@@ -1,0 +1,85 @@
+/* Reset CSS per ridurre le differenze tra i browser */
+body, h1, h2, p, ul, li, a {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+header, footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Menù di navigazione */
+nav {
+    background-color: #333;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    padding: 10px 20px;
+    color: #fff;
+}
+
+li a:hover {
+    background-color: #007BFF;
+    color: #fff;
+}
+
+/* Sezioni */
+section {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Galleria immagini */
+#featured-projects, #project-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+#featured-projects img, #project-gallery img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    font-size: 0.8em;
+}
