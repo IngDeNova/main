@@ -78,6 +78,13 @@ section {
     margin-bottom: 20px;
 }
 
+        .galleria {
+            display: none;
+        }
+        .galleria:target {
+            display: block;
+        }
+
 /* Footer */
 footer {
     text-align: center;
