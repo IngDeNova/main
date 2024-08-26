@@ -1,55 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giovanni Terranova</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Portfolio Architetto</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <header>
-        <h1>Giovanni Terranova</h1>
     <nav>
         <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="projects.html">Lavoro</a></li>
-            <li><a href="university.html">Progetti Universitari</a></li>
-            <li><a href="about.html">Chi Sono</a></li>
+            <li><a href="#chi-sono">Chi sono</a></li>
+            <li><button onclick="filterGallery('progettazione')">Progettazione</button></li>
+            <li><button onclick="filterGallery('direzione')">Direzione</button></li>
+            <li><button onclick="filterGallery('consulenza')">Consulenza</button></li>
+            <li><a href="#contatti">Contatti</a></li>
         </ul>
     </nav>
-    </header>
-    
 
-    
-    <section id="featured-projects">
-        <!-- Inserisci qui le immagini in evidenza dei tuoi progetti -->
+    <section id="galleria" class="galleria">
+        <!-- Aggiungi le immagini con i relativi tag come classi -->
+        <div class="immagine progettazione">
+            <a href="dettaglio1.html"><img src="img1.jpg" alt="Progetto 1"></a>
+        </div>
+        <div class="immagine direzione">
+            <a href="dettaglio2.html"><img src="img2.jpg" alt="Progetto 2"></a>
+        </div>
+        <div class="immagine consulenza">
+            <a href="dettaglio3.html"><img src="img3.jpg" alt="Progetto 3"></a>
+        </div>
+        <!-- Continua per tutte le 20 immagini -->
     </section>
 
-    <!-- Altre sezioni come "Chi Sono", "Progetti", ecc. -->
+    <section id="chi-sono">
+        <h2>Chi sono</h2>
+        <img src="foto-chi-sono.jpg" alt="Foto architetto">
+        <p>Breve biografia o descrizione dell'architetto.</p>
+    </section>
 
+    <section id="contatti">
+        <h2>Contatti</h2>
+        <p>Email: <a href="mailto:email@esempio.com">email@esempio.com</a></p>
+        <p>Telefono: +39 123 456 789</p>
+        <p>Indirizzo: Via Roma 1, 00100 Roma</p>
+    </section>
 
-    <!-- Immagine che apre la galleria -->
-    <a href="#galleria">
-        <img src="immagine.jpg" alt="Clicca per aprire la galleria">
-    </a>
-
-    <!-- Galleria di immagini -->
-    <div id="galleria" class="galleria">
-        <a href="#">
-            <img src="immagine1.jpg" alt="Immagine 1">
-        </a>
-        <a href="#">
-            <img src="immagine2.jpg" alt="Immagine 2">
-        </a>
-        <!-- Aggiungi altre immagini qui -->
-    </div>
-
-    <footer>
-        <p>&copy; 2024 Giovanni Terranova | Contattami: <a href="mailto:giovanni.terranova.94@gmail.com">giovanni.terranova.94@gmail.com</a></p>
-    </footer>
-    
+    <script src="script.js"></script>
 </body>
-
 </html>
