@@ -1,9 +1,4 @@
 <!DOCTYPE HTML>
-<!--
-	Forty by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 	<head>
 		<title>IngDeNova</title>
@@ -25,17 +20,8 @@
 						</nav>
 					</header>
 
-				<!-- Menu -->
-					<nav id="menu">
-						<ul class="links">
-							<li><a href="index.html">Home</a></li>
-							<li><a href="lpu.html">Progetti universitari</a></li>
-							<li><a href="lco.html">Consulenze</a></li>
-							<li><a href="lic.html">In campo</a></li>
-							<li><a href="irf.html">Referenze</a></li>
-							<li><a href="ict.html">Contatti</a></li>							
-						</ul>
-					</nav>
+				<!-- Menu (incluso dinamicamente) -->
+					<div id="menu-container"></div>
 
 				<!-- Banner -->
 					<section id="banner" class="major">
@@ -132,6 +118,14 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+		<!-- Script per includere il menu -->
+			<script>
+				fetch('menu.html')
+					.then(response => response.text())
+					.then(data => {
+						document.getElementById('menu-container').innerHTML = data;
+					});
+			</script>
 
 	</body>
 </html>
