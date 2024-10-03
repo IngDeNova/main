@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo di Valutazione Artigiani</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        h2 {
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .rating {
+            margin: 10px 0;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+        textarea {
+            width: 100%;
+            padding: 8px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Modulo di Valutazione Tecnico-Economica degli Artigiani</h1>
+
+    <form action="#" method="post">
+        
+        <div class="section">
+            <h2>1. Informazioni Generali sull'Artigiano</h2>
+            <label for="nome-artigiano">Nome Artigiano/Impresa:</label>
+            <input type="text" id="nome-artigiano" name="nome-artigiano" required>
+
+            <label for="specializzazione">Specializzazione:</label>
+            <input type="text" id="specializzazione" name="specializzazione" required>
+
+            <label for="esperienza">Esperienza (anni):</label>
+            <input type="number" id="esperienza" name="esperienza" required>
+
+            <label for="certificazioni">Certificazioni:</label>
+            <input type="text" id="certificazioni" name="certificazioni">
+
+            <label for="contatti">Contatti:</label>
+            <input type="text" id="contatti" name="contatti">
+        </div>
+
+        <div class="section">
+            <h2>2. Valutazione Tecnica</h2>
+            <div class="rating">
+                <label for="qualita-lavoro">Qualità del Lavoro (1-10):</label>
+                <input type="number" id="qualita-lavoro" name="qualita-lavoro" min="1" max="10" required>
+            </div>
+            <div class="rating">
+                <label for="competenza-tecnica">Competenza Tecnica (1-10):</label>
+                <input type="number" id="competenza-tecnica" name="competenza-tecnica" min="1" max="10" required>
+            </div>
+            <div class="rating">
+                <label for="esperienza-settore">Esperienza nel Settore (1-10):</label>
+                <input type="number" id="esperienza-settore" name="esperienza-settore" min="1" max="10" required>
+            </div>
+            <div class="rating">
+                <label for="capacita-risoluzione">Capacità di Risolvere Problemi (1-10):</label>
+                <input type="number" id="capacita-risoluzione" name="capacita-risoluzione" min="1" max="10" required>
+            </div>
+            <div class="rating">
+                <label for="flessibilita">Flessibilità e Adattabilità (1-10):</label>
+                <input type="number" id="flessibilita" name="flessibilita" min="1" max="10" required>
+            </div>
+            <div class="rating">
+                <label for="collaborazione">Collaborazione e Comunicazione (1-10):</label>
+                <input type="number" id="collaborazione" name="collaborazione" min="1" max="10" required>
+            </div>
+            <div class="rating">
+                <label for="sicurezza">Sicurezza e Rispetto delle Normative (1-10):</label>
+                <input type="number" id="sicurezza" name="sicurezza" min="1" max="10" required>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>3. Valutazione Economica</h2>
+            <div class="rating">
+                <label for="costo-servizio">Costo del Servizio (1-10):</label>
+                <input type="number" id="costo-servizio" name="costo-servizio" min="1" max="10" required>
+            </div>
+            <div class="rating">
+                <label for="valore-generato">Valore Generato (1-10):</label>
+                <input type="number" id="valore-generato" name="valore-generato" min="1" max="10" required>
+            </div>
+            <div class="rating">
+                <label for="flessibilita-costi">Flessibilità nei Costi (1-10):</label>
+                <input type="number" id="flessibilita-costi" name="flessibilita-costi" min="1" max="10" required>
+            </div>
+            <div class="rating">
+                <label for="risparmio-lungo-termine">Risparmio a Lungo Termine (1-10):</label>
+                <input type="number" id="risparmio-lungo-termine" name="risparmio-lungo-termine" min="1" max="10" required>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>4. Valutazione Complessiva</h2>
+            <div class="rating">
+                <label for="soddisfazione-team">Soddisfazione del Team (1-10):</label>
+                <input type="number" id="soddisfazione-team" name="soddisfazione-team" min="1" max="10" required>
+            </div>
+            <div class="rating">
+                <label for="referenze-feedback">Referenze e Feedback (1-10):</label>
+                <input type="number" id="referenze-feedback" name="referenze-feedback" min="1" max="10" required>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>5. Conclusione e Raccomandazioni</h2>
+            <label for="artigiano-raccomandato">Artigiano Raccomandato:</label>
+            <select id="artigiano-raccomandato" name="artigiano-raccomandato" required>
+                <option value="sì">Sì</option>
+                <option value="no">No</option>
+            </select>
+
+            <label for="note-finali">Note Finali:</label>
+            <textarea id="note-finali" name="note-finali" rows="4"></textarea>
+
+            <label for="commenti-aggiuntivi">Commenti Aggiuntivi:</label>
+            <textarea id="commenti-aggiuntivi" name="commenti-aggiuntivi" rows="4"></textarea>
+        </div>
+
+        <input type="submit" value="Invia Valutazione">
+    </form>
+
+</body>
+</html>
