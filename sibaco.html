@@ -31,9 +31,7 @@
     #negativo { grid-column: 3; }
     #btn { grid-column: 2; width: 100%; justify-self: center; }
     canvas { background: #0b0e06; width: 50%; aspect-ratio: 1 / 1; margin-bottom: 10px; }
-    #radarCanvas { border: none; }
-    /* rimuovo il bordo del grafico traiettoria */
-    #trajCanvas { border: none; }
+    #radarCanvas, #trajCanvas { border: none; }
     .canvas-container { width: 100%; display: flex; flex-direction: column; align-items: center; }
     @keyframes errorPulse { 0% { border-color: #ff4040; } 50% { border-color: #991010; } 100% { border-color: #ff4040; } }
     @media (max-width: 768px) {
@@ -42,16 +40,9 @@
       .grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 480px) {
-      .grid {
-        grid-template-columns: 1fr;      /* una sola colonna per i campi */
-      }
-      canvas {
-        width: 100% !important;          /* canvas a tutta larghezza */
-        height: auto;                    /* mantiene il rapporto 1:1 */
-      }
-      #btn {
-        font-size: 1.1em;                /* bottone un po’ più grande */
-      }
+      .grid { grid-template-columns: 1fr; }
+      canvas { width: 100% !important; height: auto; }
+      #btn { font-size: 1.1em; }
     }
     .error-message { color: #ff4040; font-size: 0.8em; margin-top: 5px; min-height: 1em; }
   </style>
@@ -113,9 +104,10 @@
       rCtx.fillText("В", cx+maxR+5, cy+5);
       rCtx.fillText("З", cx-maxR-15, cy+5);
 
-      // Traiettoria di base (terreno + partenza)
+      // Traiettoria di base
       const tC = document.getElementById('trajCanvas'), tCtx = tC.getContext('2d');
-      tCtx.beginPath(); tCtx.moveTo(0, tC.height); tCtx.lineTo(tC.width, tC.height); tCtx.strokeStyle='#40ff40'; tCtx.stroke();
+      tCtx.beginPath(); tCtx.moveTo(0, tC.height); tCtx.lineTo(tC.width, tC.height);
+      tCtx.strokeStyle='#40ff40'; tCtx.stroke();
       tCtx.beginPath(); tCtx.arc(0,tC.height,5,0,2*Math.PI); tCtx.fillStyle='#40ff40'; tCtx.fill();
     }
 
@@ -132,8 +124,7 @@
       const v0 = +document.getElementById('vel').value;
       const zen = +document.getElementById('el').value;
       const elev = (90 - zen) * Math.PI/180;
-      const vx = v0 * Math.cos(elev), vy = v0 * Math.sin(elev);
-      const t_vo = 2 * vy / g;
+      const t_vo = 2 * (v0 * Math.sin(elev)) / g;
 
       // reset UI
       document.getElementById('btn').disabled = true;
@@ -146,7 +137,7 @@
         document.getElementById(`${i.id}-error`).textContent = '';
       });
 
-      // barra progress sincronizzata
+      // barra progress
       let pct = 0;
       const barra = document.getElementById('barra');
       barra.style.width = '0%';
@@ -184,7 +175,7 @@
       const dm = +document.getElementById('d_mer').value;
       if (v <= 0) e.push({campo:'vel', messaggio:'ДОЛЖНО БЫТЬ > 0'});
       if (el < 0 || el > 90) e.push({campo:'el', messaggio:'ДОЛЖНО БЫТЬ МЕЖДУ 0 И 90°'});
-      if (az < 0 || az >= 360) e.push({campo:'az', messaggio:'ДОЛЖНО БЫТЬ МЕЖДУ 0 И 359°'});
+      if (az < 0 || az >= 360) e.push({campo:'az', messaggio:'ДОЛЖНО  БЫТЬ МЕЖДУ 0 И 359°'});
       if (dp <= 0) e.push({campo:'d_par', messaggio:'ДОЛЖНО БЫТЬ > 0'});
       if (isNaN(dm)) e.push({campo:'d_mer', messaggio:'ДОЛЖНО БЫТЬ ЧИСЛОМ'});
       return e;
@@ -192,14 +183,14 @@
 
     function verificaCoerenzaConErrori() {
       const errs = [];
-      const tol = 5; // tolleranza di 5 metri
+      const tol = 5;
       const g = 9.81;
       const dp = +document.getElementById('d_par').value;
       const dm = +document.getElementById('d_mer').value;
       const dist = Math.hypot(dp, dm);
       const v0 = +document.getElementById('vel').value;
       const zen = +document.getElementById('el').value;
-      const quad = getQuadrante(dp, dm);
+      const quad = getQuadrante(dm, dp);
       if (!verificaAzimutInQuadrante(+document.getElementById('az').value, quad)) {
         errs.push({campo:'az', messaggio:'АЗИМУТ НЕСООТВЕТСТВУЕТ'});
       }
@@ -236,47 +227,56 @@
 
     function animateRadar(v0, angle, duration) {
       const c = document.getElementById('radarCanvas'), ctx = c.getContext('2d');
-      const dp = +document.getElementById('d_par').value, dm = +document.getElementById('d_mer').value;
+      const dp = +document.getElementById('d_par').value;
+      const dm = +document.getElementById('d_mer').value;
       const az = +document.getElementById('az').value * Math.PI/180;
       const targ = Math.hypot(dp, dm), maxProj = v0 * Math.cos(angle) * duration;
       const cx = c.width/2, cy = c.height/2, maxR = Math.min(c.width, c.height)/2 - 10;
       const scale = maxR / (Math.max(targ, maxProj) * 1.2);
 
       let blink = true;
-      if (window.radarBlinkInterval) clearInterval(window.radarBlinkInterval);
+      clearInterval(window.radarBlinkInterval);
       window.radarBlinkInterval = setInterval(() => blink = !blink, 100);
-      if (window.radarAnimation) clearInterval(window.radarAnimation);
+      clearInterval(window.radarAnimation);
 
       const steps = 100, simDur = duration * 1000, interval = simDur / steps;
       let frame = 0;
       window.radarAnimation = setInterval(() => {
         const frac = frame / steps, t = frac * duration;
         const d = v0 * Math.cos(angle) * t;
-        const x = d * Math.cos(az), y = d * Math.sin(az);
+        // *** AZIMUT CORRETTO: zero=su, aumenta in senso orario ***
+        const x = d * Math.sin(az);
+        const y = d * Math.cos(az);
 
+        // ridisegno base radar
         ctx.clearRect(0, 0, c.width, c.height);
         ctx.strokeStyle = "#40ff40"; ctx.lineWidth = 1;
         for (let r = 1; r <= 5; r++) {
           ctx.beginPath(); ctx.arc(cx, cy, r*(maxR/5), 0, 2*Math.PI); ctx.stroke();
         }
-        ctx.beginPath(); ctx.arc(cx, cy, maxR*1.5, 0, 2*Math.PI); ctx.stroke();
+        ctx.beginPath(); ctx.arc(cx, cy, 5, 0, 2*Math.PI); ctx.fillStyle='#40ff40'; ctx.fill();
         ctx.globalAlpha = 0.5;
         ctx.beginPath();
-        ctx.moveTo(cx, cy-maxR*1.5); ctx.lineTo(cx, cy+maxR*1.5);
-        ctx.moveTo(cx-maxR*1.5, cy);  ctx.lineTo(cx+maxR*1.5, cy);
-        ctx.stroke(); ctx.globalAlpha = 1; ctx.font = "12px Courier New"; ctx.fillStyle = "#40ff40";
-        ctx.fillText("С", cx-5, cy-maxR*1.5-5);
-        ctx.fillText("Ю", cx-5, cy+maxR*1.5+15);
-        ctx.fillText("В", cx+maxR*1.5+5, cy+5);
-        ctx.fillText("З", cx-maxR*1.5-15, cy+5);
+        ctx.moveTo(cx, cy-maxR); ctx.lineTo(cx, cy+maxR);
+        ctx.moveTo(cx-maxR, cy); ctx.lineTo(cx+maxR, cy);
+        ctx.stroke();
+        ctx.globalAlpha = 1;
+        ctx.font = "12px Courier New"; ctx.fillStyle = "#40ff40";
+        ctx.fillText("С", cx-5, cy-maxR-5);
+        ctx.fillText("Ю", cx-5, cy+maxR+15);
+        ctx.fillText("В", cx+maxR+5, cy+5);
+        ctx.fillText("З", cx-maxR-15, cy+5);
 
-        ctx.beginPath(); ctx.arc(cx, cy, 5, 0, 2*Math.PI); ctx.fillStyle='#40ff40'; ctx.fill();
+        // bersaglio fisso
+        const tx = cx + dm * scale;
+        const ty = cy - dp * scale;
+        ctx.font = "16px Courier New"; ctx.fillText("★", tx - 5, ty + 5);
 
-        const tx = cx + dp * scale, ty = cy - dm * scale;
-        ctx.font = "16px Courier New"; ctx.fillText("★", tx-5, ty+5);
-
+        // sweep del proiettile
         if (blink && frame <= steps) {
-          ctx.beginPath(); ctx.arc(cx + x*scale, cy - y*scale, 5, 0, 2*Math.PI); ctx.fill();
+          ctx.beginPath();
+          ctx.arc(cx + x*scale, cy - y*scale, 5, 0, 2*Math.PI);
+          ctx.fill();
         }
 
         frame++;
@@ -304,9 +304,9 @@
       const scale = Math.min((c.width-10)/maxX, (c.height-20)/maxY);
 
       let blink = true;
-      if (window.trajBlinkInterval) clearInterval(window.trajBlinkInterval);
+      clearInterval(window.trajBlinkInterval);
       window.trajBlinkInterval = setInterval(() => blink = !blink, 100);
-      if (window.trajAnimation) clearInterval(window.trajAnimation);
+      clearInterval(window.trajAnimation);
 
       const simDur = duration * 1000, interval = simDur / steps;
       let frame = 0;
@@ -328,17 +328,12 @@
         }
         ctx.stroke();
         ctx.beginPath(); ctx.arc(0, c.height, 5, 0, 2*Math.PI); ctx.fillStyle='#40ff40'; ctx.fill();
-
-        // stellina esattamente alla stessa altezza
         const aX = targ * scale;
-        ctx.font = "16px Courier New";
-        ctx.fillText("★", aX - 5, c.height);
-
+        ctx.font = "16px Courier New"; ctx.fillText("★", aX - 5, c.height);
         if (blink && frame < pts.length) {
           const px = pts[frame].x * scale, py = c.height - pts[frame].y * scale;
           ctx.beginPath(); ctx.arc(px, py, 5, 0, 2*Math.PI); ctx.fill();
         }
-
         frame++;
         if (frame > steps) {
           clearInterval(window.trajAnimation);
