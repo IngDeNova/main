@@ -5,7 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ПЛАТФОРМА ЗАПУСКА</title>
   <style>
-    body { background-color: #0b0e06; color: #40ff40; font-family: "Courier New", monospace; margin: 0; display: flex; flex-wrap: nowrap; height: 100vh; text-transform: uppercase; }
+  	#crtEffect {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; /* il canvas non interferisce con click/touch */
+  opacity: 0.1; /* regola per maggiore o minore visibilità */
+}
+
+    body { background-color: #0b0e06; color: #40ff40; font-family: "Courier New", monospace; margin: 0; display: flex; font-weight: bold; flex-wrap: nowrap; height: 100vh; text-transform: uppercase; }
     .main { flex: 2; padding: 20px; box-sizing: border-box; }
     .graphics { flex: 1; display: flex; flex-direction: column; justify-content: space-around; align-items: center; padding: 20px; box-sizing: border-box; }
     h1 { text-align: center; margin-bottom: 10px; border-bottom: 1px solid #40ff40; padding-bottom: 10px; }
@@ -37,7 +48,8 @@
     @media (max-width: 768px) {
       body { flex-direction: column; height: auto; }
       .main, .graphics { flex: none; width: 100%; }
-      .grid { grid-template-columns: repeat(2, 1fr); }
+      .grid { grid-template-columns: repeat(2, 1fr); position: relative; z-index: 1; }
+
     }
     @media (max-width: 480px) {
       .grid { grid-template-columns: 1fr; }
@@ -48,6 +60,7 @@
   </style>
 </head>
 <body>
+	<canvas id="crtEffect"></canvas>
   <div class="main">
     <div class="container">
       <h1>ПЛАТФОРМА ЗАПУСКА</h1>
@@ -341,6 +354,54 @@
         }
       }, interval);
     }
+    function startCRTStatic() {
+  const canvas = document.getElementById('crtEffect');
+  const ctx = canvas.getContext('2d', { alpha: true });
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  function drawNoise() {
+  const size = 6; // grandezza dei punti
+  const w = canvas.width;
+  const h = canvas.height;
+
+  ctx.clearRect(0, 0, w, h);
+
+  // Disturbo casuale
+  for (let i = 0; i < 600; i++) {
+    const x = Math.floor(Math.random() * w);
+    const y = Math.floor(Math.random() * h);
+    const alpha = Math.random() * 0.5 + 0.3;
+    ctx.fillStyle = `rgba(0, 255, 0, ${alpha.toFixed(2)})`;
+    ctx.fillRect(x, y, size, size);
+  }
+
+  // Effetto scanline
+  ctx.fillStyle = 'rgba(0, 255, 0, 0.5)'; // verde leggero molto trasparente
+  const spacing = 25; // ogni quanti pixel fare una linea
+  for (let y = 0; y < h; y += spacing) {
+    ctx.fillRect(0, y, w, 5); // altezza di 1 pixel
+  }
+}
+
+setInterval(() => {
+  ctx.globalAlpha = Math.random() * 0.2 + 0.9;
+  // ridisegna il testo qui
+}, 100);
+
+  setInterval(drawNoise, 50); // ogni 50ms ≈ 20fps
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // altre inizializzazioni...
+  startCRTStatic(); // attiva l’effetto CRT
+});
+
   </script>
 </body>
 </html>
