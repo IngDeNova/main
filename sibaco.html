@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PIATTAFORMA DI LANCIO</title>
+  <title>ПЛАТФОРМА ЗАПУСКА</title>
   <style>
     body { background-color: #0b0e06; color: #40ff40; font-family: "Courier New", monospace; margin: 0; display: flex; flex-wrap: nowrap; height: 100vh; text-transform: uppercase; }
     .main { flex: 2; padding: 20px; box-sizing: border-box; }
@@ -42,38 +42,37 @@
       .grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 480px) {
-  .grid {
-    grid-template-columns: 1fr;      /* una sola colonna per i campi */
-  }
-  canvas {
-    width: 100% !important;          /* canvas a tutta larghezza */
-    height: auto;                    /* mantiene il rapporto 1:1 */
-  }
-  #btn {
-    font-size: 1.1em;                /* bottone un po’ più grande */
-  }
-}
-
+      .grid {
+        grid-template-columns: 1fr;      /* una sola colonna per i campi */
+      }
+      canvas {
+        width: 100% !important;          /* canvas a tutta larghezza */
+        height: auto;                    /* mantiene il rapporto 1:1 */
+      }
+      #btn {
+        font-size: 1.1em;                /* bottone un po’ più grande */
+      }
+    }
     .error-message { color: #ff4040; font-size: 0.8em; margin-top: 5px; min-height: 1em; }
   </style>
 </head>
 <body>
   <div class="main">
     <div class="container">
-      <h1>PIATTAFORMA DI LANCIO</h1>
+      <h1>ПЛАТФОРМА ЗАПУСКА</h1>
       <div id="dataOraContainer"><div id="dataOra"></div></div>
       <div class="grid">
-        <div class="field"><label for="vel">VELOCITÀ (m/s)</label><input type="number" id="vel" placeholder="150"><div id="vel-error" class="error-message"></div></div>
-        <div class="field"><label for="el">ZENIT (0-90°)</label><input type="number" id="el" placeholder="45"><div id="el-error" class="error-message"></div></div>
-        <div class="field"><label for="az">AZIMUT (0-359°)</label><input type="number" id="az" placeholder="45"><div id="az-error" class="error-message"></div></div>
-        <div class="field"><label for="d_par">DISTANZA LATITUDINE (m)</label><input type="number" id="d_par" placeholder="1622"><div id="d_par-error" class="error-message"></div></div>
-        <div class="field"><label for="d_mer">DISTANZA LONGITUDINE (m)</label><input type="number" id="d_mer" placeholder="1622"><div id="d_mer-error" class="error-message"></div></div>
+        <div class="field"><label for="vel">СКОРОСТЬ (м/с)</label><input type="number" id="vel" placeholder="150"><div id="vel-error" class="error-message"></div></div>
+        <div class="field"><label for="el">ЗЕНИТ (0–90°)</label><input type="number" id="el" placeholder="45"><div id="el-error" class="error-message"></div></div>
+        <div class="field"><label for="az">АЗИМУТ (0–359°)</label><input type="number" id="az" placeholder="45"><div id="az-error" class="error-message"></div></div>
+        <div class="field"><label for="d_par">РАССТОЯНИЕ ПО ШИРОТЕ (м)</label><input type="number" id="d_par" placeholder="1622"><div id="d_par-error" class="error-message"></div></div>
+        <div class="field"><label for="d_mer">РАССТОЯНИЕ ПО ДОЛГОТЕ (м)</label><input type="number" id="d_mer" placeholder="1622"><div id="d_mer-error" class="error-message"></div></div>
       </div>
       <div id="barraContainer"><div id="barra"></div></div>
       <div class="bottom-buttons">
-        <button id="positivo" disabled>ESITO POSITIVO</button>
-        <button id="btn" onclick="lancio()">LANCIO</button>
-        <button id="negativo" disabled>ESITO NEGATIVO</button>
+        <button id="positivo" disabled>ПОЗИТИВНЫЙ РЕЗУЛЬТАТ</button>
+        <button id="btn" onclick="lancio()">ЗАПУСК</button>
+        <button id="negativo" disabled>ОТРИЦАТЕЛЬНЫЙ РЕЗУЛЬТАТ</button>
       </div>
     </div>
   </div>
@@ -109,10 +108,10 @@
       rCtx.moveTo(cx-maxR, cy); rCtx.lineTo(cx+maxR, cy);
       rCtx.stroke();
       rCtx.globalAlpha=1; rCtx.font="12px Courier New"; rCtx.fillStyle="#40ff40";
-      rCtx.fillText("N", cx-5, cy-maxR-5);
-      rCtx.fillText("S", cx-5, cy+maxR+15);
-      rCtx.fillText("E", cx+maxR+5, cy+5);
-      rCtx.fillText("O", cx-maxR-15, cy+5);
+      rCtx.fillText("С", cx-5, cy-maxR-5);
+      rCtx.fillText("Ю", cx-5, cy+maxR+15);
+      rCtx.fillText("В", cx+maxR+5, cy+5);
+      rCtx.fillText("З", cx-maxR-15, cy+5);
 
       // Traiettoria di base (terreno + partenza)
       const tC = document.getElementById('trajCanvas'), tCtx = tC.getContext('2d');
@@ -183,11 +182,11 @@
       const az = +document.getElementById('az').value;
       const dp = +document.getElementById('d_par').value;
       const dm = +document.getElementById('d_mer').value;
-      if (v <= 0) e.push({campo:'vel', messaggio:'DEVE ESSERE > 0'});
-      if (el < 0 || el > 90) e.push({campo:'el', messaggio:'DEVE ESSERE TRA 0 E 90°'});
-      if (az < 0 || az >= 360) e.push({campo:'az', messaggio:'DEVE ESSERE TRA 0 E 359°'});
-      if (dp <= 0) e.push({campo:'d_par', messaggio:'DEVE ESSERE > 0'});
-      if (isNaN(dm)) e.push({campo:'d_mer', messaggio:'DEVE ESSERE UN NUMERO'});
+      if (v <= 0) e.push({campo:'vel', messaggio:'ДОЛЖНО БЫТЬ > 0'});
+      if (el < 0 || el > 90) e.push({campo:'el', messaggio:'ДОЛЖНО БЫТЬ МЕЖДУ 0 И 90°'});
+      if (az < 0 || az >= 360) e.push({campo:'az', messaggio:'ДОЛЖНО БЫТЬ МЕЖДУ 0 И 359°'});
+      if (dp <= 0) e.push({campo:'d_par', messaggio:'ДОЛЖНО БЫТЬ > 0'});
+      if (isNaN(dm)) e.push({campo:'d_mer', messaggio:'ДОЛЖНО БЫТЬ ЧИСЛОМ'});
       return e;
     }
 
@@ -202,7 +201,7 @@
       const zen = +document.getElementById('el').value;
       const quad = getQuadrante(dp, dm);
       if (!verificaAzimutInQuadrante(+document.getElementById('az').value, quad)) {
-        errs.push({campo:'az', messaggio:'AZIMUT NON CONGRUENTE'});
+        errs.push({campo:'az', messaggio:'АЗИМУТ НЕСООТВЕТСТВУЕТ'});
       }
       const elev = (90 - zen) * Math.PI/180;
       const vx = v0 * Math.cos(elev), vy = v0 * Math.sin(elev);
@@ -210,10 +209,10 @@
       const gittata = vx * t_vo;
       if (Math.abs(dist - gittata) > tol) {
         const diff = Math.abs(dist - gittata).toFixed(2);
-        errs.push({campo:'vel', messaggio:`GITTATA NON RAGGIUNTA (DIFF: ${diff}m)`});
-        errs.push({campo:'el',  messaggio:'MODIFICA ELEVAZIONE O VELOCITÀ'});
-        errs.push({campo:'d_par', messaggio:'DISTANZA INCOERENTE CON LANCIO'});
-        errs.push({campo:'d_mer', messaggio:'DISTANZA INCOERENTE CON LANCIO'});
+        errs.push({campo:'vel', messaggio:`ДАЛЬНОСТЬ НЕ ДОСТИГНУТА (РАЗНИЦА: ${diff}м)`});
+        errs.push({campo:'el',  messaggio:'ИЗМЕНИТЕ УГОЛ НАКЛОНА ИЛИ СКОРОСТЬ'});
+        errs.push({campo:'d_par', messaggio:'РАССТОЯНИЕ НЕ СООТВЕТСТВУЕТ ЗАПУСКУ'});
+        errs.push({campo:'d_mer', messaggio:'РАССТОЯНИЕ НЕ СООТВЕТСТВУЕТ ЗАПУСКУ'});
       }
       return errs;
     }
@@ -266,10 +265,10 @@
         ctx.moveTo(cx, cy-maxR*1.5); ctx.lineTo(cx, cy+maxR*1.5);
         ctx.moveTo(cx-maxR*1.5, cy);  ctx.lineTo(cx+maxR*1.5, cy);
         ctx.stroke(); ctx.globalAlpha = 1; ctx.font = "12px Courier New"; ctx.fillStyle = "#40ff40";
-        ctx.fillText("N", cx-5, cy-maxR*1.5-5);
-        ctx.fillText("S", cx-5, cy+maxR*1.5+15);
-        ctx.fillText("E", cx+maxR*1.5+5, cy+5);
-        ctx.fillText("O", cx-maxR*1.5-15, cy+5);
+        ctx.fillText("С", cx-5, cy-maxR*1.5-5);
+        ctx.fillText("Ю", cx-5, cy+maxR*1.5+15);
+        ctx.fillText("В", cx+maxR*1.5+5, cy+5);
+        ctx.fillText("З", cx-maxR*1.5-15, cy+5);
 
         ctx.beginPath(); ctx.arc(cx, cy, 5, 0, 2*Math.PI); ctx.fillStyle='#40ff40'; ctx.fill();
 
