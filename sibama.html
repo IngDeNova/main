@@ -40,8 +40,22 @@
     #positivo { grid-column: 1; }
     #negativo { grid-column: 3; }
     #btn { grid-column: 2; width: 100%; justify-self: center; }
-    canvas { background: #0b0e06; width: 50%; aspect-ratio: 1 / 1; margin-bottom: 10px; }
-    #radarCanvas, #trajCanvas { border: none; }
+    canvas { background: #0b0e06; margin-bottom: 10px; }
+    /* radar width 80% and no border */
+    #radarCanvas {
+      width: 80%;
+      aspect-ratio: 1 / 1;
+      border: none !important;
+    }
+    /* trajectory width 80% and retain border */
+    #trajCanvas {
+      width: 80%;
+      aspect-ratio: 1 / 1;
+      border: 1px solid #40ff40;
+    }
+
+    #radarCanvas, #trajCanvas { border: none;   border: 1px solid #40ff40;
+}
     .canvas-container { width: 100%; display: flex; flex-direction: column; align-items: center; }
     @keyframes errorPulse { 0% { border-color: #ff4040; } 50% { border-color: #991010; } 100% { border-color: #ff4040; } }
     @keyframes blinkZoom {
@@ -96,7 +110,7 @@
       </div>
 
       <div id="mapWrapper" style="padding-top: 20px; display: flex; justify-content: center;">
-  <canvas id="worldMapCanvas" style="width: 100%; max-width: 600px; aspect-ratio: 2 / 1; background: #0b0e06; border: 1px solid #40ff40;"></canvas>
+  <canvas id="worldMapCanvas" style="width: 100%; max-width: 900px; aspect-ratio: 2 / 1; background: #0b0e06; border: 1px solid #40ff40;"></canvas>
 </div>      
 
     </div>
@@ -176,6 +190,10 @@ document.addEventListener('DOMContentLoaded', () => {
       tCtx.beginPath(); tCtx.moveTo(0, tC.height); tCtx.lineTo(tC.width, tC.height);
       tCtx.strokeStyle='#40ff40'; tCtx.stroke();
       tCtx.beginPath(); tCtx.arc(0,tC.height,5,0,2*Math.PI); tCtx.fillStyle='#40ff40'; tCtx.fill();
+      // bordo e asse X permanenti iniziali
+      tCtx.strokeStyle = '#40ff40'; tCtx.lineWidth = 1;
+      tCtx.strokeRect(0.5, 0.5, tC.width - 1, tC.height - 1);
+      tCtx.beginPath(); tCtx.moveTo(0, tC.height - 20); tCtx.lineTo(tC.width, tC.height - 20); tCtx.stroke();
     }
 
     function lancio() {
@@ -355,7 +373,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function animateTrajectory(v0, angle, duration) {
       const c = document.getElementById('trajCanvas'), ctx = c.getContext('2d');
-      const dp = +document.getElementById('d_par').value, dm = +document.getElementById('d_mer').value;
+      const bottomOffset = 20;
+      const dp = +document.getElementById('d_par').value;
+      const dm = +document.getElementById('d_mer').value;
       const targ = Math.hypot(dp, dm), g = 9.81;
       const pts = [], steps = 100;
       for (let i = 0; i <= steps; i++) {
@@ -367,38 +387,62 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       const maxX = Math.max(...pts.map(p => p.x), targ);
       const maxY = Math.max(...pts.map(p => p.y), 1);
-      const scale = Math.min((c.width-10)/maxX, (c.height-20)/maxY);
-
+      const scale = Math.min((c.width - 10) / maxX,
+                             (c.height - bottomOffset) / maxY);
       let blink = true;
       clearInterval(window.trajBlinkInterval);
       window.trajBlinkInterval = setInterval(() => blink = !blink, 100);
       clearInterval(window.trajAnimation);
-
       const simDur = duration * 1000, interval = simDur / steps;
       let frame = 0;
       window.trajAnimation = setInterval(() => {
         ctx.clearRect(0, 0, c.width, c.height);
-        ctx.strokeStyle = "#40ff40"; ctx.globalAlpha = 0.2; ctx.lineWidth = 0.5;
+        // perimetro
+        ctx.strokeStyle = '#40ff40'; ctx.globalAlpha = 1; ctx.lineWidth = 1;
+        ctx.strokeRect(0.5, 0.5, c.width - 1, c.height - 1);
+        // griglia
+        ctx.globalAlpha = 0.2; ctx.lineWidth = 0.5;
         for (let i = 0; i <= 5; i++) {
-          const yVal = i*(maxY/5), yPos = c.height - yVal*scale;
+          const yVal = i * (maxY / 5);
+          const yPos = c.height - bottomOffset - yVal * scale;
           ctx.beginPath(); ctx.moveTo(0, yPos); ctx.lineTo(c.width, yPos); ctx.stroke();
-          const xVal = i*(maxX/5), xPos = xVal*scale;
-          ctx.beginPath(); ctx.moveTo(xPos, 0); ctx.lineTo(xPos, c.height); ctx.stroke();
+        // etichetta y (m)
+        ctx.globalAlpha = 1; ctx.font = "12px Courier New";
+        ctx.fillText(`${Math.round(yVal)}m`, 2, yPos - 2);
+          const xVal = i * (maxX / 5);
+          const xPos = xVal * scale;
+          ctx.beginPath(); ctx.moveTo(xPos, c.height - bottomOffset); ctx.lineTo(xPos, 0); ctx.stroke();
+        // etichetta x (m)
+        ctx.globalAlpha = 1; ctx.font = "12px Courier New";
+        ctx.fillText(`${Math.round(xVal)}m`, xPos + 2, c.height - bottomOffset + 12);
         }
+        // asse X
         ctx.globalAlpha = 1; ctx.lineWidth = 1;
-        ctx.beginPath(); ctx.moveTo(0, c.height); ctx.lineTo(c.width, c.height); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(0, c.height);
+        ctx.beginPath();
+        ctx.moveTo(0, c.height - bottomOffset);
+        ctx.lineTo(c.width, c.height - bottomOffset);
+        ctx.stroke();
+        // traiettoria
+        ctx.beginPath();
+        ctx.moveTo(0, c.height - bottomOffset);
         for (let i = 0; i <= frame && i < pts.length; i++) {
-          const px = pts[i].x * scale, py = c.height - pts[i].y * scale;
+          const px = pts[i].x * scale;
+          const py = c.height - bottomOffset - pts[i].y * scale;
           ctx.lineTo(px, py);
         }
         ctx.stroke();
-        ctx.beginPath(); ctx.arc(0, c.height, 5, 0, 2*Math.PI); ctx.fillStyle='#40ff40'; ctx.fill();
+        // punto lancio
+        ctx.beginPath();
+        ctx.arc(0, c.height - bottomOffset, 5, 0, 2 * Math.PI);
+        ctx.fillStyle = '#40ff40'; ctx.fill();
+        // bersaglio
         const aX = targ * scale;
-        ctx.font = "16px Courier New"; ctx.fillText("★", aX - 5, c.height);
+        ctx.font = '16px Courier New'; ctx.fillText('★', aX - 5, c.height - bottomOffset);
+        // proiettile lampeggiante
         if (blink && frame < pts.length) {
-          const px = pts[frame].x * scale, py = c.height - pts[frame].y * scale;
-          ctx.beginPath(); ctx.arc(px, py, 5, 0, 2*Math.PI); ctx.fill();
+          const px = pts[frame].x * scale;
+          const py = c.height - bottomOffset - pts[frame].y * scale;
+          ctx.beginPath(); ctx.arc(px, py, 5, 0, 2 * Math.PI); ctx.fill();
         }
         frame++;
         if (frame > steps) {
