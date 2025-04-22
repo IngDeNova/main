@@ -15,9 +15,9 @@
     pointer-events: none;
     opacity: 0.1;
   }
-    body { background-color: #0b0e06; color: #40ff40; font-family: "Courier New", monospace; margin: 0; display: flex; flex-wrap: nowrap; height: 100vh; text-transform: uppercase; }
-    .main { flex: 2; padding: 20px; box-sizing: border-box; }
-    .graphics { flex: 1; display: flex; flex-direction: column; justify-content: space-around; align-items: center; padding: 20px; box-sizing: border-box; }
+    body { background-color: #0b0e06; color: #40ff40; font-family: "Courier New", monospace; margin: 0; display: flex; flex-wrap: nowrap; height: 100vh; text-transform: uppercase;  align-items: flex-end; }
+    .main { flex: 2; display: flex; flex-direction: column; justify-content: space-between; padding: 20px; box-sizing: border-box; }
+    .graphics { flex: 1; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: 20px; box-sizing: border-box; }
     h1 { text-align: center; margin-bottom: 10px; border-bottom: 1px solid #40ff40; padding-bottom: 10px; }
     #dataOraContainer { text-align: center; margin-bottom: 20px; }
     #dataOra { font-size: 1em; border-bottom: 1px solid #40ff40; display: inline-block; padding: 5px 10px; }
@@ -43,42 +43,48 @@
     canvas { background: #0b0e06; margin-bottom: 10px; }
     /* radar width 80% and no border */
     #radarCanvas {
-      width: 80%;
+      width: 70%;
       aspect-ratio: 1 / 1;
-      border: none !important;
+        border: none !important;
     }
     /* trajectory width 80% and retain border */
     #trajCanvas {
-      width: 80%;
+      width: 70%;
       aspect-ratio: 1 / 1;
       border: 1px solid #40ff40;
     }
 
     #radarCanvas, #trajCanvas { border: none;   border: 1px solid #40ff40;
+    /* nascondi risultati fino a fine verifica */
+    #positivo, #negativo { display: none; }
 }
     .canvas-container { width: 100%; display: flex; flex-direction: column; align-items: center; }
     @keyframes errorPulse { 0% { border-color: #ff4040; } 50% { border-color: #991010; } 100% { border-color: #ff4040; } }
     @keyframes blinkZoom {
-  0%   { transform: scale(1);   opacity: 1; }
-  50%  { transform: scale(1.3); opacity: 0.7; }
-  100% { transform: scale(1);   opacity: 1; }
+  0%   { transform: scale(5);   opacity: 0.9; }
+  50%  { transform: scale(5.2); opacity: 0.8; }
+  100% { transform: scale(5);   opacity: 0.9; }
 }
 
 .blink-zoom {
-  animation: blinkZoom 0.8s ease-in-out infinite;
-  position: relative;
+  animation: blinkZoom 1.6s ease-in-out infinite;
+  position: fixed;        /* lo stacca dal flusso e lo lega alla viewport */
+  top: 50%;               /* punto di riferimento: metà altezza */
+  left: 50%;  
   z-index: 1;
 }
 
 .blink-zoom {
-  animation: blinkZoom 0.8s ease-in-out infinite;
-  position: relative;
+  animation: blinkZoom 1.6s ease-in-out infinite;
+  position: fixed;        /* lo stacca dal flusso e lo lega alla viewport */
+  top: 50%;               /* punto di riferimento: metà altezza */
+  left: 50%;  
   z-index: 1;
 }
 
     @media (max-width: 768px) {
-      body { flex-direction: column; height: auto; }
-      .main, .graphics { flex: none; width: 100%; }
+      body { flex-direction: column; height: auto;  align-items: flex-end; }
+      .main, .graphics { flex: 1; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: 20px; box-sizing: border-box; }
       .grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 480px) {
@@ -92,7 +98,7 @@
 <body>
   <canvas id="crtEffect"></canvas>
   <div class="main">
-    <div class="container">
+    <div class="container controls">
       <h1>ПЛАТФОРМА ЗАПУСКА</h1>
       <div id="dataOraContainer"><div id="dataOra"></div></div>
       <div class="grid">
@@ -101,19 +107,21 @@
         <div class="field"><label for="az">АЗИМУТ (0–359°)</label><input type="number" id="az" placeholder="45"><div id="az-error" class="error-message"></div></div>
         <div class="field"><label for="d_par">РАССТОЯНИЕ ПО ШИРОТЕ (м)</label><input type="number" id="d_par" placeholder="1622"><div id="d_par-error" class="error-message"></div></div>
         <div class="field"><label for="d_mer">РАССТОЯНИЕ ПО ДОЛГОТЕ (м)</label><input type="number" id="d_mer" placeholder="1622"><div id="d_mer-error" class="error-message"></div></div>
+        <div class="bottom-buttons">
+        <button id="btn" onclick="lancio()">ЗАПУСК</button>
       </div>
+      </div>
+
       <div id="barraContainer"><div id="barra"></div></div>
+
       <div class="bottom-buttons">
         <button id="positivo" disabled>ПОЗИТИВНЫЙ РЕЗУЛЬТАТ</button>
-        <button id="btn" onclick="lancio()">ЗАПУСК</button>
         <button id="negativo" disabled>ОТРИЦАТЕЛЬНЫЙ РЕЗУЛЬТАТ</button>
       </div>
 
-      <div id="mapWrapper" style="padding-top: 20px; display: flex; justify-content: center;">
+      </div><div id="mapWrapper" style="padding-top: 20px; display: flex; justify-content: center;">
   <canvas id="worldMapCanvas" style="width: 100%; max-width: 900px; aspect-ratio: 2 / 1; background: #0b0e06; border: 1px solid #40ff40;"></canvas>
-</div>      
-
-    </div>
+</div>
   </div>
   <div class="graphics">
     <div class="canvas-container"><canvas id="radarCanvas" width="300" height="300"></canvas></div>
@@ -236,10 +244,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const neg = document.getElementById('negativo');
   neg.classList.add('rosso', 'blink-zoom');
   neg.disabled = false;
+          neg.style.display = 'inline-block';
 } else {
   const pos = document.getElementById('positivo');
   pos.classList.add('verde', 'blink-zoom');
   pos.disabled = false;
+          pos.style.display = 'inline-block';
 }
 
           document.getElementById('btn').disabled = false;
@@ -320,7 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       let blink = true;
       clearInterval(window.radarBlinkInterval);
-      window.radarBlinkInterval = setInterval(() => blink = !blink, 100);
+      window.radarBlinkInterval = setInterval(() => blink = !blink, 50);
       clearInterval(window.radarAnimation);
 
       const steps = 100, simDur = duration * 1000, interval = simDur / steps;
@@ -373,7 +383,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function animateTrajectory(v0, angle, duration) {
       const c = document.getElementById('trajCanvas'), ctx = c.getContext('2d');
-      const bottomOffset = 20;
+      const bottomOffset = 40;
       const dp = +document.getElementById('d_par').value;
       const dm = +document.getElementById('d_mer').value;
       const targ = Math.hypot(dp, dm), g = 9.81;
@@ -390,16 +400,19 @@ document.addEventListener('DOMContentLoaded', () => {
       const scale = Math.min((c.width - 10) / maxX,
                              (c.height - bottomOffset) / maxY);
       let blink = true;
+      let blinkFrame = 0;
       clearInterval(window.trajBlinkInterval);
-      window.trajBlinkInterval = setInterval(() => blink = !blink, 100);
-      clearInterval(window.trajAnimation);
+      window.trajBlinkInterval = setInterval(() => blink = !blink, 50);
       const simDur = duration * 1000, interval = simDur / steps;
       let frame = 0;
       window.trajAnimation = setInterval(() => {
+        blinkFrame = (blinkFrame + 1) % 10;
+        blink = blinkFrame < 5;  // 5 frame visibile, 5 frame nascosto
+          clearInterval(window.trajBlinkInterval);
         ctx.clearRect(0, 0, c.width, c.height);
         // perimetro
         ctx.strokeStyle = '#40ff40'; ctx.globalAlpha = 1; ctx.lineWidth = 1;
-        ctx.strokeRect(0.5, 0.5, c.width - 1, c.height - 1);
+        // ctx.strokeRect(0.5, 0.5, c.width - 1, c.height - 1);
         // griglia
         ctx.globalAlpha = 0.2; ctx.lineWidth = 0.5;
         for (let i = 0; i <= 5; i++) {
@@ -446,8 +459,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         frame++;
         if (frame > steps) {
-          clearInterval(window.trajAnimation);
-          clearInterval(window.trajBlinkInterval);
         }
       }, interval);
     }
