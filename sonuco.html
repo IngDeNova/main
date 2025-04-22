@@ -2,117 +2,234 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>Soviet Nuclear Codes</title>
+  <title>Console Nucleare Sovietica</title>
   <style>
-    /* reset rapido */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* Reset minimo */
+    * { margin:0; padding:0; box-sizing:border-box; }
 
     body {
       background: #000;
       color: #0f0;
-      font-family: "Courier New", Courier, monospace;
+      font-family: "Courier New", monospace;
+      display: flex;
       height: 100vh;
       overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
 
-    .screen {
+    /* Container principale */
+    .console {
+      flex: 1;
       position: relative;
-      width: 800px; height: 500px;
-      background: #111;
-      border: 5px solid #444;
-      box-shadow: 0 0 20px #0f0;
+      background: #011;
+      box-shadow: inset 0 0 50px #00ff00;
       padding: 20px;
+      display: flex;
+      flex-direction: column;
     }
 
+    /* Overlay CRT scanlines e vignette */
+    .console::before {
+      content: "";
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(0,0,0,0) 49%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0) 51%) 0 0 / 100% 4px,
+        radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.7) 100%);
+      mix-blend-mode: multiply;
+      z-index: 10;
+    }
+
+    /* Titolo con flicker casuale */
     h1 {
+      position: relative;
       text-align: center;
       font-size: 2rem;
-      margin-bottom: 20px;
-      animation: flicker 1.5s infinite;
+      margin-bottom: 10px;
+      animation: flicker 2s infinite;
+      z-index: 20;
     }
 
-    /* lista dei codici */
-    .code-list {
-      height: 330px;
-      overflow: hidden;
+    @keyframes flicker {
+      0%,100% { opacity:1; }
+      10%,30%,50%,70%,90% { opacity:0.85; }
+      20%,40%,60%,80% { opacity:0.9; }
     }
-    .code-line {
-      font-size: 1.25rem;
-      line-height: 1.5;
+
+    /* Area dei codici */
+    .feed {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      padding-top: 10px;
+      z-index: 20;
+    }
+    .line {
+      font-size: 1.2rem;
+      line-height: 1.4;
       white-space: nowrap;
       opacity: 0;
-      animation: typewriter 0.5s forwards;
+      animation: typein 0.4s forwards;
+      text-shadow: 0 0 4px #0f0;
     }
-    .code-line:nth-child(even) { color: #a0f; }
+    @keyframes typein {
+      0% { opacity:0; transform: translateX(-30px); }
+      100% { opacity:1; transform: translateX(0); }
+    }
 
-    /* barra scanner sovietica */
-    .scanner {
+    /* Overlay glitch casuale */
+    .glitch::after {
+      content: attr(data-text);
       position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      left: 0;
+      top: 0;
+      color: #f0f;
+      clip: rect(0, 900px, 0, 0);
+      animation: glitch-anim 3s infinite;
+      mix-blend-mode: screen;
       pointer-events: none;
-      background: 
-        radial-gradient(circle, rgba(0,255,0,0.1) 0%, rgba(0,0,0,0.7) 70%);
-      animation: sweep 5s linear infinite;
-      mix-blend-mode: overlay;
+      z-index: 30;
+    }
+    @keyframes glitch-anim {
+      0% { clip: rect(0,900px,0,0); transform: translate(0);}
+      10% { clip: rect(10px,900px,50px,0); transform: translate(-2px,-2px);}
+      20% { clip: rect(60px,900px,90px,0); transform: translate(2px,2px);}
+      30% { clip: rect(110px,900px,140px,0); transform: translate(-2px,2px);}
+      40% { clip: rect(160px,900px,200px,0); transform: translate(2px,-2px);}
+      50%,100% { clip: rect(0,900px,0,0); transform: translate(0); }
     }
 
-    /* KEYFRAMES */
-    @keyframes flicker {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.8; }
-      51% { opacity: 0.95; }
+    /* Panel dei controlli */
+    .controls {
+      width: 280px;
+      background: #002;
+      border-left: 2px solid #033;
+      padding: 20px;
+      color: #0f0;
+      font-size: 0.9rem;
     }
-    @keyframes typewriter {
-      0% { opacity: 0; transform: translateX(-20px); }
-      100% { opacity: 1; transform: translateX(0); }
+    .controls h2 { margin-bottom:10px; font-size:1.2rem; }
+    .controls label { display:block; margin:10px 0 4px; }
+    .controls input, .controls select, .controls button {
+      width:100%;
+      margin-bottom:8px;
+      background:#011;
+      border:1px solid #044;
+      color:#0f0;
+      padding:6px;
+      font-family:monospace;
     }
-    @keyframes sweep {
-      from { transform: rotate(0deg) scale(1.2); }
-      to   { transform: rotate(360deg) scale(1.2); }
-    }
+    .controls button { cursor:pointer; }
+
   </style>
 </head>
 <body>
-  <div class="screen">
-    <h1>СОВЕТСКИЕ ЯДЕРНЫЕ КОДЫ</h1>
-    <div class="code-list"></div>
-    <div class="scanner"></div>
+
+  <div class="console">
+    <h1>SOVIET NUCLEAR LAUNCH</h1>
+    <div class="feed glitch" data-text="">
+      <!-- qui appaiono le linee -->
+    </div>
+  </div>
+
+  <div class="controls">
+    <h2>Controlli</h2>
+    <label for="speed">Velocità feed (ms)</label>
+    <input type="range" id="speed" min="100" max="2000" step="50" value="800">
+
+    <label for="length">Lunghezza codice</label>
+    <input type="number" id="length" min="4" max="12" value="6">
+
+    <label for="format">Formato</label>
+    <select id="format">
+      <option value="numeric">Solo numerico</option>
+      <option value="hex">Esadecimale</option>
+      <option value="alphanum">Alfanumerico</option>
+    </select>
+
+    <label><input type="checkbox" id="scanlines" checked> Scanlines CRT</label>
+    <label><input type="checkbox" id="glitch-toggle" checked> Glitch effect</label>
+
+    <button id="toggle">Sospendi feed</button>
+    <button id="launch">LANCIA ORBITALE</button>
   </div>
 
   <script>
-    const codeList = document.querySelector('.code-list');
+    const feedEl     = document.querySelector('.feed');
+    const speedInput = document.getElementById('speed');
+    const lenInput   = document.getElementById('length');
+    const fmtSelect  = document.getElementById('format');
+    const scanCk     = document.getElementById('scanlines');
+    const glitchCk   = document.getElementById('glitch-toggle');
+    const togBtn     = document.getElementById('toggle');
+    const launchBtn  = document.getElementById('launch');
+    let running = true, timer;
 
-    // Genera un codice esadecimale fittizio o 6 cifre
-    function generateCode() {
-      // 6 cifre numeriche
-      let code = '';
-      for (let i=0; i<6; i++) {
-        code += Math.floor(Math.random()*10);
-      }
-      return code;
+    function genCode(len, fmt) {
+      const nums = '0123456789';
+      const hexs = '0123456789ABCDEF';
+      const alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let src = nums;
+      if (fmt==='hex') src = hexs;
+      if (fmt==='alphanum') src = alpha;
+      let s = '';
+      for (let i=0; i<len; i++) s += src[Math.floor(Math.random()*src.length)];
+      return s;
     }
 
-    // Aggiunge una riga di codice con animazione
-    function pushCodeLine() {
-      const line = document.createElement('div');
-      line.className = 'code-line';
-      line.style.animationDelay = (Math.random()*0.8)+'s';
-      line.textContent = generateCode();
-      codeList.prepend(line);
-      // Rimuovi le righe in eccesso
-      if (codeList.children.length > 15) {
-        codeList.removeChild(codeList.lastChild);
+    function pushLine() {
+      if (!running) return;
+      const len = +lenInput.value;
+      const fmt = fmtSelect.value;
+      const code = genCode(len, fmt);
+      const div = document.createElement('div');
+      div.textContent = code;
+      div.classList.add('line');
+      // impostiamo glitch text
+      if (glitchCk.checked) {
+        div.classList.add('glitch');
+        div.dataset.text = code;
+      } else {
+        div.classList.remove('glitch');
       }
+      feedEl.prepend(div);
+      // rimuovi vecchie
+      if (feedEl.children.length > 30) {
+        feedEl.removeChild(feedEl.lastChild);
+      }
+      // aggiorna overlay glitch
+      feedEl.dataset.text = '';
     }
 
-    // Avvia un flusso continuo di codici
-    setInterval(pushCodeLine, 800);
-    // Riempie inizialmente qualche riga
-    for (let i=0; i<10; i++) pushCodeLine();
+    function startFeed() {
+      clearInterval(timer);
+      timer = setInterval(pushLine, +speedInput.value);
+    }
+
+    // event listeners
+    speedInput.oninput = startFeed;
+    scanCk.onchange = () => {
+      document.querySelector('.console').style.setProperty(
+        '--scan-opacity',
+        scanCk.checked ? '1' : '0'
+      );
+      document.querySelector('.console') .style.setProperty(
+        'background',
+        scanCk.checked ? '#011' : '#001'
+      );
+    };
+    togBtn.onclick = () => {
+      running = !running;
+      togBtn.textContent = running ? 'Sospendi feed' : 'Riavvia feed';
+    };
+    launchBtn.onclick = () => {
+      if (confirm('Confermi il lancio dei missili nucleari?')) {
+        alert('★ 🚀 ★ LAUNCH SEQUENCE INITIATED ★ 🚀 ★');
+      }
+    };
+
+    // avvio iniziale
+    startFeed();
   </script>
 </body>
 </html>
