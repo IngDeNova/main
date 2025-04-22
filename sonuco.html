@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Soviet Nuclear Codes</title>
+  <style>
+    /* reset rapido */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #000;
+      color: #0f0;
+      font-family: "Courier New", Courier, monospace;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .screen {
+      position: relative;
+      width: 800px; height: 500px;
+      background: #111;
+      border: 5px solid #444;
+      box-shadow: 0 0 20px #0f0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      animation: flicker 1.5s infinite;
+    }
+
+    /* lista dei codici */
+    .code-list {
+      height: 330px;
+      overflow: hidden;
+    }
+    .code-line {
+      font-size: 1.25rem;
+      line-height: 1.5;
+      white-space: nowrap;
+      opacity: 0;
+      animation: typewriter 0.5s forwards;
+    }
+    .code-line:nth-child(even) { color: #a0f; }
+
+    /* barra scanner sovietica */
+    .scanner {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      background: 
+        radial-gradient(circle, rgba(0,255,0,0.1) 0%, rgba(0,0,0,0.7) 70%);
+      animation: sweep 5s linear infinite;
+      mix-blend-mode: overlay;
+    }
+
+    /* KEYFRAMES */
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+      51% { opacity: 0.95; }
+    }
+    @keyframes typewriter {
+      0% { opacity: 0; transform: translateX(-20px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes sweep {
+      from { transform: rotate(0deg) scale(1.2); }
+      to   { transform: rotate(360deg) scale(1.2); }
+    }
+  </style>
+</head>
+<body>
+  <div class="screen">
+    <h1>СОВЕТСКИЕ ЯДЕРНЫЕ КОДЫ</h1>
+    <div class="code-list"></div>
+    <div class="scanner"></div>
+  </div>
+
+  <script>
+    const codeList = document.querySelector('.code-list');
+
+    // Genera un codice esadecimale fittizio o 6 cifre
+    function generateCode() {
+      // 6 cifre numeriche
+      let code = '';
+      for (let i=0; i<6; i++) {
+        code += Math.floor(Math.random()*10);
+      }
+      return code;
+    }
+
+    // Aggiunge una riga di codice con animazione
+    function pushCodeLine() {
+      const line = document.createElement('div');
+      line.className = 'code-line';
+      line.style.animationDelay = (Math.random()*0.8)+'s';
+      line.textContent = generateCode();
+      codeList.prepend(line);
+      // Rimuovi le righe in eccesso
+      if (codeList.children.length > 15) {
+        codeList.removeChild(codeList.lastChild);
+      }
+    }
+
+    // Avvia un flusso continuo di codici
+    setInterval(pushCodeLine, 800);
+    // Riempie inizialmente qualche riga
+    for (let i=0; i<10; i++) pushCodeLine();
+  </script>
+</body>
+</html>
