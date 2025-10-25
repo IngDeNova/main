@@ -1,0 +1,2669 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TakticalCampEtna - Esperienze outdoor uniche sull'Etna per giovani, famiglie e scuole. Avventura, formazione e crescita personale in Sicilia.">
+  <title>TakticalCampEtna | Outdoor Camp sull'Etna - Ragalna, Sicilia</title>
+  <style>
+    :root {
+  /* Primitive Color Tokens */
+  --color-white: rgba(255, 255, 255, 1);
+  --color-black: rgba(0, 0, 0, 1);
+  --color-cream-50: rgba(252, 252, 249, 1);
+  --color-cream-100: rgba(255, 255, 253, 1);
+  --color-gray-200: rgba(245, 245, 245, 1);
+  --color-gray-300: rgba(167, 169, 169, 1);
+  --color-gray-400: rgba(119, 124, 124, 1);
+  --color-slate-500: rgba(98, 108, 113, 1);
+  --color-brown-600: rgba(94, 82, 64, 1);
+  --color-charcoal-700: rgba(31, 33, 33, 1);
+  --color-charcoal-800: rgba(38, 40, 40, 1);
+  --color-slate-900: rgba(19, 52, 59, 1);
+  --color-teal-300: rgba(50, 184, 198, 1);
+  --color-teal-400: rgba(45, 166, 178, 1);
+  --color-teal-500: rgba(33, 128, 141, 1);
+  --color-teal-600: rgba(29, 116, 128, 1);
+  --color-teal-700: rgba(26, 104, 115, 1);
+  --color-teal-800: rgba(41, 150, 161, 1);
+  --color-red-400: rgba(255, 84, 89, 1);
+  --color-red-500: rgba(192, 21, 47, 1);
+  --color-orange-400: rgba(230, 129, 97, 1);
+  --color-orange-500: rgba(168, 75, 47, 1);
+
+  --color-brown-600-rgb: 94, 82, 64;
+  --color-teal-500-rgb: 33, 128, 141;
+  --color-slate-900-rgb: 19, 52, 59;
+  --color-slate-500-rgb: 98, 108, 113;
+  --color-red-500-rgb: 192, 21, 47;
+  --color-red-400-rgb: 255, 84, 89;
+  --color-orange-500-rgb: 168, 75, 47;
+  --color-orange-400-rgb: 230, 129, 97;
+
+  --color-bg-1: rgba(59, 130, 246, 0.08);
+  --color-bg-2: rgba(245, 158, 11, 0.08);
+  --color-bg-3: rgba(34, 197, 94, 0.08);
+  --color-bg-4: rgba(239, 68, 68, 0.08);
+  --color-bg-5: rgba(147, 51, 234, 0.08);
+  --color-bg-6: rgba(249, 115, 22, 0.08);
+  --color-bg-7: rgba(236, 72, 153, 0.08);
+  --color-bg-8: rgba(6, 182, 212, 0.08);
+
+  --color-background: var(--color-cream-50);
+  --color-surface: var(--color-cream-100);
+  --color-text: var(--color-slate-900);
+  --color-text-secondary: var(--color-slate-500);
+  --color-primary: var(--color-teal-500);
+  --color-primary-hover: var(--color-teal-600);
+  --color-primary-active: var(--color-teal-700);
+  --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+  --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-btn-primary-text: var(--color-cream-50);
+  --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-error: var(--color-red-500);
+  --color-success: var(--color-teal-500);
+  --color-warning: var(--color-orange-500);
+  --color-info: var(--color-slate-500);
+  --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+  --color-select-caret: rgba(var(--color-slate-900-rgb), 0.8);
+
+  --focus-ring: 0 0 0 3px var(--color-focus-ring);
+  --focus-outline: 2px solid var(--color-primary);
+  --status-bg-opacity: 0.15;
+  --status-border-opacity: 0.25;
+
+  --font-family-base: "FKGroteskNeue", "Geist", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-mono: "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 20px;
+  --font-size-3xl: 24px;
+  --font-size-4xl: 30px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 550;
+  --font-weight-bold: 600;
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --letter-spacing-tight: -0.01em;
+
+  --space-0: 0;
+  --space-1: 1px;
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+
+  --radius-sm: 6px;
+  --radius-base: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+  --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.15), inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-gray-400-rgb: 119, 124, 124;
+    --color-teal-300-rgb: 50, 184, 198;
+    --color-gray-300-rgb: 167, 169, 169;
+    --color-gray-200-rgb: 245, 245, 245;
+    --color-bg-1: rgba(29, 78, 216, 0.15);
+    --color-bg-2: rgba(180, 83, 9, 0.15);
+    --color-bg-3: rgba(21, 128, 61, 0.15);
+    --color-bg-4: rgba(185, 28, 28, 0.15);
+    --color-bg-5: rgba(107, 33, 168, 0.15);
+    --color-bg-6: rgba(194, 65, 12, 0.15);
+    --color-bg-7: rgba(190, 24, 93, 0.15);
+    --color-bg-8: rgba(8, 145, 178, 0.15);
+    --color-background: var(--color-charcoal-700);
+    --color-surface: var(--color-charcoal-800);
+    --color-text: var(--color-gray-200);
+    --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+    --color-primary: var(--color-teal-300);
+    --color-primary-hover: var(--color-teal-400);
+    --color-primary-active: var(--color-teal-800);
+    --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
+    --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
+    --color-secondary-active: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-error: var(--color-red-400);
+    --color-success: var(--color-teal-300);
+    --color-warning: var(--color-orange-400);
+    --color-info: var(--color-gray-300);
+    --color-focus-ring: rgba(var(--color-teal-300-rgb), 0.4);
+    --color-btn-primary-text: var(--color-slate-900);
+    --color-card-border: rgba(var(--color-gray-400-rgb), 0.2);
+    --color-card-border-inner: rgba(var(--color-gray-400-rgb), 0.15);
+    --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  }
+}
+
+@font-face {
+  font-family: 'FKGroteskNeue';
+  src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2') format('woff2');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: var(--font-size-base);
+  font-family: var(--font-family-base);
+  line-height: var(--line-height-normal);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Header & Navigation */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  z-index: 1000;
+  box-shadow: var(--shadow-sm);
+}
+
+.nav-container {
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  padding: var(--space-16) var(--space-24);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-24);
+}
+
+.logo {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  text-decoration: none;
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: var(--space-24);
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-base);
+  transition: color var(--duration-fast) var(--ease-standard);
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  color: var(--color-primary);
+}
+
+.lang-switch {
+  display: flex;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+.lang-btn {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  padding: var(--space-4) var(--space-12);
+  border-radius: var(--radius-base);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+  transition: all var(--duration-fast) var(--ease-standard);
+}
+
+.lang-btn.active {
+  background: var(--color-primary);
+  color: var(--color-btn-primary-text);
+  border-color: var(--color-primary);
+}
+
+.lang-btn:hover:not(.active) {
+  background: var(--color-secondary);
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  font-size: var(--font-size-3xl);
+  color: var(--color-text);
+  cursor: pointer;
+  padding: var(--space-4);
+}
+
+/* Hero Section */
+.hero {
+  margin-top: 70px;
+  position: relative;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--color-bg-1);
+}
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.3;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 900px;
+  padding: var(--space-32);
+}
+
+.hero-title {
+  font-size: 48px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  margin-bottom: var(--space-24);
+  letter-spacing: var(--letter-spacing-tight);
+  line-height: var(--line-height-tight);
+}
+
+.hero-subtitle {
+  font-size: var(--font-size-xl);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-32);
+  line-height: 1.6;
+}
+
+.hero-cta {
+  display: flex;
+  gap: var(--space-16);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-12) var(--space-24);
+  border-radius: var(--radius-base);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-standard);
+  border: none;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-btn-primary-text);
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+  background: var(--color-secondary);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+.btn-secondary:hover {
+  background: var(--color-secondary-hover);
+}
+
+/* Sections */
+.section {
+  padding: 80px var(--space-24);
+}
+
+.section-alt {
+  background: var(--color-surface);
+}
+
+.container {
+  max-width: var(--container-xl);
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-title {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  margin-bottom: var(--space-16);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.section-description {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Cards */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-24);
+}
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-24);
+  transition: all var(--duration-normal) var(--ease-standard);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-icon {
+  font-size: 40px;
+  margin-bottom: var(--space-16);
+}
+
+.card-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin-bottom: var(--space-12);
+}
+
+.card-text {
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* Gallery */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-16);
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  aspect-ratio: 4/3;
+  cursor: pointer;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--duration-normal) var(--ease-standard);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+/* Values Grid */
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-24);
+  margin-top: var(--space-32);
+}
+
+.value-item {
+  text-align: center;
+  padding: var(--space-24);
+}
+
+.value-icon {
+  font-size: 48px;
+  margin-bottom: var(--space-16);
+}
+
+.value-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin-bottom: var(--space-8);
+}
+
+.value-text {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-base);
+}
+
+/* FAQ */
+.faq-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  background: var(--color-surface);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-16);
+  overflow: hidden;
+}
+
+.faq-question {
+  width: 100%;
+  padding: var(--space-20);
+  background: transparent;
+  border: none;
+  text-align: left;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background var(--duration-fast) var(--ease-standard);
+}
+
+.faq-question:hover {
+  background: var(--color-secondary);
+}
+
+.faq-answer {
+  padding: 0 var(--space-20) var(--space-20);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  display: none;
+}
+
+.faq-item.active .faq-answer {
+  display: block;
+}
+
+.faq-icon {
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+.faq-item.active .faq-icon {
+  transform: rotate(180deg);
+}
+
+/* Form */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-16);
+  margin-bottom: var(--space-16);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.form-label {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  padding: var(--space-12);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-base);
+  font-size: var(--font-size-base);
+  font-family: var(--font-family-base);
+  color: var(--color-text);
+  background: var(--color-surface);
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  outline: var(--focus-outline);
+  border-color: var(--color-primary);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-full {
+  grid-column: 1 / -1;
+}
+
+.form-message {
+  padding: var(--space-16);
+  border-radius: var(--radius-base);
+  margin-top: var(--space-16);
+  display: none;
+}
+
+.form-message.success {
+  background: rgba(var(--color-success-rgb), 0.1);
+  color: var(--color-success);
+  border: 1px solid rgba(var(--color-success-rgb), 0.3);
+}
+
+.form-message.error {
+  background: rgba(var(--color-error-rgb), 0.1);
+  color: var(--color-error);
+  border: 1px solid rgba(var(--color-error-rgb), 0.3);
+}
+
+/* Footer */
+.footer {
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  padding: 60px var(--space-24) var(--space-32);
+}
+
+.footer-content {
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-32);
+  margin-bottom: var(--space-32);
+}
+
+.footer-section h4 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin-bottom: var(--space-16);
+}
+
+.footer-section p,
+.footer-section a {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  text-decoration: none;
+  display: block;
+  margin-bottom: var(--space-8);
+}
+
+.footer-section a:hover {
+  color: var(--color-primary);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: var(--space-24);
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+/* Testimonials */
+.testimonials {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-24);
+  margin-top: var(--space-32);
+}
+
+.testimonial {
+  background: var(--color-surface);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-24);
+}
+
+.testimonial-text {
+  color: var(--color-text);
+  font-style: italic;
+  margin-bottom: var(--space-16);
+  line-height: 1.6;
+}
+
+.testimonial-author {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+}
+
+/* News Cards */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-24);
+}
+
+.news-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all var(--duration-normal) var(--ease-standard);
+}
+
+.news-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.news-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.news-content {
+  padding: var(--space-20);
+}
+
+.news-date {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--space-8);
+}
+
+.news-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin-bottom: var(--space-12);
+}
+
+.news-excerpt {
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--space-16);
+}
+
+/* Contact Info */
+.contact-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-24);
+  margin-bottom: 60px;
+}
+
+.contact-card {
+  text-align: center;
+  padding: var(--space-24);
+  background: var(--color-surface);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+}
+
+.contact-icon {
+  font-size: 40px;
+  margin-bottom: var(--space-16);
+}
+
+.contact-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin-bottom: var(--space-8);
+}
+
+.contact-detail {
+  color: var(--color-text-secondary);
+}
+
+.contact-detail a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.contact-detail a:hover {
+  text-decoration: underline;
+}
+
+/* Info Grid */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-32);
+}
+
+.info-section h3 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin-bottom: var(--space-16);
+}
+
+.info-section p,
+.info-section ul {
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--space-12);
+}
+
+.info-section ul {
+  padding-left: var(--space-20);
+}
+
+.info-section li {
+  margin-bottom: var(--space-8);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--color-surface);
+    flex-direction: column;
+    padding: var(--space-24);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .nav-menu.active {
+    display: flex;
+  }
+  
+  .mobile-menu-btn {
+    display: block;
+  }
+  
+  .hero-title {
+    font-size: 36px;
+  }
+  
+  .hero-subtitle {
+    font-size: var(--font-size-base);
+  }
+  
+  .section {
+    padding: 60px var(--space-16);
+  }
+  
+  .section-title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .cards-grid,
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Hidden class for language switching */
+.hidden {
+  display: none !important;
+}
+
+/* Booking System Styles */
+.booking-filters {
+  display: flex;
+  gap: var(--space-16);
+  margin-bottom: var(--space-32);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.filter-btn {
+  padding: var(--space-10) var(--space-20);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  border-radius: var(--radius-base);
+  cursor: pointer;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+  transition: all var(--duration-fast) var(--ease-standard);
+}
+
+.filter-btn:hover {
+  background: var(--color-secondary);
+}
+
+.filter-btn.active {
+  background: var(--color-primary);
+  color: var(--color-btn-primary-text);
+  border-color: var(--color-primary);
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-16);
+  margin-bottom: var(--space-32);
+}
+
+.day-column {
+  background: var(--color-surface);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.day-header {
+  background: var(--color-bg-1);
+  padding: var(--space-16);
+  text-align: center;
+  border-bottom: 1px solid var(--color-card-border);
+}
+
+.day-name {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin-bottom: var(--space-4);
+}
+
+.day-date {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.slots-container {
+  padding: var(--space-12);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.slot-card {
+  background: var(--color-surface);
+  border: 2px solid;
+  border-radius: var(--radius-base);
+  padding: var(--space-12);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-standard);
+}
+
+.slot-card:hover:not(.slot-full) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.slot-card.slot-full {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.slot-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  margin-bottom: var(--space-8);
+}
+
+.slot-icon {
+  font-size: 20px;
+}
+
+.slot-activity {
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+}
+
+.slot-time {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-8);
+}
+
+.slot-availability {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.slot-availability-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.availability-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--color-secondary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  position: relative;
+}
+
+.availability-bar-fill {
+  height: 100%;
+  transition: width var(--duration-normal) var(--ease-standard);
+  border-radius: var(--radius-full);
+}
+
+.availability-bar-fill.high {
+  background: #22c55e;
+}
+
+.availability-bar-fill.medium {
+  background: #f59e0b;
+}
+
+.availability-bar-fill.low {
+  background: #ef4444;
+}
+
+@keyframes flashUpdate {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.slot-card.updating {
+  animation: flashUpdate 0.6s ease-in-out;
+}
+
+.slot-spots {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.slot-badge {
+  padding: var(--space-4) var(--space-8);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+}
+
+.badge-available {
+  background: rgba(var(--color-success-rgb), 0.15);
+  color: var(--color-success);
+  border: 1px solid rgba(var(--color-success-rgb), 0.3);
+}
+
+.badge-few {
+  background: rgba(251, 191, 36, 0.15);
+  color: #f59e0b;
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.badge-full {
+  background: rgba(var(--color-error-rgb), 0.15);
+  color: var(--color-error);
+  border: 1px solid rgba(var(--color-error-rgb), 0.3);
+}
+
+/* Activity Colors */
+.activity-cqb {
+  border-color: #C0152F;
+}
+
+.activity-nerf {
+  border-color: #E68161;
+}
+
+.activity-areatraining {
+  border-color: #21808D;
+}
+
+.activity-tdod {
+  border-color: #1A6873;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-16);
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+}
+
+.modal-header {
+  padding: var(--space-24);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+}
+
+.modal-close {
+  background: transparent;
+  border: none;
+  font-size: var(--font-size-3xl);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  padding: var(--space-4);
+  line-height: 1;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.modal-close:hover {
+  color: var(--color-text);
+}
+
+.modal-body {
+  padding: var(--space-24);
+}
+
+.booking-info {
+  background: var(--color-bg-1);
+  padding: var(--space-16);
+  border-radius: var(--radius-base);
+  margin-bottom: var(--space-24);
+}
+
+.booking-info-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--space-8);
+  font-size: var(--font-size-base);
+}
+
+.booking-info-item:last-child {
+  margin-bottom: 0;
+}
+
+.info-label {
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+.info-value {
+  color: var(--color-text);
+  font-weight: var(--font-weight-semibold);
+}
+
+.checkbox-group {
+  display: flex;
+  gap: var(--space-8);
+  align-items: flex-start;
+  margin-top: var(--space-16);
+  margin-bottom: var(--space-24);
+}
+
+.checkbox-group input[type="checkbox"] {
+  margin-top: var(--space-4);
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.checkbox-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+/* My Bookings */
+.bookings-list {
+  display: grid;
+  gap: var(--space-16);
+}
+
+.booking-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-20);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-16);
+  flex-wrap: wrap;
+}
+
+.booking-details {
+  flex: 1;
+  min-width: 250px;
+}
+
+.booking-code {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-8);
+}
+
+.booking-activity {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin-bottom: var(--space-8);
+}
+
+.booking-datetime {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+.booking-participants {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.booking-actions {
+  display: flex;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+.btn-cancel {
+  background: transparent;
+  border: 1px solid var(--color-error);
+  color: var(--color-error);
+  padding: var(--space-8) var(--space-16);
+  border-radius: var(--radius-base);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--duration-fast) var(--ease-standard);
+}
+
+.btn-cancel:hover {
+  background: var(--color-error);
+  color: var(--color-white);
+}
+
+.empty-state {
+  text-align: center;
+  padding: var(--space-32);
+  color: var(--color-text-secondary);
+}
+
+.empty-icon {
+  font-size: 48px;
+  margin-bottom: var(--space-16);
+  opacity: 0.5;
+}
+
+/* Calendar Styles */
+.calendar-container {
+  max-width: 400px;
+  margin: 0 auto;
+  background: var(--color-surface);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-16);
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-16);
+  padding: var(--space-8);
+}
+
+.calendar-month {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+}
+
+.calendar-nav-btn {
+  background: var(--color-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-base);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: var(--font-size-lg);
+  color: var(--color-text);
+  transition: all var(--duration-fast) var(--ease-standard);
+}
+
+.calendar-nav-btn:hover:not(:disabled) {
+  background: var(--color-secondary-hover);
+}
+
+.calendar-nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+.calendar-weekday {
+  text-align: center;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  padding: var(--space-8);
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--space-4);
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-base);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-standard);
+  border: 2px solid transparent;
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.calendar-day:hover:not(.calendar-day-disabled):not(.calendar-day-empty) {
+  background: var(--color-secondary);
+  border-color: var(--color-border);
+}
+
+.calendar-day.calendar-day-today {
+  border-color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.calendar-day.calendar-day-selected {
+  background: var(--color-primary);
+  color: var(--color-btn-primary-text);
+  border-color: var(--color-primary);
+}
+
+.calendar-day.calendar-day-disabled {
+  color: var(--color-text-secondary);
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.calendar-day.calendar-day-empty {
+  cursor: default;
+  opacity: 0;
+}
+
+.placeholder-message {
+  text-align: center;
+  padding: 60px var(--space-24);
+  background: var(--color-bg-1);
+  border-radius: var(--radius-lg);
+  border: 2px dashed var(--color-border);
+}
+
+.placeholder-message-icon {
+  font-size: 64px;
+  margin-bottom: var(--space-16);
+  opacity: 0.5;
+}
+
+.placeholder-message-text {
+  font-size: var(--font-size-lg);
+  color: var(--color-text);
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--space-8);
+}
+
+.placeholder-message-subtext {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+}
+
+.alert {
+  padding: var(--space-16);
+  border-radius: var(--radius-base);
+  margin-bottom: var(--space-16);
+  display: none;
+}
+
+.alert.show {
+  display: block;
+}
+
+.alert-success {
+  background: rgba(var(--color-success-rgb), 0.1);
+  color: var(--color-success);
+  border: 1px solid rgba(var(--color-success-rgb), 0.3);
+}
+
+.alert-error {
+  background: rgba(var(--color-error-rgb), 0.1);
+  color: var(--color-error);
+  border: 1px solid rgba(var(--color-error-rgb), 0.3);
+}
+
+@media (max-width: 768px) {
+  .calendar-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .booking-filters {
+    flex-direction: column;
+  }
+  
+  .filter-btn {
+    width: 100%;
+  }
+  
+  .booking-card {
+    flex-direction: column;
+  }
+  
+  .booking-actions {
+    width: 100%;
+  }
+  
+  .btn-cancel {
+    width: 100%;
+  }
+}
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <nav class="nav-container">
+      <a href="#home" class="logo">TakticalCampEtna</a>
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+        ☰
+      </button>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#home" class="nav-link" data-section="home">Home</a></li>
+        <li><a href="#chi-siamo" class="nav-link" data-section="about">Chi siamo</a></li>
+        <li><a href="#attivita" class="nav-link" data-section="activities">Attività</a></li>
+        <li><a href="#gallery" class="nav-link" data-section="gallery">Gallery</a></li>
+        <li><a href="#info" class="nav-link" data-section="info">Info pratiche</a></li>
+        <li><a href="#news" class="nav-link" data-section="news">News</a></li>
+        <li><a href="#prenota" class="nav-link" data-section="booking">Prenota</a></li>
+        <li><a href="#mie-prenotazioni" class="nav-link" data-section="mybookings">Le mie prenotazioni</a></li>
+        <li><a href="#contatti" class="nav-link" data-section="contact">Contatti</a></li>
+        <li class="lang-switch">
+          <button class="lang-btn active" data-lang="it">IT</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <img src="https://pplx-res.cloudinary.com/image/upload/v1758897001/pplx_project_search_images/1083f401ef01a5568c79deda6a9e46e0aad767bd.png" alt="Mount Etna" class="hero-background">
+    <div class="hero-content">
+      <h1 class="hero-title" data-it="Vivi l'avventura sull'Etna" data-en="Experience adventure on Mount Etna">Vivi l'avventura sull'Etna</h1>
+      <p class="hero-subtitle" data-it="Campi outdoor, sport e formazione esperienziale per giovani, famiglie e scuole nel cuore della Sicilia" data-en="Outdoor camps, sports and experiential training for youth, families and schools in the heart of Sicily">Campi outdoor, sport e formazione esperienziale per giovani, famiglie e scuole nel cuore della Sicilia</p>
+      <div class="hero-cta">
+        <a href="#attivita" class="btn btn-primary" data-it="Scopri le attività" data-en="Discover activities">Scopri le attività</a>
+        <a href="#prenota" class="btn btn-secondary" data-it="Prenota ora" data-en="Book now">Prenota ora</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chi Siamo -->
+  <section id="chi-siamo" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title" data-it="Chi Siamo" data-en="About Us">Chi Siamo</h2>
+        <p class="section-description" data-it="TakticalCampEtna nasce dalla passione per lo sport, la natura e la formazione attiva. Proponiamo programmi costruiti sulla crescita e il benessere dei ragazzi e famiglie, in un contesto siciliano autentico." data-en="TakticalCampEtna was born from a passion for sports, nature and active training. We offer programs built on the growth and well-being of youth and families, in an authentic Sicilian setting.">TakticalCampEtna nasce dalla passione per lo sport, la natura e la formazione attiva. Proponiamo programmi costruiti sulla crescita e il benessere dei ragazzi e famiglie, in un contesto siciliano autentico.</p>
+      </div>
+      
+      <div class="values-grid">
+        <div class="value-item">
+          <div class="value-icon">🏔️</div>
+          <h3 class="value-title" data-it="Location Unica" data-en="Unique Location">Location Unica</h3>
+          <p class="value-text" data-it="Ai piedi dell'Etna, nel cuore della natura siciliana" data-en="At the foot of Mount Etna, in the heart of Sicilian nature">Ai piedi dell'Etna, nel cuore della natura siciliana</p>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">🎯</div>
+          <h3 class="value-title" data-it="Staff Certificato" data-en="Certified Staff">Staff Certificato</h3>
+          <p class="value-text" data-it="Istruttori outdoor professionali e educatori esperti" data-en="Professional outdoor instructors and experienced educators">Istruttori outdoor professionali e educatori esperti</p>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">🌱</div>
+          <h3 class="value-title" data-it="Sostenibilità" data-en="Sustainability">Sostenibilità</h3>
+          <p class="value-text" data-it="Rispetto per l'ambiente e pratiche eco-sostenibili" data-en="Respect for the environment and eco-sustainable practices">Rispetto per l'ambiente e pratiche eco-sostenibili</p>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">🛡️</div>
+          <h3 class="value-title" data-it="Sicurezza" data-en="Safety">Sicurezza</h3>
+          <p class="value-text" data-it="Massima attenzione alla sicurezza e supervisione costante" data-en="Maximum attention to safety and constant supervision">Massima attenzione alla sicurezza e supervisione costante</p>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">🤝</div>
+          <h3 class="value-title" data-it="Inclusività" data-en="Inclusivity">Inclusività</h3>
+          <p class="value-text" data-it="Esperienze aperte a tutti, per tutte le età e abilità" data-en="Experiences open to all, for all ages and abilities">Esperienze aperte a tutti, per tutte le età e abilità</p>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">💚</div>
+          <h3 class="value-title" data-it="Passione" data-en="Passion">Passione</h3>
+          <p class="value-text" data-it="Team giovane e appassionato, dedicato alla formazione" data-en="Young and passionate team, dedicated to training">Team giovane e appassionato, dedicato alla formazione</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Attività & Programmi -->
+  <section id="attivita" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title" data-it="Attività &amp; Programmi" data-en="Activities &amp; Programs">Attività &amp; Programmi</h2>
+        <p class="section-description" data-it="Esperienze outdoor uniche sull'Etna, progettate per ogni età e interesse. Avventura, apprendimento e divertimento in un contesto naturale straordinario." data-en="Unique outdoor experiences on Mount Etna, designed for every age and interest. Adventure, learning and fun in an extraordinary natural setting.">Esperienze outdoor uniche sull'Etna, progettate per ogni età e interesse. Avventura, apprendimento e divertimento in un contesto naturale straordinario.</p>
+      </div>
+
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-icon">☀️</div>
+          <h3 class="card-title" data-it="Campi Estivi" data-en="Summer Camps">Campi Estivi</h3>
+          <p class="card-text" data-it="Settimane indimenticabili per bambini e ragazzi: trekking, arrampicata, orienteering, attività di gruppo e molto altro. Crescita personale e divertimento garantiti!" data-en="Unforgettable weeks for children and teenagers: trekking, climbing, orienteering, group activities and much more. Personal growth and fun guaranteed!">Settimane indimenticabili per bambini e ragazzi: trekking, arrampicata, orienteering, attività di gruppo e molto altro. Crescita personale e divertimento garantiti!</p>
+        </div>
+        
+        <div class="card">
+          <div class="card-icon">👨‍👩‍👧‍👦</div>
+          <h3 class="card-title" data-it="Weekend Famiglia" data-en="Family Weekends">Weekend Famiglia</h3>
+          <p class="card-text" data-it="Esperienze outdoor per tutta la famiglia: escursioni guidate sull'Etna, mountain bike, parchi avventura. Momenti speciali da condividere insieme nella natura." data-en="Outdoor experiences for the whole family: guided excursions on Mount Etna, mountain biking, adventure parks. Special moments to share together in nature.">Esperienze outdoor per tutta la famiglia: escursioni guidate sull'Etna, mountain bike, parchi avventura. Momenti speciali da condividere insieme nella natura.</p>
+        </div>
+        
+        <div class="card">
+          <div class="card-icon">🎓</div>
+          <h3 class="card-title" data-it="Scuole &amp; Team Building" data-en="Schools &amp; Team Building">Scuole &amp; Team Building</h3>
+          <p class="card-text" data-it="Programmi educativi per scuole e aziende: formazione esperienziale, team building outdoor, educazione ambientale. Imparare facendo in un contesto unico." data-en="Educational programs for schools and companies: experiential training, outdoor team building, environmental education. Learning by doing in a unique setting.">Programmi educativi per scuole e aziende: formazione esperienziale, team building outdoor, educazione ambientale. Imparare facendo in un contesto unico.</p>
+        </div>
+        
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <h3 class="card-title" data-it="Eventi Personalizzati" data-en="Custom Events">Eventi Personalizzati</h3>
+          <p class="card-text" data-it="Organizziamo eventi su misura per ogni esigenza: compleanni avventura, giornate speciali, ritiri sportivi. Costruiamo insieme l'esperienza perfetta per te." data-en="We organize tailor-made events for every need: adventure birthdays, special days, sports retreats. We build the perfect experience for you together.">Organizziamo eventi su misura per ogni esigenza: compleanni avventura, giornate speciali, ritiri sportivi. Costruiamo insieme l'esperienza perfetta per te.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title" data-it="Gallery" data-en="Gallery">Gallery</h2>
+        <p class="section-description" data-it="Scopri le nostre attività attraverso le immagini: avventura, natura e sorrisi sull'Etna" data-en="Discover our activities through images: adventure, nature and smiles on Mount Etna">Scopri le nostre attività attraverso le immagini: avventura, natura e sorrisi sull'Etna</p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="https://pplx-res.cloudinary.com/image/upload/v1761362414/pplx_project_search_images/3993df1f0db2046283b09c1dd2dc0625738fe57d.png" alt="Mountain biking su Etna">
+        </div>
+        <div class="gallery-item">
+          <img src="https://pplx-res.cloudinary.com/image/upload/v1761362415/pplx_project_search_images/0453cc873d53b888cd8fc6c9ecc4256cf8ad4baf.png" alt="Parco avventura ragazzi">
+        </div>
+        <div class="gallery-item">
+          <img src="https://pplx-res.cloudinary.com/image/upload/v1758897001/pplx_project_search_images/1083f401ef01a5568c79deda6a9e46e0aad767bd.png" alt="Gruppo trekking Etna">
+        </div>
+        <div class="gallery-item">
+          <img src="https://pplx-res.cloudinary.com/image/upload/v1761362414/pplx_project_search_images/50f6b921c27dda93a1ac01fea05017dbcd6ef7de.png" alt="Percorso avventura">
+        </div>
+        <div class="gallery-item">
+          <img src="https://pplx-res.cloudinary.com/image/upload/v1761362416/pplx_project_search_images/b9af082bb73d2c40790107e8a7060dc008d87f25.png" alt="Zipline avventura">
+        </div>
+        <div class="gallery-item">
+          <img src="https://pplx-res.cloudinary.com/image/upload/v1761362414/pplx_project_search_images/a2e894b0c9cc83ee3a0fb385598f2429cdf1c8d4.png" alt="Esperienza natura Etna">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonianze -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title" data-it="Cosa Dicono di Noi" data-en="What People Say">Cosa Dicono di Noi</h2>
+      </div>
+
+      <div class="testimonials">
+        <div class="testimonial">
+          <p class="testimonial-text" data-it="&quot;Un'esperienza fantastica per i nostri ragazzi! Staff preparato, attività entusiasmanti e una location mozzafiato. Torneremo sicuramente!&quot;" data-en="&quot;A fantastic experience for our kids! Well-prepared staff, exciting activities and a breathtaking location. We will definitely be back!&quot;">&quot;Un'esperienza fantastica per i nostri ragazzi! Staff preparato, attività entusiasmanti e una location mozzafiato. Torneremo sicuramente!&quot;</p>
+          <p class="testimonial-author">— Maria R., mamma</p>
+        </div>
+        <div class="testimonial">
+          <p class="testimonial-text" data-it="&quot;Il campo estivo più bello di sempre! Ho fatto nuove amicizie, imparato tanto e vissuto avventure incredibili sull'Etna. 5 stelle!&quot;" data-en="&quot;The best summer camp ever! I made new friends, learned a lot and lived incredible adventures on Mount Etna. 5 stars!&quot;">&quot;Il campo estivo più bello di sempre! Ho fatto nuove amicizie, imparato tanto e vissuto avventure incredibili sull'Etna. 5 stelle!&quot;</p>
+          <p class="testimonial-author">— Luca, 13 anni</p>
+        </div>
+        <div class="testimonial">
+          <p class="testimonial-text" data-it="&quot;Ottima organizzazione per la nostra gita scolastica. Gli studenti sono tornati entusiasti e con tanti apprendimenti. Consigliatissimo!&quot;" data-en="&quot;Excellent organization for our school trip. The students came back enthusiastic and with lots of learning. Highly recommended!&quot;">&quot;Ottima organizzazione per la nostra gita scolastica. Gli studenti sono tornati entusiasti e con tanti apprendimenti. Consigliatissimo!&quot;</p>
+          <p class="testimonial-author">— Prof. Giuseppe T.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Info Pratiche -->
+  <section id="info" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title" data-it="Info Pratiche" data-en="Practical Info">Info Pratiche</h2>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-section">
+          <h3 data-it="Come Arrivare" data-en="How to Get Here">Come Arrivare</h3>
+          <p data-it="Località Ragalna, versante sud dell'Etna. Facilmente raggiungibile da Catania (40 km) e dall'aeroporto (50 km). Indicazioni dettagliate verranno fornite al momento dell'iscrizione." data-en="Ragalna location, south side of Mount Etna. Easily accessible from Catania (40 km) and the airport (50 km). Detailed directions will be provided upon registration.">Località Ragalna, versante sud dell'Etna. Facilmente raggiungibile da Catania (40 km) e dall'aeroporto (50 km). Indicazioni dettagliate verranno fornite al momento dell'iscrizione.</p>
+        </div>
+        
+        <div class="info-section">
+          <h3 data-it="Equipaggiamento" data-en="Equipment">Equipaggiamento</h3>
+          <p data-it="Forniamo tutta l'attrezzatura tecnica necessaria (caschi, imbragature, etc.). Consigliamo abbigliamento comodo, scarpe da trekking, zaino e borraccia. Lista dettagliata disponibile su richiesta." data-en="We provide all necessary technical equipment (helmets, harnesses, etc.). We recommend comfortable clothing, hiking shoes, backpack and water bottle. Detailed list available upon request.">Forniamo tutta l'attrezzatura tecnica necessaria (caschi, imbragature, etc.). Consigliamo abbigliamento comodo, scarpe da trekking, zaino e borraccia. Lista dettagliata disponibile su richiesta.</p>
+        </div>
+        
+        <div class="info-section">
+          <h3 data-it="Sicurezza" data-en="Safety">Sicurezza</h3>
+          <p data-it="Tutte le attività sono svolte nel rispetto delle normative di sicurezza outdoor, con assicurazione e supervisione costante da parte di istruttori certificati. Primo soccorso sempre disponibile." data-en="All activities are carried out in compliance with outdoor safety regulations, with insurance and constant supervision by certified instructors. First aid always available.">Tutte le attività sono svolte nel rispetto delle normative di sicurezza outdoor, con assicurazione e supervisione costante da parte di istruttori certificati. Primo soccorso sempre disponibile.</p>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <div style="margin-top: 60px;">
+        <h3 style="text-align: center; font-size: var(--font-size-3xl); margin-bottom: var(--space-32); color: var(--color-text);" data-it="Domande Frequenti" data-en="Frequently Asked Questions">Domande Frequenti</h3>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-it="Chi può partecipare alle attività?" data-en="Who can participate in the activities?">Chi può partecipare alle attività?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer" data-it="Le nostre attività sono aperte a bambini (dai 7 anni), adolescenti, famiglie, scuole e gruppi organizzati. Offriamo programmi adatti a tutte le età e livelli di esperienza, con particolare attenzione all'inclusività." data-en="Our activities are open to children (from 7 years old), teenagers, families, schools and organized groups. We offer programs suitable for all ages and experience levels, with particular attention to inclusivity.">Le nostre attività sono aperte a bambini (dai 7 anni), adolescenti, famiglie, scuole e gruppi organizzati. Offriamo programmi adatti a tutte le età e livelli di esperienza, con particolare attenzione all'inclusività.</div>
+          </div>
+          
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-it="Che equipaggiamento è necessario?" data-en="What equipment is necessary?">Che equipaggiamento è necessario?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer" data-it="Forniamo tutta l'attrezzatura tecnica specialistica (caschi, imbragature, dispositivi di sicurezza). I partecipanti devono portare abbigliamento comodo e sportivo, scarpe da trekking, zaino, borraccia e protezione solare. Una lista dettagliata viene inviata con la conferma di iscrizione." data-en="We provide all specialized technical equipment (helmets, harnesses, safety devices). Participants must bring comfortable and sporty clothing, hiking shoes, backpack, water bottle and sun protection. A detailed list is sent with registration confirmation.">Forniamo tutta l'attrezzatura tecnica specialistica (caschi, imbragature, dispositivi di sicurezza). I partecipanti devono portare abbigliamento comodo e sportivo, scarpe da trekking, zaino, borraccia e protezione solare. Una lista dettagliata viene inviata con la conferma di iscrizione.</div>
+          </div>
+          
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-it="Come si svolgono le attività?" data-en="How are activities conducted?">Come si svolgono le attività?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer" data-it="Le attività sono guidate da istruttori outdoor certificati e educatori esperti. Iniziamo sempre con un briefing sulla sicurezza, seguito da esperienze pratiche outdoor (trekking, arrampicata, orienteering, mountain bike, etc.). Le giornate includono momenti formativi, sfide di gruppo e tempo libero, sempre in un'atmosfera di divertimento e apprendimento." data-en="Activities are led by certified outdoor instructors and experienced educators. We always start with a safety briefing, followed by hands-on outdoor experiences (trekking, climbing, orienteering, mountain biking, etc.). Days include training moments, group challenges and free time, always in an atmosphere of fun and learning.">Le attività sono guidate da istruttori outdoor certificati e educatori esperti. Iniziamo sempre con un briefing sulla sicurezza, seguito da esperienze pratiche outdoor (trekking, arrampicata, orienteering, mountain bike, etc.). Le giornate includono momenti formativi, sfide di gruppo e tempo libero, sempre in un'atmosfera di divertimento e apprendimento.</div>
+          </div>
+          
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-it="Quali sono le misure di sicurezza?" data-en="What are the safety measures?">Quali sono le misure di sicurezza?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer" data-it="La sicurezza è la nostra priorità assoluta. Tutti i nostri istruttori sono certificati e formati in primo soccorso. Utilizziamo solo attrezzature certificate e regolarmente controllate. Tutte le attività sono coperte da assicurazione. Il rapporto istruttori/partecipanti è ottimale per garantire supervisione costante. Abbiamo protocolli di emergenza e comunicazioni dirette con i soccorsi." data-en="Safety is our absolute priority. All our instructors are certified and trained in first aid. We use only certified and regularly checked equipment. All activities are covered by insurance. The instructors/participants ratio is optimal to ensure constant supervision. We have emergency protocols and direct communications with rescue services.">La sicurezza è la nostra priorità assoluta. Tutti i nostri istruttori sono certificati e formati in primo soccorso. Utilizziamo solo attrezzature certificate e regolarmente controllate. Tutte le attività sono coperte da assicurazione. Il rapporto istruttori/partecipanti è ottimale per garantire supervisione costante. Abbiamo protocolli di emergenza e comunicazioni dirette con i soccorsi.</div>
+          </div>
+          
+          <div class="faq-item">
+            <button class="faq-question">
+              <span data-it="Cosa offre il vitto e l'alloggio?" data-en="What does food and accommodation offer?">Cosa offre il vitto e l'alloggio?</span>
+              <span class="faq-icon">▼</span>
+            </button>
+            <div class="faq-answer" data-it="Per i campi residenziali offriamo sistemazione in strutture sicure e confortevoli nei pressi di Ragalna. I pasti sono preparati con prodotti locali e attenzione alle esigenze alimentari particolari (vegetariani, allergie, intolleranze). Menu equilibrati e gustosi che valorizzano la tradizione siciliana. Per attività giornaliere, pranzi al sacco inclusi nel programma." data-en="For residential camps we offer accommodation in safe and comfortable facilities near Ragalna. Meals are prepared with local products and attention to special dietary needs (vegetarians, allergies, intolerances). Balanced and tasty menus that enhance the Sicilian tradition. For daily activities, packed lunches included in the program.">Per i campi residenziali offriamo sistemazione in strutture sicure e confortevoli nei pressi di Ragalna. I pasti sono preparati con prodotti locali e attenzione alle esigenze alimentari particolari (vegetariani, allergie, intolleranze). Menu equilibrati e gustosi che valorizzano la tradizione siciliana. Per attività giornaliere, pranzi al sacco inclusi nel programma.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- News & Eventi -->
+  <section id="news" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title" data-it="News &amp; Eventi" data-en="News &amp; Events">News &amp; Eventi</h2>
+        <p class="section-description" data-it="Scopri le ultime novità, eventi speciali e aperture iscrizioni" data-en="Discover the latest news, special events and registration openings">Scopri le ultime novità, eventi speciali e aperture iscrizioni</p>
+      </div>
+
+      <div class="news-grid">
+        <div class="news-card">
+          <img src="https://pplx-res.cloudinary.com/image/upload/v1761362414/pplx_project_search_images/50f6b921c27dda93a1ac01fea05017dbcd6ef7de.png" alt="Summer Camp 2025" class="news-image">
+          <div class="news-content">
+            <p class="news-date">15 Marzo 2025</p>
+            <h3 class="news-title" data-it="Aperte le iscrizioni Estate 2025!" data-en="Summer 2025 registrations open!">Aperte le iscrizioni Estate 2025!</h3>
+            <p class="news-excerpt" data-it="Sono ufficialmente aperte le iscrizioni per i campi estivi 2025! Nuove attività, più date disponibili e tante sorprese. Prenota subito il tuo posto!" data-en="Registrations for the 2025 summer camps are officially open! New activities, more dates available and many surprises. Book your spot now!">Sono ufficialmente aperte le iscrizioni per i campi estivi 2025! Nuove attività, più date disponibili e tante sorprese. Prenota subito il tuo posto!</p>
+          </div>
+        </div>
+        
+        <div class="news-card">
+          <img src="https://pplx-res.cloudinary.com/image/upload/v1761362414/pplx_project_search_images/3993df1f0db2046283b09c1dd2dc0625738fe57d.png" alt="Mountain Bike Tour" class="news-image">
+          <div class="news-content">
+            <p class="news-date">1 Aprile 2025</p>
+            <h3 class="news-title" data-it="Nuovo tour in Mountain Bike" data-en="New Mountain Bike Tour">Nuovo tour in Mountain Bike</h3>
+            <p class="news-excerpt" data-it="Lancio del nuovo tour guidato in mountain bike sui sentieri dell'Etna! Weekend speciale ad Aprile con guida esperta e percorsi per tutti i livelli." data-en="Launch of the new guided mountain bike tour on the Etna trails! Special weekend in April with expert guide and routes for all levels.">Lancio del nuovo tour guidato in mountain bike sui sentieri dell'Etna! Weekend speciale ad Aprile con guida esperta e percorsi per tutti i livelli.</p>
+          </div>
+        </div>
+        
+        <div class="news-card">
+          <img src="https://pplx-res.cloudinary.com/image/upload/v1761362416/pplx_project_search_images/b9af082bb73d2c40790107e8a7060dc008d87f25.png" alt="Partnership" class="news-image">
+          <div class="news-content">
+            <p class="news-date">20 Febbraio 2025</p>
+            <h3 class="news-title" data-it="Nuova partnership con Scuole" data-en="New partnership with Schools">Nuova partnership con Scuole</h3>
+            <p class="news-excerpt" data-it="Siamo felici di annunciare la partnership con diverse scuole siciliane per programmi di educazione outdoor e gite didattiche sull'Etna durante l'anno scolastico." data-en="We are happy to announce the partnership with several Sicilian schools for outdoor education programs and educational trips on Mount Etna during the school year.">Siamo felici di annunciare la partnership con diverse scuole siciliane per programmi di educazione outdoor e gite didattiche sull'Etna durante l'anno scolastico.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prenota / Booking System -->
+  <section id="prenota" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title" data-it="Prenota la tua Attività" data-en="Book Your Activity">Prenota la tua Attività</h2>
+        <p class="section-description" data-it="Scegli l'attività, il giorno e l'orario che preferisci. Prenota il tuo posto in pochi click!" data-en="Choose your activity, day and time. Book your spot in just a few clicks!">Scegli l'attività, il giorno e l'orario che preferisci. Prenota il tuo posto in pochi click!</p>
+      </div>
+
+      <!-- Filters -->
+      <div style="margin-bottom: var(--space-24);">
+        <h3 style="font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); color: var(--color-text); margin-bottom: var(--space-12); text-align: center;" data-it="Seleziona Attività" data-en="Select Activity">Seleziona Attività</h3>
+        <div class="booking-filters">
+          <button class="filter-btn" data-filter="cqb">🎯 CQB</button>
+          <button class="filter-btn" data-filter="nerf">🔫 NERF</button>
+          <button class="filter-btn" data-filter="areatraining">💪 AreaTraining</button>
+          <button class="filter-btn" data-filter="tdod">🎪 TdOD</button>
+        </div>
+      </div>
+
+      <div style="margin-bottom: var(--space-32);">
+        <h3 style="font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); color: var(--color-text); margin-bottom: var(--space-12); text-align: center;" data-it="Seleziona Data" data-en="Select Date">Seleziona Data</h3>
+        <div id="calendar" class="calendar-container">
+          <!-- Calendar will be generated here -->
+        </div>
+      </div>
+
+      <!-- Alert -->
+      <div id="bookingAlert" class="alert"></div>
+
+      <!-- Calendar Grid -->
+      <div id="calendarGrid" class="calendar-grid">
+        <!-- Generated by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Le Mie Prenotazioni -->
+  <section id="mie-prenotazioni" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title" data-it="Le Mie Prenotazioni" data-en="My Bookings">Le Mie Prenotazioni</h2>
+        <p class="section-description" data-it="Visualizza e gestisci le tue prenotazioni" data-en="View and manage your bookings">Visualizza e gestisci le tue prenotazioni</p>
+      </div>
+
+      <div id="bookingsList" class="bookings-list">
+        <!-- Generated by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking Modal -->
+  <div id="bookingModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" data-it="Completa la Prenotazione" data-en="Complete Booking">Completa la Prenotazione</h3>
+        <button class="modal-close" id="modalClose">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="booking-info" id="bookingInfo">
+          <!-- Booking details will be inserted here -->
+        </div>
+
+        <form id="bookingForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" data-it="Nome e Cognome" data-en="Full Name">Nome e Cognome</label>
+              <input type="text" class="form-input" name="fullName" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" data-it="Email" data-en="Email">Email</label>
+              <input type="email" class="form-input" name="email" required>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" data-it="Telefono" data-en="Phone">Telefono</label>
+              <input type="tel" class="form-input" name="phone" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" data-it="Numero Partecipanti" data-en="Number of Participants">Numero Partecipanti</label>
+              <input type="number" class="form-input" name="participants" min="1" required>
+            </div>
+          </div>
+
+          <div class="form-group form-full">
+            <label class="form-label" data-it="Note (opzionale)" data-en="Notes (optional)">Note (opzionale)</label>
+            <textarea class="form-textarea" name="notes" rows="3"></textarea>
+          </div>
+
+          <div class="checkbox-group">
+            <input type="checkbox" id="privacyCheck" required>
+            <label class="checkbox-label" for="privacyCheck" data-it="Accetto il regolamento e la privacy policy" data-en="I accept the regulations and privacy policy">Accetto il regolamento e la privacy policy</label>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;" data-it="Conferma Prenotazione" data-en="Confirm Booking">Conferma Prenotazione</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contatti -->
+  <section id="contatti" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title" data-it="Contatti" data-en="Contact Us">Contatti</h2>
+        <p class="section-description" data-it="Siamo qui per rispondere a tutte le tue domande. Contattaci per informazioni o per iscriverti!" data-en="We are here to answer all your questions. Contact us for information or to register!">Siamo qui per rispondere a tutte le tue domande. Contattaci per informazioni o per iscriverti!</p>
+      </div>
+
+      <div class="contact-info">
+        <div class="contact-card">
+          <div class="contact-icon">📧</div>
+          <h3 class="contact-title" data-it="Email" data-en="Email">Email</h3>
+          <p class="contact-detail"><a href="mailto:info@takticalcampetna.it">info@takticalcampetna.it</a></p>
+        </div>
+        
+        <div class="contact-card">
+          <div class="contact-icon">📱</div>
+          <h3 class="contact-title" data-it="Telefono" data-en="Phone">Telefono</h3>
+          <p class="contact-detail"><a href="tel:+393331234567">+39 333 123 4567</a></p>
+        </div>
+        
+        <div class="contact-card">
+          <div class="contact-icon">📍</div>
+          <h3 class="contact-title" data-it="Sede" data-en="Location">Sede</h3>
+          <p class="contact-detail">Ragalna (CT), Sicilia<br>Versante Sud Etna</p>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div style="max-width: 700px; margin: 0 auto; background: var(--color-surface); padding: var(--space-32); border-radius: var(--radius-lg); border: 1px solid var(--color-card-border);">
+        <h3 style="font-size: var(--font-size-2xl); margin-bottom: var(--space-24); text-align: center; color: var(--color-text);" data-it="Richiedi Informazioni o Iscriviti" data-en="Request Information or Register">Richiedi Informazioni o Iscriviti</h3>
+        <form id="contactForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" data-it="Nome" data-en="Name">Nome</label>
+              <input type="text" class="form-input" name="name" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" data-it="Cognome" data-en="Surname">Cognome</label>
+              <input type="text" class="form-input" name="surname" required>
+            </div>
+          </div>
+          
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" data-it="Email" data-en="Email">Email</label>
+              <input type="email" class="form-input" name="email" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" data-it="Telefono" data-en="Phone">Telefono</label>
+              <input type="tel" class="form-input" name="phone">
+            </div>
+          </div>
+          
+          <div class="form-group form-full">
+            <label class="form-label" data-it="Tipo di interesse" data-en="Type of interest">Tipo di interesse</label>
+            <select class="form-select" name="interest">
+              <option value="summer" data-it="Campo estivo" data-en="Summer camp">Campo estivo</option>
+              <option value="weekend" data-it="Weekend famiglia" data-en="Family weekend">Weekend famiglia</option>
+              <option value="school" data-it="Scuola/Team building" data-en="School/Team building">Scuola/Team building</option>
+              <option value="custom" data-it="Evento personalizzato" data-en="Custom event">Evento personalizzato</option>
+              <option value="info" data-it="Informazioni generali" data-en="General information">Informazioni generali</option>
+            </select>
+          </div>
+          
+          <div class="form-group form-full">
+            <label class="form-label" data-it="Messaggio" data-en="Message">Messaggio</label>
+            <textarea class="form-textarea" name="message" rows="5"></textarea>
+          </div>
+          
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: var(--space-16);" data-it="Invia Richiesta" data-en="Send Request">Invia Richiesta</button>
+          
+          <div id="formMessage" class="form-message"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>TakticalCampEtna</h4>
+        <p data-it="Esperienze outdoor uniche sull'Etna. Avventura, formazione e crescita personale nel cuore della Sicilia." data-en="Unique outdoor experiences on Mount Etna. Adventure, training and personal growth in the heart of Sicily.">Esperienze outdoor uniche sull'Etna. Avventura, formazione e crescita personale nel cuore della Sicilia.</p>
+      </div>
+      
+      <div class="footer-section">
+        <h4 data-it="Link Utili" data-en="Useful Links">Link Utili</h4>
+        <a href="#chi-siamo" data-it="Chi siamo" data-en="About us">Chi siamo</a>
+        <a href="#attivita" data-it="Attività" data-en="Activities">Attività</a>
+        <a href="#gallery" data-it="Gallery" data-en="Gallery">Gallery</a>
+        <a href="#contatti" data-it="Contatti" data-en="Contact">Contatti</a>
+      </div>
+      
+      <div class="footer-section">
+        <h4 data-it="Contatti" data-en="Contact">Contatti</h4>
+        <a href="mailto:info@takticalcampetna.it">info@takticalcampetna.it</a>
+        <a href="tel:+393331234567">+39 333 123 4567</a>
+        <p>Ragalna (CT), Sicilia</p>
+      </div>
+      
+      <div class="footer-section">
+        <h4 data-it="Seguici" data-en="Follow Us">Seguici</h4>
+        <a href="#" target="_blank">Facebook</a>
+        <a href="#" target="_blank">Instagram</a>
+        <a href="#" target="_blank">YouTube</a>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 TakticalCampEtna. <span data-it="Tutti i diritti riservati." data-en="All rights reserved.">Tutti i diritti riservati.</span></p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navMenu = document.getElementById('navMenu');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+    
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+      });
+    });
+    
+    // FAQ Toggle
+    document.querySelectorAll('.faq-question').forEach(button => {
+      button.addEventListener('click', () => {
+        const faqItem = button.parentElement;
+        const isActive = faqItem.classList.contains('active');
+        
+        // Close all FAQ items
+        document.querySelectorAll('.faq-item').forEach(item => {
+          item.classList.remove('active');
+        });
+        
+        // Open clicked item if it wasn't active
+        if (!isActive) {
+          faqItem.classList.add('active');
+        }
+      });
+    });
+    
+    // Contact Form Submission
+    const contactForm = document.getElementById('contactForm');
+    const formMessage = document.getElementById('formMessage');
+    
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Simulate form submission
+      formMessage.textContent = currentLang === 'it' 
+        ? 'Grazie per il tuo messaggio! Ti contatteremo presto.'
+        : 'Thank you for your message! We will contact you soon.';
+      formMessage.className = 'form-message success';
+      formMessage.style.display = 'block';
+      
+      // Reset form
+      contactForm.reset();
+      
+      // Hide message after 5 seconds
+      setTimeout(() => {
+        formMessage.style.display = 'none';
+      }, 5000);
+    });
+    
+    // Language Switching
+    let currentLang = 'it';
+    const langBtns = document.querySelectorAll('.lang-btn');
+    
+    function switchLanguage(lang) {
+      currentLang = lang;
+      
+      // Update button states
+      langBtns.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+      
+      // Update all translatable elements
+      document.querySelectorAll('[data-it]').forEach(element => {
+        const translation = element.getAttribute(`data-${lang}`);
+        if (translation) {
+          if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+            element.placeholder = translation;
+          } else {
+            element.textContent = translation;
+          }
+        }
+      });
+      
+      // Update select options
+      document.querySelectorAll('select option[data-it]').forEach(option => {
+        const translation = option.getAttribute(`data-${lang}`);
+        if (translation) {
+          option.textContent = translation;
+        }
+      });
+    }
+    
+    langBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        switchLanguage(btn.dataset.lang);
+      });
+    });
+    
+    // Smooth scroll offset for fixed header
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const headerOffset = 80;
+          const elementPosition = target.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // ========================================
+    // BOOKING SYSTEM
+    // ========================================
+
+    // Activities data
+    const activities = [
+      {
+        id: 'cqb',
+        name: 'CQB',
+        description: 'Close Quarters Battle - Simulazioni tattiche in ambiente chiuso',
+        color: '#C0152F',
+        maxCapacity: 12,
+        icon: '🎯'
+      },
+      {
+        id: 'nerf',
+        name: 'NERF',
+        description: 'Battaglie con blaster NERF per tutte le età',
+        color: '#E68161',
+        maxCapacity: 16,
+        icon: '🔫'
+      },
+      {
+        id: 'areatraining',
+        name: 'AreaTraining',
+        description: 'Area dedicata a fitness e preparazione fisica outdoor',
+        color: '#21808D',
+        maxCapacity: 20,
+        icon: '💪'
+      },
+      {
+        id: 'tdod',
+        name: 'TdOD',
+        description: 'Tiro da Operativo Dinamico - Poligono specializzato',
+        color: '#1A6873',
+        maxCapacity: 10,
+        icon: '🎪'
+      }
+    ];
+
+    const timeSlots = [
+      '09:00-11:00',
+      '11:00-13:00',
+      '14:00-16:00',
+      '16:00-18:00',
+      '18:00-20:00'
+    ];
+
+    // State management (using JavaScript variables, not localStorage due to sandbox)
+    let bookingsData = [];
+    let slotsData = [];
+    let currentFilter = null; // No default activity selected
+    let selectedDate = null; // No default date selected
+    let currentCalendarMonth = new Date(2025, 9, 1); // October 2025
+    let selectedSlot = null;
+
+    // Initialize booking system
+    function initBookingSystem() {
+      generateSlots();
+      renderCalendarWidget();
+      renderSlots();
+      renderMyBookings();
+      setupEventListeners();
+    }
+
+    // Generate slots for next 7 days
+    function generateSlots() {
+      slotsData = [];
+      const today = new Date();
+      
+      for (let day = 0; day < 7; day++) {
+        const date = new Date(today);
+        date.setDate(date.getDate() + day);
+        
+        activities.forEach(activity => {
+          timeSlots.forEach(time => {
+            // Random availability
+            const bookedSpots = Math.floor(Math.random() * activity.maxCapacity);
+            const availableSpots = activity.maxCapacity - bookedSpots;
+            
+            slotsData.push({
+              id: `${activity.id}-${date.toISOString().split('T')[0]}-${time}`,
+              activityId: activity.id,
+              activityName: activity.name,
+              activityIcon: activity.icon,
+              date: new Date(date),
+              time: time,
+              maxCapacity: activity.maxCapacity,
+              bookedSpots: bookedSpots,
+              availableSpots: availableSpots
+            });
+          });
+        });
+      }
+    }
+
+    // Render calendar widget (date picker)
+    function renderCalendarWidget() {
+      const calendar = document.getElementById('calendar');
+      const month = currentCalendarMonth.getMonth();
+      const year = currentCalendarMonth.getFullYear();
+      const today = new Date(2025, 9, 25); // October 25, 2025
+      
+      const firstDay = new Date(year, month, 1);
+      const lastDay = new Date(year, month + 1, 0);
+      const daysInMonth = lastDay.getDate();
+      const startDayOfWeek = firstDay.getDay(); // 0 = Sunday
+      
+      const monthNames = currentLang === 'it' 
+        ? ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre']
+        : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      
+      const weekdayNames = currentLang === 'it'
+        ? ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab']
+        : ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      
+      let html = `
+        <div class="calendar-header">
+          <button class="calendar-nav-btn" id="prevMonth">&lt;</button>
+          <div class="calendar-month">${monthNames[month]} ${year}</div>
+          <button class="calendar-nav-btn" id="nextMonth">&gt;</button>
+        </div>
+        <div class="calendar-weekdays">
+      `;
+      
+      weekdayNames.forEach(day => {
+        html += `<div class="calendar-weekday">${day}</div>`;
+      });
+      
+      html += `</div><div class="calendar-days">`;
+      
+      // Empty cells before first day
+      for (let i = 0; i < startDayOfWeek; i++) {
+        html += `<div class="calendar-day calendar-day-empty"></div>`;
+      }
+      
+      // Days of the month
+      for (let day = 1; day <= daysInMonth; day++) {
+        const currentDate = new Date(year, month, day);
+        const dateKey = currentDate.toISOString().split('T')[0];
+        const isPast = currentDate < today;
+        const isToday = currentDate.toDateString() === today.toDateString();
+        const isSelected = selectedDate && selectedDate.toDateString() === currentDate.toDateString();
+        
+        let classes = 'calendar-day';
+        if (isPast) classes += ' calendar-day-disabled';
+        if (isToday) classes += ' calendar-day-today';
+        if (isSelected) classes += ' calendar-day-selected';
+        
+        html += `<div class="${classes}" data-date="${dateKey}">${day}</div>`;
+      }
+      
+      html += `</div>`;
+      calendar.innerHTML = html;
+      
+      // Add event listeners
+      document.getElementById('prevMonth').addEventListener('click', () => {
+        currentCalendarMonth = new Date(currentCalendarMonth.getFullYear(), currentCalendarMonth.getMonth() - 1, 1);
+        renderCalendarWidget();
+      });
+      
+      document.getElementById('nextMonth').addEventListener('click', () => {
+        currentCalendarMonth = new Date(currentCalendarMonth.getFullYear(), currentCalendarMonth.getMonth() + 1, 1);
+        renderCalendarWidget();
+      });
+      
+      document.querySelectorAll('.calendar-day:not(.calendar-day-disabled):not(.calendar-day-empty)').forEach(dayEl => {
+        dayEl.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          // Use THIS instead of e.target to get the correct element
+          const dateKey = this.dataset.date;
+          console.log('=== CALENDAR CLICK DEBUG ===');
+          console.log('Clicked day text:', this.textContent);
+          console.log('Dataset date:', dateKey);
+          console.log('e.target:', e.target);
+          console.log('this:', this);
+          
+          selectedDate = new Date(dateKey);
+          renderCalendarWidget();
+          renderSlots();
+        });
+      });
+    }
+    
+    // Render slots based on filters
+    function renderSlots() {
+      const calendarGrid = document.getElementById('calendarGrid');
+      calendarGrid.innerHTML = '';
+      
+      // Check if both filters are selected
+      if (!currentFilter || !selectedDate) {
+        // Show placeholder message
+        calendarGrid.innerHTML = `
+          <div class="placeholder-message">
+            <div class="placeholder-message-icon">📅</div>
+            <div class="placeholder-message-text" data-it="Seleziona un'attività e una data per vedere gli slot disponibili" data-en="Select an activity and a date to see available slots">${
+              currentLang === 'it' 
+                ? "Seleziona un'attività e una data per vedere gli slot disponibili" 
+                : "Select an activity and a date to see available slots"
+            }</div>
+            <div class="placeholder-message-subtext" data-it="Usa i filtri qui sopra per iniziare" data-en="Use the filters above to get started">${
+              currentLang === 'it' 
+                ? "Usa i filtri qui sopra per iniziare" 
+                : "Use the filters above to get started"
+            }</div>
+          </div>
+        `;
+        return;
+      }
+      
+      // Filter slots by activity and selected date
+      const dateKey = selectedDate.toISOString().split('T')[0];
+      const filteredSlots = slotsData.filter(slot => {
+        const slotDateKey = slot.date.toISOString().split('T')[0];
+        return slot.activityId === currentFilter && slotDateKey === dateKey;
+      });
+      
+      if (filteredSlots.length === 0) {
+        calendarGrid.innerHTML = `
+          <div class="placeholder-message">
+            <div class="placeholder-message-icon">😕</div>
+            <div class="placeholder-message-text" data-it="Nessuno slot disponibile" data-en="No slots available">${
+              currentLang === 'it' 
+                ? "Nessuno slot disponibile" 
+                : "No slots available"
+            }</div>
+            <div class="placeholder-message-subtext" data-it="Prova a selezionare un'altra data o attività" data-en="Try selecting another date or activity">${
+              currentLang === 'it' 
+                ? "Prova a selezionare un'altra data o attività" 
+                : "Try selecting another date or activity"
+            }</div>
+          </div>
+        `;
+        return;
+      }
+      
+      // Create a single day column
+      const dayColumn = document.createElement('div');
+      dayColumn.className = 'day-column';
+      dayColumn.style.maxWidth = '400px';
+      dayColumn.style.margin = '0 auto';
+      
+      // Day header
+      const dayHeader = document.createElement('div');
+      dayHeader.className = 'day-header';
+      dayHeader.innerHTML = `
+        <div class="day-name">${getDayName(selectedDate)}</div>
+        <div class="day-date">${formatDate(selectedDate)}</div>
+      `;
+      dayColumn.appendChild(dayHeader);
+      
+      // Slots container
+      const slotsContainer = document.createElement('div');
+      slotsContainer.className = 'slots-container';
+      
+      filteredSlots.forEach(slot => {
+        const slotCard = createSlotCard(slot);
+        slotsContainer.appendChild(slotCard);
+      });
+      
+      dayColumn.appendChild(slotsContainer);
+      calendarGrid.appendChild(dayColumn);
+    }
+
+    // Create slot card
+    function createSlotCard(slot) {
+      const card = document.createElement('div');
+      const isFull = slot.availableSpots <= 0;
+      // INVERTED LOGIC: Calculate percentage of OCCUPIED spots instead of available
+      const percentOccupied = (slot.bookedSpots / slot.maxCapacity) * 100;
+      const percentAvailable = (slot.availableSpots / slot.maxCapacity) * 100;
+      const isFew = percentAvailable > 0 && percentAvailable <= 25;
+      
+      // Determine bar fill class based on OCCUPIED percentage (inverted colors)
+      // Green when few occupied (many available), Red when many occupied (few available)
+      let barClass = 'high'; // Green
+      if (percentOccupied >= 100) {
+        barClass = 'low'; // Red - fully occupied
+      } else if (percentOccupied >= 75) {
+        barClass = 'medium'; // Orange - mostly occupied
+      }
+      
+      card.className = `slot-card activity-${slot.activityId} ${isFull ? 'slot-full' : ''}`;
+      card.setAttribute('data-slot-id', slot.id);
+      card.innerHTML = `
+        <div class="slot-header">
+          <span class="slot-icon">${slot.activityIcon}</span>
+          <span class="slot-activity">${slot.activityName}</span>
+        </div>
+        <div class="slot-time">${slot.time}</div>
+        <div class="slot-availability">
+          <div class="slot-availability-header">
+            <span class="slot-spots">${slot.availableSpots}/${slot.maxCapacity} ${currentLang === 'it' ? 'posti' : 'spots'}</span>
+            <span class="slot-badge ${
+              isFull ? 'badge-full' : isFew ? 'badge-few' : 'badge-available'
+            }">
+              ${isFull ? (currentLang === 'it' ? 'Completo' : 'Full') : 
+                isFew ? (currentLang === 'it' ? 'Pochi posti' : 'Few spots') : 
+                (currentLang === 'it' ? 'Disponibile' : 'Available')}
+            </span>
+          </div>
+          <div class="availability-bar">
+            <div class="availability-bar-fill ${barClass}" style="width: ${percentOccupied}%"></div>
+          </div>
+        </div>
+      `;
+      
+      if (!isFull) {
+        card.addEventListener('click', () => openBookingModal(slot));
+      }
+      
+      return card;
+    }
+
+    // Open booking modal
+    function openBookingModal(slot) {
+      selectedSlot = slot;
+      const modal = document.getElementById('bookingModal');
+      const bookingInfo = document.getElementById('bookingInfo');
+      const activity = activities.find(a => a.id === slot.activityId);
+      
+      bookingInfo.innerHTML = `
+        <div class="booking-info-item">
+          <span class="info-label">${currentLang === 'it' ? 'Attività' : 'Activity'}:</span>
+          <span class="info-value">${slot.activityIcon} ${slot.activityName}</span>
+        </div>
+        <div class="booking-info-item">
+          <span class="info-label">${currentLang === 'it' ? 'Data' : 'Date'}:</span>
+          <span class="info-value">${formatDate(slot.date)}</span>
+        </div>
+        <div class="booking-info-item">
+          <span class="info-label">${currentLang === 'it' ? 'Orario' : 'Time'}:</span>
+          <span class="info-value">${slot.time}</span>
+        </div>
+        <div class="booking-info-item">
+          <span class="info-label">${currentLang === 'it' ? 'Posti disponibili' : 'Available spots'}:</span>
+          <span class="info-value">${slot.availableSpots}/${slot.maxCapacity}</span>
+        </div>
+      `;
+      
+      // Set max participants
+      document.querySelector('input[name="participants"]').max = slot.availableSpots;
+      
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Close modal
+    function closeModal() {
+      const modal = document.getElementById('bookingModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+      document.getElementById('bookingForm').reset();
+      selectedSlot = null;
+    }
+
+    // Handle booking form submission
+    function handleBookingSubmit(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(e.target);
+      const participants = parseInt(formData.get('participants'));
+      
+      // Validate participants
+      if (participants > selectedSlot.availableSpots) {
+        showAlert('error', currentLang === 'it' 
+          ? `Puoi prenotare massimo ${selectedSlot.availableSpots} posti!` 
+          : `You can book maximum ${selectedSlot.availableSpots} spots!`);
+        return;
+      }
+      
+      // Generate booking code
+      const bookingCode = 'TCE' + Date.now().toString().slice(-8);
+      
+      // Create booking
+      const booking = {
+        code: bookingCode,
+        slotId: selectedSlot.id,
+        activityId: selectedSlot.activityId,
+        activityName: selectedSlot.activityName,
+        activityIcon: selectedSlot.activityIcon,
+        date: selectedSlot.date,
+        time: selectedSlot.time,
+        fullName: formData.get('fullName'),
+        email: formData.get('email'),
+        phone: formData.get('phone'),
+        participants: participants,
+        notes: formData.get('notes'),
+        createdAt: new Date()
+      };
+      
+      // Update slot availability
+      const slot = slotsData.find(s => s.id === selectedSlot.id);
+      slot.bookedSpots += participants;
+      slot.availableSpots -= participants;
+      
+      // Add to bookings
+      bookingsData.push(booking);
+      
+      // Close modal
+      closeModal();
+      
+      // Show success message
+      showAlert('success', currentLang === 'it' 
+        ? `Prenotazione confermata! Codice: ${bookingCode}` 
+        : `Booking confirmed! Code: ${bookingCode}`);
+      
+      // Refresh views with animation
+      renderSlots();
+      renderMyBookings();
+      
+      // Add flash animation to updated slot
+      setTimeout(() => {
+        const updatedCard = document.querySelector(`[data-slot-id="${selectedSlot.id}"]`);
+        if (updatedCard) {
+          updatedCard.classList.add('updating');
+          setTimeout(() => {
+            updatedCard.classList.remove('updating');
+          }, 600);
+        }
+      }, 100);
+      
+      // Scroll to my bookings
+      setTimeout(() => {
+        document.getElementById('bookingsList').parentElement.scrollIntoView({ behavior: 'smooth' });
+      }, 1000);
+    }
+
+    // Render my bookings
+    function renderMyBookings() {
+      const bookingsList = document.getElementById('bookingsList');
+      
+      if (bookingsData.length === 0) {
+        bookingsList.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">📋</div>
+            <p>${currentLang === 'it' ? 'Non hai ancora prenotazioni' : 'You have no bookings yet'}</p>
+          </div>
+        `;
+        return;
+      }
+      
+      bookingsList.innerHTML = '';
+      
+      // Sort by date (most recent first)
+      const sortedBookings = [...bookingsData].sort((a, b) => b.date - a.date);
+      
+      sortedBookings.forEach(booking => {
+        const card = document.createElement('div');
+        card.className = 'booking-card';
+        card.setAttribute('data-booking-code', booking.code);
+        card.innerHTML = `
+          <div class="booking-details">
+            <div class="booking-code">${currentLang === 'it' ? 'Codice' : 'Code'}: ${booking.code}</div>
+            <div class="booking-activity">${booking.activityIcon} ${booking.activityName}</div>
+            <div class="booking-datetime">📅 ${formatDate(booking.date)} - 🕒 ${booking.time}</div>
+            <div class="booking-participants">👥 ${booking.participants} ${currentLang === 'it' ? 'partecipanti' : 'participants'}</div>
+          </div>
+          <div class="booking-actions">
+            <button class="btn-cancel" onclick="window.cancelBooking('${booking.code}')">
+              ${currentLang === 'it' ? 'Cancella prenotazione' : 'Cancel booking'}
+            </button>
+          </div>
+        `;
+        
+        bookingsList.appendChild(card);
+      });
+    }
+
+    // Cancel booking - GLOBAL FUNCTION with confirm as FIRST line
+    window.cancelBooking = function(bookingCode) {
+      // CRITICAL: confirm() MUST be the ABSOLUTE FIRST line - no logging before it
+      const confirmed = confirm('Sei sicuro di voler cancellare questa prenotazione?');
+      
+      // If user clicks Cancel, stop immediately
+      if (!confirmed) {
+        return;
+      }
+      
+      console.log('=== CANCELLATION DEBUG START ===');
+      console.log('Step 1: cancelBooking called with code:', bookingCode);
+      console.log('Step 2: Current bookingsData:', JSON.stringify(bookingsData));
+      console.log('Step 3: User confirmed cancellation');
+      
+      console.log('Step 5: Looking for booking with code:', bookingCode);
+      const bookingIndex = bookingsData.findIndex(b => b.code === bookingCode);
+      console.log('Step 6: Booking index found:', bookingIndex);
+      
+      if (bookingIndex === -1) {
+        console.error('ERROR: Booking not found with code:', bookingCode);
+        alert(currentLang === 'it' ? 'Prenotazione non trovata!' : 'Booking not found!');
+        return;
+      }
+      
+      const booking = bookingsData[bookingIndex];
+      console.log('Step 7: Booking found:', JSON.stringify(booking));
+      
+      // Restore slot availability
+      const slot = slotsData.find(s => s.id === booking.slotId);
+      console.log('Step 8: Slot found:', slot ? 'Yes' : 'No', slot ? JSON.stringify(slot) : '');
+      
+      if (slot) {
+        console.log('Step 9: Before - Slot bookedSpots:', slot.bookedSpots, 'availableSpots:', slot.availableSpots);
+        slot.bookedSpots -= booking.participants;
+        slot.availableSpots += booking.participants;
+        console.log('Step 10: After - Slot bookedSpots:', slot.bookedSpots, 'availableSpots:', slot.availableSpots);
+      }
+      
+      // Remove booking
+      console.log('Step 11: Removing booking from array');
+      bookingsData.splice(bookingIndex, 1);
+      console.log('Step 12: Updated bookingsData:', JSON.stringify(bookingsData));
+      
+      // Show message
+      console.log('Step 13: Showing success alert');
+      showAlert('success', currentLang === 'it' 
+        ? 'Prenotazione cancellata con successo!' 
+        : 'Booking cancelled successfully!');
+      
+      // Refresh views with animation
+      console.log('Step 14: Refreshing slots and bookings list');
+      renderSlots();
+      renderMyBookings();
+      
+      // Add flash animation to updated slot
+      setTimeout(() => {
+        const updatedCard = document.querySelector(`[data-slot-id="${booking.slotId}"]`);
+        if (updatedCard) {
+          updatedCard.classList.add('updating');
+          setTimeout(() => {
+            updatedCard.classList.remove('updating');
+          }, 600);
+        }
+      }, 100);
+      
+      console.log('=== CANCELLATION DEBUG END ===');
+    }
+
+    // Show alert
+    function showAlert(type, message) {
+      const alert = document.getElementById('bookingAlert');
+      alert.className = `alert alert-${type} show`;
+      alert.textContent = message;
+      
+      setTimeout(() => {
+        alert.classList.remove('show');
+      }, 5000);
+    }
+
+    // Setup event listeners
+    function setupEventListeners() {
+      // Activity filter buttons
+      document.querySelectorAll('.filter-btn[data-filter]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Toggle selection
+          const wasActive = btn.classList.contains('active');
+          document.querySelectorAll('.filter-btn[data-filter]').forEach(b => b.classList.remove('active'));
+          
+          if (wasActive) {
+            currentFilter = null;
+          } else {
+            btn.classList.add('active');
+            currentFilter = btn.dataset.filter;
+          }
+          
+          renderSlots();
+        });
+      });
+      
+      // Modal close
+      document.getElementById('modalClose').addEventListener('click', closeModal);
+      document.getElementById('bookingModal').addEventListener('click', (e) => {
+        if (e.target.id === 'bookingModal') {
+          closeModal();
+        }
+      });
+      
+      // Booking form
+      document.getElementById('bookingForm').addEventListener('submit', handleBookingSubmit);
+    }
+
+    // Helper functions
+    function getDayName(date) {
+      const days = currentLang === 'it' 
+        ? ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato']
+        : ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      return days[date.getDay()];
+    }
+
+    function formatDate(date) {
+      const day = date.getDate().toString().padStart(2, '0');
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const year = date.getFullYear();
+      return `${day}/${month}/${year}`;
+    }
+
+    // Initialize booking system on page load
+    initBookingSystem();
+  </script>
+</body>
+</html>
