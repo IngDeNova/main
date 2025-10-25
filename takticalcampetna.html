@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TakticalCamp Etna - Avventura e Training in Sicilia</title>
+    <style>
+        :root {
+            --color-white: rgba(255, 255, 255, 1);
+            --color-black: rgba(0, 0, 0, 1);
+            --color-cream-50: rgba(252, 252, 249, 1);
+            --color-cream-100: rgba(255, 255, 253, 1);
+            --color-gray-200: rgba(245, 245, 245, 1);
+            --color-gray-300: rgba(167, 169, 169, 1);
+            --color-gray-400: rgba(119, 124, 124, 1);
+            --color-slate-500: rgba(98, 108, 113, 1);
+            --color-brown-600: rgba(94, 82, 64, 1);
+            --color-charcoal-700: rgba(31, 33, 33, 1);
+            --color-charcoal-800: rgba(38, 40, 40, 1);
+            --color-slate-900: rgba(19, 52, 59, 1);
+            --color-teal-300: rgba(50, 184, 198, 1);
+            --color-teal-400: rgba(45, 166, 178, 1);
+            --color-teal-500: rgba(33, 128, 141, 1);
+            --color-teal-600: rgba(29, 116, 128, 1);
+            --color-teal-700: rgba(26, 104, 115, 1);
+            --color-red-400: rgba(255, 84, 89, 1);
+            --color-red-500: rgba(192, 21, 47, 1);
+            --color-orange-400: rgba(230, 129, 97, 1);
+            --color-orange-500: rgba(168, 75, 47, 1);
+            --color-brown-600-rgb: 94, 82, 64;
+            --color-teal-500-rgb: 33, 128, 141;
+            --color-slate-900-rgb: 19, 52, 59;
+            --color-background: var(--color-cream-50);
+            --color-surface: var(--color-cream-100);
+            --color-text: var(--color-slate-900);
+            --color-text-secondary: var(--color-slate-500);
+            --color-primary: var(--color-teal-500);
+            --color-primary-hover: var(--color-teal-600);
+            --color-primary-active: var(--color-teal-700);
+            --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+            --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+            --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+            --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+            --color-error: var(--color-red-500);
+            --color-success: var(--color-teal-500);
+            --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-size-sm: 12px;
+            --font-size-base: 14px;
+            --font-size-lg: 16px;
+            --font-size-xl: 18px;
+            --font-size-2xl: 20px;
+            --font-size-3xl: 24px;
+            --font-size-4xl: 30px;
+            --font-weight-normal: 400;
+            --font-weight-medium: 500;
+            --font-weight-semibold: 550;
+            --font-weight-bold: 600;
+            --space-4: 4px;
+            --space-8: 8px;
+            --space-12: 12px;
+            --space-16: 16px;
+            --space-20: 20px;
+            --space-24: 24px;
+            --space-32: 32px;
+            --radius-base: 8px;
+            --radius-lg: 12px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family-base);
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--color-surface);
+            box-shadow: var(--shadow-sm);
+            z-index: 1000;
+            padding: var(--space-16) 0;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-24);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: var(--font-size-3xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-primary);
+        }
+
+        nav ul {
+            display: flex;
+            gap: var(--space-24);
+            list-style: none;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--color-text);
+            font-weight: var(--font-weight-medium);
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--color-primary);
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: var(--space-8);
+            margin-left: var(--space-24);
+        }
+
+        .lang-btn {
+            padding: var(--space-4) var(--space-12);
+            border: 1px solid var(--color-border);
+            background: transparent;
+            border-radius: var(--radius-base);
+            cursor: pointer;
+            font-weight: var(--font-weight-medium);
+            transition: all 0.3s;
+        }
+
+        .lang-btn.active {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: var(--font-size-3xl);
+            cursor: pointer;
+            color: var(--color-text);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 70px;
+            height: 600px;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                        url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            margin-bottom: var(--space-16);
+        }
+
+        .hero-content p {
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--space-32);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: var(--space-12) var(--space-32);
+            background: var(--color-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--radius-base);
+            font-weight: var(--font-weight-semibold);
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: var(--font-size-base);
+        }
+
+        .btn:hover {
+            background: var(--color-primary-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px var(--space-24);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: var(--font-size-4xl);
+            margin-bottom: var(--space-32);
+            text-align: center;
+        }
+
+        /* Chi Siamo */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-32);
+            align-items: center;
+        }
+
+        /* Attività */
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-24);
+        }
+
+        .activity-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-24);
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .activity-icon {
+            font-size: 48px;
+            margin-bottom: var(--space-16);
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-16);
+        }
+
+        .gallery-item {
+            height: 250px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Booking Section */
+        .booking-container {
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            padding: var(--space-32);
+            border: 1px solid var(--color-card-border);
+        }
+
+        .booking-filters {
+            display: flex;
+            gap: var(--space-12);
+            margin-bottom: var(--space-24);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: var(--space-12) var(--space-24);
+            border: 2px solid var(--color-border);
+            background: transparent;
+            border-radius: var(--radius-base);
+            cursor: pointer;
+            font-weight: var(--font-weight-medium);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: var(--space-8);
+        }
+
+        .filter-btn.active {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+
+        .booking-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: var(--space-32);
+            margin-top: var(--space-24);
+        }
+
+        .calendar {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--space-20);
+            border: 1px solid var(--color-card-border);
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-20);
+        }
+
+        .calendar-nav-btn {
+            background: none;
+            border: none;
+            font-size: var(--font-size-2xl);
+            cursor: pointer;
+            color: var(--color-primary);
+            padding: var(--space-4);
+        }
+
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: var(--space-4);
+            margin-bottom: var(--space-8);
+        }
+
+        .calendar-day-name {
+            text-align: center;
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            padding: var(--space-8);
+        }
+
+        .calendar-date {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-base);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: var(--font-size-sm);
+            border: 1px solid transparent;
+        }
+
+        .calendar-date:hover:not(.disabled):not(.other-month) {
+            background: var(--color-secondary);
+            border-color: var(--color-primary);
+        }
+
+        .calendar-date.selected {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .calendar-date.today {
+            border-color: var(--color-primary);
+        }
+
+        .calendar-date.other-month {
+            color: var(--color-gray-300);
+        }
+
+        .calendar-date.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .slots-container {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--space-20);
+            border: 1px solid var(--color-card-border);
+        }
+
+        .slots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: var(--space-16);
+        }
+
+        .slot-card {
+            background: var(--color-surface);
+            border: 2px solid var(--color-card-border);
+            border-radius: var(--radius-base);
+            padding: var(--space-16);
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .slot-card:hover:not(.booked):not(.disabled) {
+            border-color: var(--color-primary);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .slot-card.booked {
+            background: var(--color-secondary);
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .slot-card.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .slot-time {
+            font-weight: var(--font-weight-bold);
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--space-8);
+        }
+
+        .slot-status {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+        }
+
+        /* My Bookings */
+        .my-bookings {
+            margin-top: var(--space-32);
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--space-24);
+            border: 1px solid var(--color-card-border);
+        }
+
+        .my-bookings h3 {
+            margin-bottom: var(--space-20);
+            display: flex;
+            align-items: center;
+            gap: var(--space-12);
+        }
+
+        .booking-count {
+            background: var(--color-primary);
+            color: white;
+            padding: var(--space-4) var(--space-12);
+            border-radius: var(--radius-base);
+            font-size: var(--font-size-sm);
+        }
+
+        .booking-item {
+            background: var(--color-surface);
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--radius-base);
+            padding: var(--space-16);
+            margin-bottom: var(--space-12);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .booking-info {
+            display: flex;
+            gap: var(--space-24);
+            flex-wrap: wrap;
+        }
+
+        .booking-detail {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .booking-label {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+        }
+
+        .booking-value {
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .cancel-btn {
+            background: var(--color-error);
+            color: white;
+            padding: var(--space-8) var(--space-16);
+            border: none;
+            border-radius: var(--radius-base);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cancel-btn:hover {
+            background: var(--color-red-400);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            padding: var(--space-32);
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-24);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: var(--font-size-3xl);
+            cursor: pointer;
+            color: var(--color-text-secondary);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-20);
+        }
+
+        label {
+            display: block;
+            margin-bottom: var(--space-8);
+            font-weight: var(--font-weight-medium);
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: var(--space-12);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            font-family: inherit;
+            font-size: var(--font-size-base);
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+
+        /* News */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-24);
+        }
+
+        .news-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: var(--space-20);
+        }
+
+        .news-date {
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-sm);
+            margin-bottom: var(--space-8);
+        }
+
+        /* FAQ */
+        .faq-item {
+            background: var(--color-surface);
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--radius-base);
+            margin-bottom: var(--space-12);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: var(--space-16);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: var(--font-weight-semibold);
+            transition: background 0.3s;
+        }
+
+        .faq-question:hover {
+            background: var(--color-secondary);
+        }
+
+        .faq-answer {
+            padding: 0 var(--space-16);
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: var(--space-16);
+            max-height: 500px;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Contact Form */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-32);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--color-slate-900);
+            color: white;
+            padding: var(--space-32) var(--space-24);
+            text-align: center;
+        }
+
+        /* Success Animation */
+        .success-message {
+            background: var(--color-success);
+            color: white;
+            padding: var(--space-16);
+            border-radius: var(--radius-base);
+            margin-top: var(--space-16);
+            animation: slideIn 0.3s ease-out;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--color-surface);
+                flex-direction: column;
+                padding: var(--space-16);
+                box-shadow: var(--shadow-md);
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                height: 400px;
+            }
+
+            .hero-content h1 {
+                font-size: 32px;
+            }
+
+            .about-content,
+            .booking-content,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .booking-info {
+                flex-direction: column;
+                gap: var(--space-8);
+            }
+
+            .booking-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-12);
+            }
+
+            section {
+                padding: 40px var(--space-16);
+            }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: var(--space-32);
+            color: var(--color-text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">⚡ TakticalCamp Etna</div>
+            <nav>
+                <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+                <ul id="mainNav">
+                    <li><a href="#home" data-it="Home" data-en="Home">Home</a></li>
+                    <li><a href="#chi-siamo" data-it="Chi Siamo" data-en="About Us">Chi Siamo</a></li>
+                    <li><a href="#attivita" data-it="Attività" data-en="Activities">Attività</a></li>
+                    <li><a href="#gallery" data-it="Gallery" data-en="Gallery">Gallery</a></li>
+                    <li><a href="#prenota" data-it="Prenota" data-en="Book">Prenota</a></li>
+                    <li><a href="#news" data-it="News" data-en="News">News</a></li>
+                    <li><a href="#faq" data-it="FAQ" data-en="FAQ">FAQ</a></li>
+                    <li><a href="#contatti" data-it="Contatti" data-en="Contact">Contatti</a></li>
+                </ul>
+                <div class="lang-switcher">
+                    <button class="lang-btn active" onclick="switchLang('it')">IT</button>
+                    <button class="lang-btn" onclick="switchLang('en')">EN</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 data-it="Avventura Tattica sull'Etna" data-en="Tactical Adventure on Etna">Avventura Tattica sull'Etna</h1>
+            <p data-it="Vivi esperienze uniche di training e avventura in Sicilia" data-en="Live unique training and adventure experiences in Sicily">Vivi esperienze uniche di training e avventura in Sicilia</p>
+            <a href="#prenota" class="btn" data-it="Prenota Ora" data-en="Book Now">Prenota Ora</a>
+        </div>
+    </section>
+
+    <!-- Chi Siamo -->
+    <section id="chi-siamo">
+        <h2 data-it="Chi Siamo" data-en="About Us">Chi Siamo</h2>
+        <div class="about-content">
+            <div>
+                <p data-it="TakticalCamp Etna è il primo centro in Sicilia dedicato ad attività tattiche, outdoor e training specializzato. Situati alle pendici dell'Etna, offriamo un'esperienza unica che combina sport, avventura e formazione professionale." data-en="TakticalCamp Etna is the first center in Sicily dedicated to tactical activities, outdoor and specialized training. Located on the slopes of Etna, we offer a unique experience that combines sports, adventure and professional training.">TakticalCamp Etna è il primo centro in Sicilia dedicato ad attività tattiche, outdoor e training specializzato. Situati alle pendici dell'Etna, offriamo un'esperienza unica che combina sport, avventura e formazione professionale.</p>
+                <p data-it="Il nostro staff è composto da istruttori certificati con esperienza pluriennale nel settore. Garantiamo sicurezza, professionalità e divertimento per tutti i livelli di esperienza." data-en="Our staff consists of certified instructors with years of experience in the sector. We guarantee safety, professionalism and fun for all experience levels.">Il nostro staff è composto da istruttori certificati con esperienza pluriennale nel settore. Garantiamo sicurezza, professionalità e divertimento per tutti i livelli di esperienza.</p>
+            </div>
+            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800" alt="TakticalCamp" style="width: 100%; border-radius: var(--radius-lg);">
+        </div>
+    </section>
+
+    <!-- Attività -->
+    <section id="attivita">
+        <h2 data-it="Le Nostre Attività" data-en="Our Activities">Le Nostre Attività</h2>
+        <div class="activities-grid">
+            <div class="activity-card">
+                <div class="activity-icon">🎯</div>
+                <h3>CQB</h3>
+                <p data-it="Close Quarters Battle - Simulazioni tattiche in ambienti chiusi" data-en="Close Quarters Battle - Tactical simulations in closed environments">Close Quarters Battle - Simulazioni tattiche in ambienti chiusi</p>
+            </div>
+            <div class="activity-card">
+                <div class="activity-icon">🔫</div>
+                <h3>NERF</h3>
+                <p data-it="Battaglie adrenaliniche con blaster NERF per tutte le età" data-en="Adrenaline battles with NERF blasters for all ages">Battaglie adrenaliniche con blaster NERF per tutte le età</p>
+            </div>
+            <div class="activity-card">
+                <div class="activity-icon">💪</div>
+                <h3>AreaTraining</h3>
+                <p data-it="Allenamento outdoor funzionale e crossfit" data-en="Functional outdoor training and crossfit">Allenamento outdoor funzionale e crossfit</p>
+            </div>
+            <div class="activity-card">
+                <div class="activity-icon">🎪</div>
+                <h3>TdOD</h3>
+                <p data-it="Tiro da Operativo Dinamico - Tecniche di tiro dinamico" data-en="Dynamic Operative Shooting - Dynamic shooting techniques">Tiro da Operativo Dinamico - Tecniche di tiro dinamico</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery">
+        <h2 data-it="Gallery" data-en="Gallery">Gallery</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1544191696-102dbdaeeaa0?w=800" alt="Mountain Biking">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=800" alt="Adventure Park">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=800" alt="Trekking">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1522163182402-834f871fd851?w=800" alt="Adventure Course">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?w=800" alt="Zipline">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800" alt="Nature">
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="prenota">
+        <h2 data-it="Prenota la Tua Avventura" data-en="Book Your Adventure">Prenota la Tua Avventura</h2>
+        <div class="booking-container">
+            <div class="booking-filters" id="activityFilters"></div>
+            <div class="booking-content">
+                <div class="calendar" id="calendar"></div>
+                <div class="slots-container">
+                    <h3 data-it="Orari Disponibili" data-en="Available Slots">Orari Disponibili</h3>
+                    <div class="slots-grid" id="slotsGrid">
+                        <p class="empty-state" data-it="Seleziona una data per vedere gli orari disponibili" data-en="Select a date to see available slots">Seleziona una data per vedere gli orari disponibili</p>
+                    </div>
+                </div>
+            </div>
+            <div class="my-bookings">
+                <h3>
+                    <span data-it="Le Mie Prenotazioni" data-en="My Bookings">Le Mie Prenotazioni</span>
+                    <span class="booking-count" id="bookingCount">0</span>
+                </h3>
+                <div id="myBookings">
+                    <p class="empty-state" data-it="Non hai ancora prenotazioni" data-en="You don't have any bookings yet">Non hai ancora prenotazioni</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News -->
+    <section id="news">
+        <h2 data-it="Ultime News" data-en="Latest News">Ultime News</h2>
+        <div class="news-grid">
+            <div class="news-card">
+                <img src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=800" alt="Summer Camp" class="news-image">
+                <div class="news-content">
+                    <p class="news-date">25 Ottobre 2025</p>
+                    <h3 data-it="Apertura Summer Camp 2026" data-en="Summer Camp 2026 Opening">Apertura Summer Camp 2026</h3>
+                    <p data-it="Aperte le iscrizioni per il summer camp estivo!" data-en="Registration open for summer camp!">Aperte le iscrizioni per il summer camp estivo!</p>
+                </div>
+            </div>
+            <div class="news-card">
+                <img src="https://images.unsplash.com/photo-1559264948-1774f50d5f2b?w=800" alt="MTB Tour" class="news-image">
+                <div class="news-content">
+                    <p class="news-date">20 Ottobre 2025</p>
+                    <h3 data-it="Nuovo Percorso MTB" data-en="New MTB Trail">Nuovo Percorso MTB</h3>
+                    <p data-it="Inaugurato il nuovo trail di mountain bike sull'Etna" data-en="New mountain bike trail on Etna inaugurated">Inaugurato il nuovo trail di mountain bike sull'Etna</p>
+                </div>
+            </div>
+            <div class="news-card">
+                <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=800" alt="Partnership" class="news-image">
+                <div class="news-content">
+                    <p class="news-date">15 Ottobre 2025</p>
+                    <h3 data-it="Partnership con Scuole" data-en="School Partnership">Partnership con Scuole</h3>
+                    <p data-it="Accordi con istituti scolastici per attività educative" data-en="Agreements with schools for educational activities">Accordi con istituti scolastici per attività educative</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+        <h2 data-it="Domande Frequenti" data-en="Frequently Asked Questions">Domande Frequenti</h2>
+        <div class="faq-list">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span data-it="Qual è l'età minima per partecipare?" data-en="What is the minimum age to participate?">Qual è l'età minima per partecipare?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p data-it="L'età minima varia per attività: NERF dai 6 anni, AreaTraining dai 12 anni, CQB e TdOD dai 14 anni." data-en="Minimum age varies by activity: NERF from 6 years, AreaTraining from 12 years, CQB and TdOD from 14 years.">L'età minima varia per attività: NERF dai 6 anni, AreaTraining dai 12 anni, CQB e TdOD dai 14 anni.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span data-it="È necessaria esperienza precedente?" data-en="Is previous experience required?">È necessaria esperienza precedente?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p data-it="No, tutte le attività sono adatte anche ai principianti. I nostri istruttori forniranno formazione iniziale." data-en="No, all activities are suitable for beginners. Our instructors will provide initial training.">No, tutte le attività sono adatte anche ai principianti. I nostri istruttori forniranno formazione iniziale.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span data-it="Cosa devo portare?" data-en="What should I bring?">Cosa devo portare?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p data-it="Abbigliamento comodo e sportivo, scarpe chiuse, acqua. L'attrezzatura specifica è fornita da noi." data-en="Comfortable sportswear, closed shoes, water. Specific equipment is provided by us.">Abbigliamento comodo e sportivo, scarpe chiuse, acqua. L'attrezzatura specifica è fornita da noi.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span data-it="Posso cancellare la prenotazione?" data-en="Can I cancel my booking?">Posso cancellare la prenotazione?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p data-it="Sì, puoi cancellare fino a 24 ore prima dell'attività per un rimborso completo." data-en="Yes, you can cancel up to 24 hours before the activity for a full refund.">Sì, puoi cancellare fino a 24 ore prima dell'attività per un rimborso completo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contatti">
+        <h2 data-it="Contattaci" data-en="Contact Us">Contattaci</h2>
+        <div class="contact-grid">
+            <div>
+                <h3 data-it="Informazioni" data-en="Information">Informazioni</h3>
+                <p><strong data-it="Indirizzo:" data-en="Address:">Indirizzo:</strong> Via Etna 123, Catania, Sicilia</p>
+                <p><strong data-it="Telefono:" data-en="Phone:">Telefono:</strong> +39 095 123 4567</p>
+                <p><strong>Email:</strong> info@takticalcampetna.it</p>
+                <p><strong data-it="Orari:" data-en="Hours:">Orari:</strong> Lun-Dom 9:00-20:00</p>
+            </div>
+            <form onsubmit="handleContact(event)">
+                <div class="form-group">
+                    <label data-it="Nome" data-en="Name">Nome</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" required>
+                </div>
+                <div class="form-group">
+                    <label data-it="Messaggio" data-en="Message">Messaggio</label>
+                    <textarea rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn" data-it="Invia Messaggio" data-en="Send Message">Invia Messaggio</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 TakticalCamp Etna. <span data-it="Tutti i diritti riservati." data-en="All rights reserved.">Tutti i diritti riservati.</span></p>
+    </footer>
+
+    <!-- Booking Modal -->
+    <div class="modal" id="bookingModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 data-it="Completa Prenotazione" data-en="Complete Booking">Completa Prenotazione</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <form onsubmit="confirmBooking(event)">
+                <div class="form-group">
+                    <label data-it="Nome e Cognome" data-en="Full Name">Nome e Cognome</label>
+                    <input type="text" id="bookingName" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="bookingEmail" required>
+                </div>
+                <div class="form-group">
+                    <label data-it="Telefono" data-en="Phone">Telefono</label>
+                    <input type="tel" id="bookingPhone" required>
+                </div>
+                <div class="form-group">
+                    <label data-it="Numero Partecipanti" data-en="Number of Participants">Numero Partecipanti</label>
+                    <input type="number" id="bookingParticipants" min="1" value="1" required>
+                </div>
+                <div class="form-group">
+                    <label data-it="Note (opzionale)" data-en="Notes (optional)">Note (opzionale)</label>
+                    <textarea id="bookingNotes" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;" data-it="Conferma Prenotazione" data-en="Confirm Booking">Conferma Prenotazione</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Configurazione attività
+        const activities = [
+            { id: 'cqb', name: 'CQB', icon: '🎯', maxCapacity: 12, color: '#C0152F' },
+            { id: 'nerf', name: 'NERF', icon: '🔫', maxCapacity: 16, color: '#E68161' },
+            { id: 'areatraining', name: 'AreaTraining', icon: '💪', maxCapacity: 20, color: '#21808D' },
+            { id: 'tdod', name: 'TdOD', icon: '🎪', maxCapacity: 10, color: '#1A6873' }
+        ];
+
+        const timeSlots = ['09:00-11:00', '11:00-13:00', '14:00-16:00', '16:00-18:00', '18:00-20:00'];
+
+        // Stato applicazione (usato invece di localStorage per compatibilità sandbox)
+        let appState = {
+            selectedActivity: 'cqb',
+            selectedDate: null,
+            selectedSlot: null,
+            currentMonth: new Date().getMonth(),
+            currentYear: new Date().getFullYear(),
+            bookings: [],
+            bookingData: {},
+            currentLang: 'it'
+        };
+
+        // Inizializza dati di prenotazione simulati
+        function initBookingData() {
+            const today = new Date();
+            for (let i = 0; i < 30; i++) {
+                const date = new Date(today);
+                date.setDate(date.getDate() + i);
+                const dateKey = formatDate(date);
+                appState.bookingData[dateKey] = {};
+                
+                activities.forEach(activity => {
+                    appState.bookingData[dateKey][activity.id] = {};
+                    timeSlots.forEach(slot => {
+                        const booked = Math.floor(Math.random() * activity.maxCapacity);
+                        appState.bookingData[dateKey][activity.id][slot] = {
+                            booked: booked,
+                            max: activity.maxCapacity
+                        };
+                    });
+                });
+            }
+        }
+
+        // Aggiorna dati di prenotazione (simula refresh dal server)
+        function updateBookingData() {
+            console.log('Aggiornamento automatico dati prenotazione...');
+            // Simula piccole variazioni nei posti disponibili
+            Object.keys(appState.bookingData).forEach(dateKey => {
+                activities.forEach(activity => {
+                    timeSlots.forEach(slot => {
+                        if (appState.bookingData[dateKey] && 
+                            appState.bookingData[dateKey][activity.id] && 
+                            appState.bookingData[dateKey][activity.id][slot]) {
+                            const current = appState.bookingData[dateKey][activity.id][slot].booked;
+                            const change = Math.random() > 0.7 ? (Math.random() > 0.5 ? 1 : -1) : 0;
+                            const newBooked = Math.max(0, Math.min(activity.maxCapacity, current + change));
+                            appState.bookingData[dateKey][activity.id][slot].booked = newBooked;
+                        }
+                    });
+                });
+            });
+            
+            // Aggiorna la visualizzazione se c'è una data selezionata
+            if (appState.selectedDate) {
+                renderSlots();
+            }
+        }
+
+        // Formato data YYYY-MM-DD
+        function formatDate(date) {
+            return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+        }
+
+        // Render filtri attività
+        function renderActivityFilters() {
+            const container = document.getElementById('activityFilters');
+            container.innerHTML = activities.map(activity => `
+                <button class="filter-btn ${activity.id === appState.selectedActivity ? 'active' : ''}" 
+                        onclick="selectActivity('${activity.id}')">
+                    <span>${activity.icon}</span>
+                    <span>${activity.name}</span>
+                </button>
+            `).join('');
+        }
+
+        // Seleziona attività
+        function selectActivity(activityId) {
+            console.log('Attività selezionata:', activityId);
+            appState.selectedActivity = activityId;
+            renderActivityFilters();
+            if (appState.selectedDate) {
+                renderSlots();
+            }
+        }
+
+        // Render calendario
+        function renderCalendar() {
+            const container = document.getElementById('calendar');
+            const firstDay = new Date(appState.currentYear, appState.currentMonth, 1);
+            const lastDay = new Date(appState.currentYear, appState.currentMonth + 1, 0);
+            const prevLastDay = new Date(appState.currentYear, appState.currentMonth, 0);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            const monthNames = appState.currentLang === 'it' 
+                ? ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre']
+                : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            
+            const dayNames = appState.currentLang === 'it'
+                ? ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom']
+                : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+            let html = `
+                <div class="calendar-header">
+                    <button class="calendar-nav-btn" onclick="changeMonth(-1)">◀</button>
+                    <h3>${monthNames[appState.currentMonth]} ${appState.currentYear}</h3>
+                    <button class="calendar-nav-btn" onclick="changeMonth(1)">▶</button>
+                </div>
+                <div class="calendar-days">
+                    ${dayNames.map(day => `<div class="calendar-day-name">${day}</div>`).join('')}
+                </div>
+                <div class="calendar-days">
+            `;
+
+            const firstDayOfWeek = firstDay.getDay() === 0 ? 6 : firstDay.getDay() - 1;
+            
+            // Giorni del mese precedente
+            for (let i = firstDayOfWeek - 1; i >= 0; i--) {
+                const day = prevLastDay.getDate() - i;
+                html += `<div class="calendar-date other-month">${day}</div>`;
+            }
+
+            // Giorni del mese corrente
+            for (let day = 1; day <= lastDay.getDate(); day++) {
+                const date = new Date(appState.currentYear, appState.currentMonth, day);
+                date.setHours(0, 0, 0, 0);
+                const dateKey = formatDate(date);
+                const isToday = date.getTime() === today.getTime();
+                const isSelected = dateKey === appState.selectedDate;
+                const isPast = date < today;
+                
+                const classes = ['calendar-date'];
+                if (isToday) classes.push('today');
+                if (isSelected) classes.push('selected');
+                if (isPast) classes.push('disabled');
+
+                html += `<div class="${classes.join(' ')}" data-date="${dateKey}" ${isPast ? '' : 'onclick="selectDate.call(this, event)"'}>${day}</div>`;
+            }
+
+            // Giorni del mese successivo
+            const remainingCells = 42 - (firstDayOfWeek + lastDay.getDate());
+            for (let day = 1; day <= remainingCells; day++) {
+                html += `<div class="calendar-date other-month">${day}</div>`;
+            }
+
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        // Cambio mese
+        function changeMonth(delta) {
+            appState.currentMonth += delta;
+            if (appState.currentMonth > 11) {
+                appState.currentMonth = 0;
+                appState.currentYear++;
+            } else if (appState.currentMonth < 0) {
+                appState.currentMonth = 11;
+                appState.currentYear--;
+            }
+            renderCalendar();
+        }
+
+        // Seleziona data - FIX: usa 'this' invece di e.target
+        function selectDate(event) {
+            // FIX CRITICO: usa 'this' invece di e.target per evitare bug di selezione
+            const dateKey = this.dataset.date;
+            console.log('Data selezionata:', dateKey);
+            
+            if (!dateKey) {
+                console.error('Errore: data non trovata');
+                return;
+            }
+
+            appState.selectedDate = dateKey;
+            renderCalendar();
+            renderSlots();
+        }
+
+        // Render slot disponibili
+        function renderSlots() {
+            const container = document.getElementById('slotsGrid');
+            
+            if (!appState.selectedDate) {
+                container.innerHTML = `<p class="empty-state" data-it="Seleziona una data per vedere gli orari disponibili" data-en="Select a date to see available slots">${appState.currentLang === 'it' ? 'Seleziona una data per vedere gli orari disponibili' : 'Select a date to see available slots'}</p>`;
+                return;
+            }
+
+            const dateData = appState.bookingData[appState.selectedDate];
+            const activityData = dateData && dateData[appState.selectedActivity];
+
+            if (!activityData) {
+                container.innerHTML = `<p class="empty-state" data-it="Nessuno slot disponibile per questa data" data-en="No slots available for this date">${appState.currentLang === 'it' ? 'Nessuno slot disponibile per questa data' : 'No slots available for this date'}</p>`;
+                return;
+            }
+
+            const availableText = appState.currentLang === 'it' ? 'Disponibili' : 'Available';
+            const fullText = appState.currentLang === 'it' ? 'Completo' : 'Full';
+
+            container.innerHTML = timeSlots.map(slot => {
+                const slotData = activityData[slot];
+                const available = slotData.max - slotData.booked;
+                const isFull = available <= 0;
+                
+                return `
+                    <div class="slot-card ${isFull ? 'booked' : ''}" 
+                         ${isFull ? '' : `onclick="openBookingModal('${slot}')"`}>
+                        <div class="slot-time">${slot}</div>
+                        <div class="slot-status">
+                            ${isFull ? fullText : `${available}/${slotData.max} ${availableText}`}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Apri modal prenotazione
+        function openBookingModal(slot) {
+            appState.selectedSlot = slot;
+            document.getElementById('bookingModal').classList.add('show');
+        }
+
+        // Chiudi modal
+        function closeModal() {
+            document.getElementById('bookingModal').classList.remove('show');
+            document.getElementById('bookingName').value = '';
+            document.getElementById('bookingEmail').value = '';
+            document.getElementById('bookingPhone').value = '';
+            document.getElementById('bookingParticipants').value = '1';
+            document.getElementById('bookingNotes').value = '';
+        }
+
+        // Conferma prenotazione
+        function confirmBooking(event) {
+            event.preventDefault();
+
+            const booking = {
+                id: 'BK' + Date.now(),
+                activity: appState.selectedActivity,
+                activityName: activities.find(a => a.id === appState.selectedActivity).name,
+                date: appState.selectedDate,
+                slot: appState.selectedSlot,
+                name: document.getElementById('bookingName').value,
+                email: document.getElementById('bookingEmail').value,
+                phone: document.getElementById('bookingPhone').value,
+                participants: document.getElementById('bookingParticipants').value,
+                notes: document.getElementById('bookingNotes').value
+            };
+
+            appState.bookings.push(booking);
+            
+            // Aggiorna disponibilità
+            if (appState.bookingData[appState.selectedDate] && 
+                appState.bookingData[appState.selectedDate][appState.selectedActivity] &&
+                appState.bookingData[appState.selectedDate][appState.selectedActivity][appState.selectedSlot]) {
+                appState.bookingData[appState.selectedDate][appState.selectedActivity][appState.selectedSlot].booked += parseInt(booking.participants);
+            }
+
+            closeModal();
+            renderSlots();
+            renderMyBookings();
+
+            // Mostra messaggio di successo con animazione
+            alert(appState.currentLang === 'it' 
+                ? `✅ Prenotazione confermata!\n\nCodice: ${booking.id}\nAttività: ${booking.activityName}\nData: ${booking.date}\nOrario: ${booking.slot}`
+                : `✅ Booking confirmed!\n\nCode: ${booking.id}\nActivity: ${booking.activityName}\nDate: ${booking.date}\nTime: ${booking.slot}`);
+        }
+
+        // Render le mie prenotazioni
+        function renderMyBookings() {
+            const container = document.getElementById('myBookings');
+            const countElement = document.getElementById('bookingCount');
+            
+            countElement.textContent = appState.bookings.length;
+
+            if (appState.bookings.length === 0) {
+                container.innerHTML = `<p class="empty-state" data-it="Non hai ancora prenotazioni" data-en="You don't have any bookings yet">${appState.currentLang === 'it' ? 'Non hai ancora prenotazioni' : "You don't have any bookings yet"}</p>`;
+                return;
+            }
+
+            const activityLabel = appState.currentLang === 'it' ? 'Attività' : 'Activity';
+            const dateLabel = appState.currentLang === 'it' ? 'Data' : 'Date';
+            const timeLabel = appState.currentLang === 'it' ? 'Orario' : 'Time';
+            const codeLabel = appState.currentLang === 'it' ? 'Codice' : 'Code';
+            const cancelLabel = appState.currentLang === 'it' ? 'Cancella' : 'Cancel';
+
+            container.innerHTML = appState.bookings.map(booking => `
+                <div class="booking-item">
+                    <div class="booking-info">
+                        <div class="booking-detail">
+                            <span class="booking-label">${activityLabel}</span>
+                            <span class="booking-value">${booking.activityName}</span>
+                        </div>
+                        <div class="booking-detail">
+                            <span class="booking-label">${dateLabel}</span>
+                            <span class="booking-value">${booking.date}</span>
+                        </div>
+                        <div class="booking-detail">
+                            <span class="booking-label">${timeLabel}</span>
+                            <span class="booking-value">${booking.slot}</span>
+                        </div>
+                        <div class="booking-detail">
+                            <span class="booking-label">${codeLabel}</span>
+                            <span class="booking-value">${booking.id}</span>
+                        </div>
+                    </div>
+                    <button class="cancel-btn" onclick="cancelBooking('${booking.id}')">${cancelLabel}</button>
+                </div>
+            `).join('');
+        }
+
+        // Cancella prenotazione con conferma
+        function cancelBooking(bookingId) {
+            const confirmMessage = appState.currentLang === 'it'
+                ? 'Sei sicuro di voler cancellare questa prenotazione?'
+                : 'Are you sure you want to cancel this booking?';
+            
+            if (!window.confirm(confirmMessage)) {
+                return;
+            }
+
+            const booking = appState.bookings.find(b => b.id === bookingId);
+            if (booking) {
+                // Ripristina disponibilità
+                if (appState.bookingData[booking.date] && 
+                    appState.bookingData[booking.date][booking.activity] &&
+                    appState.bookingData[booking.date][booking.activity][booking.slot]) {
+                    appState.bookingData[booking.date][booking.activity][booking.slot].booked -= parseInt(booking.participants);
+                }
+            }
+
+            appState.bookings = appState.bookings.filter(b => b.id !== bookingId);
+            renderMyBookings();
+            if (appState.selectedDate) {
+                renderSlots();
+            }
+
+            const successMessage = appState.currentLang === 'it'
+                ? 'Prenotazione cancellata con successo'
+                : 'Booking cancelled successfully';
+            alert('✅ ' + successMessage);
+        }
+
+        // Toggle FAQ
+        function toggleFAQ(element) {
+            const item = element.parentElement;
+            item.classList.toggle('active');
+        }
+
+        // Toggle menu mobile
+        function toggleMenu() {
+            document.getElementById('mainNav').classList.toggle('show');
+        }
+
+        // Switch lingua
+        function switchLang(lang) {
+            appState.currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Aggiorna tutti i testi
+            document.querySelectorAll('[data-it][data-en]').forEach(el => {
+                el.textContent = el.dataset[lang];
+            });
+
+            // Re-render componenti dinamici
+            renderCalendar();
+            renderSlots();
+            renderMyBookings();
+        }
+
+        // Handle contact form
+        function handleContact(event) {
+            event.preventDefault();
+            const message = appState.currentLang === 'it'
+                ? 'Messaggio inviato! Ti risponderemo al più presto.'
+                : 'Message sent! We will reply as soon as possible.';
+            alert('✅ ' + message);
+            event.target.reset();
+        }
+
+        // Inizializzazione
+        window.addEventListener('DOMContentLoaded', () => {
+            initBookingData();
+            renderActivityFilters();
+            renderCalendar();
+            renderMyBookings();
+            
+            // TIMER AUTO-UPDATE: Aggiorna calendario e slot ogni 30 secondi
+            setInterval(updateBookingData, 30000);
+            console.log('Timer auto-update attivato: refresh ogni 30 secondi');
+        });
+
+        // Smooth scroll per navigazione
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
