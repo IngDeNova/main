@@ -1,520 +1,222 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate Texas Hold'em Simulator</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            background: radial-gradient(ellipse at center, #0d2f1d 0%, #071a10 100%);
-            min-height: 100vh; 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            color: #f5f0e8;
-            overflow-x: hidden;
-            touch-action: manipulation;
-        }
-        .full-screen { position: fixed; inset: 0; z-index: 1000; }
-        header { 
-            text-align: center; 
-            padding: 15px; 
-            background: rgba(0,0,0,0.6); 
-            border-bottom: 1px solid rgba(201,168,76,0.3);
-        }
-        h1 { 
-            font-size: clamp(1.2rem, 4vw, 2rem); 
-            color: #c9a84c; 
-            letter-spacing: 3px; 
-            text-shadow: 0 0 15px rgba(201,168,76,0.4);
-        }
-        #table-area { 
-            position: relative; 
-            width: min(98vw, 1200px); 
-            margin: 20px auto; 
-            background: radial-gradient(ellipse 80% 70% at 50% 50%, #236b45 0%, #1a5c3a 60%, #0f3d26 100%);
-            border-radius: 50px; 
-            border: 5px solid #5a3a00; 
-            box-shadow: 0 0 50px rgba(0,0,0,0.7), inset 0 0 60px rgba(0,0,0,0.2);
-            padding: 25px 35px; 
-            min-height: 600px;
-        }
-        #dealer-area { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-bottom: 15px; }
-        .label { font-size: 0.7rem; letter-spacing: 2px; color: rgba(201,168,76,0.7); font-weight: 600; }
-        .cards { display: flex; gap: 10px; }
-        .card { 
-            width: 50px; height: 70px; 
-            background: white; 
-            border-radius: 6px; 
-            border: 2px solid #ddd; 
-            display: flex; flex-direction: column; align-items: center; justify-content: center; 
-            font-size: 1rem; font-weight: bold; 
-            box-shadow: 2px 4px 8px rgba(0,0,0,0.4);
-            position: relative;
-        }
-        .card.red { color: #c0392b; }
-        .card.black { color: #1a1a1a; }
-        .card.face-down { 
-            background: linear-gradient(135deg, #1a3a6b 25%, #0d2244 50%); 
-            color: transparent; 
-            border: 2px solid #3a5a9b;
-        }
-        .card.face-down::after { content: '🂠'; font-size: 1.5rem; opacity: 0.2; }
-        .card.rank { font-size: 0.8rem; }
-        .card.suit { font-size: 1.2rem; }
-        #community-area { display: flex; flex-direction: column; align-items: center; gap: 5px; margin: 15px 0; }
-        #seats-area { 
-            display: flex; 
-            justify-content: space-around; 
-            align-items: flex-end; 
-            gap: 10px; 
-            margin-top: 20px; 
-            flex-wrap: wrap;
-        }
-        .seat { 
-            display: flex; flex-direction: column; align-items: center; gap: 6px; 
-            background: rgba(0,0,0,0.5); 
-            border: 1px solid rgba(201,168,76,0.3); 
-            border-radius: 12px; 
-            padding: 12px; 
-            min-width: 130px; 
-            max-width: 160px; 
-            flex: 1; 
-            transition: all 0.3s;
-        }
-        .seat.active { border-color: #c9a84c; box-shadow: 0 0 15px rgba(201,168,76,0.4); }
-        .seat-name { font-size: 0.75rem; color: #c9a84c; font-weight: 600; }
-        .seat-chips { font-size: 0.9rem; font-weight: bold; color: #fff; }
-        .seat-hand { font-size: 0.65rem; color: #a3e635; min-height: 14px; text-align: center; }
-        .bets { display: flex; gap: 4px; flex-wrap: wrap; justify-content: center; min-height: 20px; font-size: 0.65rem; }
-        .bet-chip { 
-            width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; 
-            font-size: 0.6rem; font-weight: bold; color: white; border: 1px solid rgba(255,255,255,0.3);
-        }
-        .bet-chip.ante { background: #8e44ad; }
-        .bet-chip.blind { background: #2980b9; }
-        .bet-chip.play { background: #27ae60; }
-        .seat-status { font-size: 0.65rem; color: rgba(255,255,255,0.6); min-height: 12px; }
-        #controls-area { 
-            width: min(98vw, 1200px); margin: 15px auto 0; 
-            background: rgba(0,0,0,0.5); border: 1px solid rgba(201,168,76,0.3); 
-            border-radius: 12px; padding: 15px 20px;
-        }
-        #phase-label { text-align: center; font-size: 0.8rem; color: #c9a84c; margin-bottom: 12px; letter-spacing: 1px; }
-        #bet-sizing { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
-        .chip-btn { 
-            width: 40px; height: 40px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.3); 
-            background: #c0392b; color: white; font-weight: bold; font-size: 0.8rem; cursor: pointer; 
-            transition: all 0.2s;
-        }
-        .chip-btn:hover { transform: scale(1.1); box-shadow: 0 0 10px rgba(255,255,255,0.3); }
-        #current-bet { 
-            background: rgba(0,0,0,0.5); border: 1px solid #8a6820; border-radius: 6px; 
-            padding: 6px 12px; font-size: 0.9rem; font-weight: bold; color: #c9a84c; min-width: 60px; text-align: center;
-        }
-        #clear-bet { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.7); 
-            border-radius: 6px; padding: 6px 12px; font-size: 0.7rem; cursor: pointer; }
-        #action-btns { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
-        .action-btn { 
-            font-size: 0.8rem; padding: 10px 24px; border-radius: 8px; border: none; cursor: pointer; 
-            font-weight: 600; letter-spacing: 1px; transition: all 0.2s; box-shadow: 0 3px 10px rgba(0,0,0,0.4);
-        }
-        .action-btn:hover:not(.disabled) { transform: translateY(-2px); filter: brightness(1.1); }
-        .action-btn.disabled { opacity: 0.4; cursor: not-allowed; }
-        .btn-deal { background: linear-gradient(135deg, #c9a84c, #8a6820); color: black; }
-        .btn-check { background: linear-gradient(135deg, #555, #333); color: white; }
-        .btn-bet4 { background: linear-gradient(135deg, #3498db, #2980b9); color: white; }
-        .btn-bet3 { background: linear-gradient(135deg, #3498db, #2980b9); color: white; }
-        .btn-bet2 { background: linear-gradient(135deg, #27ae60, #1e8449); color: white; }
-        .btn-bet1 { background: linear-gradient(135deg, #27ae60, #1e8449); color: white; }
-        .btn-fold { background: linear-gradient(135deg, #c0392b, #922b21); color: white; }
-        #training-box { 
-            width: min(98vw, 1200px); margin: 10px auto; 
-            background: rgba(0,20,0,0.6); border: 1px solid rgba(74,222,128,0.4); border-radius: 10px; 
-            padding: 12px 18px;
-        }
-        #training-text { font-size: 0.75rem; line-height: 1.5; color: rgba(255,255,255,0.85); }
-        .highlight { color: #4ade80 !important; }
-        #log-area { 
-            width: min(98vw, 1200px); margin: 10px auto 20px; 
-            background: rgba(0,0,0,0.4); border: 1px solid rgba(201,168,76,0.3); border-radius: 10px; 
-            padding: 12px; max-height: 100px; overflow-y: auto; font-size: 0.7rem;
-        }
-        .log-win { color: #4ade80; }
-        .log-lose { color: #f87171; }
-        .log-info { color: #c9a84c; }
-        #setup-modal, #result-overlay { 
-            position: fixed; inset: 0; background: rgba(0,0,0,0.8); 
-            display: none; align-items: center; justify-content: center; z-index: 100;
-        }
-        .modal-panel { 
-            background: linear-gradient(160deg, #0d2a1a, #071510); 
-            border: 2px solid #c9a84c; border-radius: 20px; padding: 30px; 
-            width: min(90vw, 550px); text-align: center; box-shadow: 0 0 50px rgba(0,0,0,0.8);
-        }
-        .setup-section label { display: block; font-size: 0.75rem; color: #c9a84c; margin-bottom: 8px; font-weight: 600; }
-        .seat-row { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.05); border-radius: 8px; padding: 8px; margin-bottom: 6px; }
-        .seat-row input, .seat-row select { background: rgba(255,255,255,0.08); border: 1px solid rgba(201,168,76,0.3); color: white; padding: 6px; border-radius: 6px; font-size: 0.75rem; }
-        #ante-input { width: 100px; text-align: center; }
-        .start-btn { background: linear-gradient(135deg, #c9a84c, #8a6820); color: black; font-size: 0.9rem; padding: 12px 40px; border: none; border-radius: 10px; cursor: pointer; font-weight: 700; margin-top: 20px; }
-        #result-rows { font-size: 0.8rem; line-height: 1.6; margin-bottom: 15px; }
-        .res-win { color: #4ade80; }
-        .res-lose { color: #f87171; }
-        .res-push { color: #fbbf24; }
-        @media (max-width: 768px) { 
-            .card { width: 40px; height: 56px; font-size: 0.9rem; }
-            .seat { min-width: 110px; padding: 10px; }
-            #seats-area { flex-direction: column; align-items: center; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UTH Simulator FIXED</title>
+
+<style>
+body {
+    background:#0b2e1a;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
+
+#table {
+    margin:20px auto;
+}
+
+.cards {
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin:10px;
+}
+
+.card {
+    width:60px;
+    height:80px;
+    background:white;
+    color:black;
+    border-radius:6px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    font-weight:bold;
+}
+
+.red { color:red; }
+
+button {
+    padding:10px 20px;
+    margin:5px;
+    cursor:pointer;
+}
+</style>
 </head>
+
 <body>
-    <header>
-        <h1>ULTIMATE TEXAS HOLD'EM</h1>
-        <p>Simulatore Professionale | Single/Multiplayer | Training</p>
-    </header>
 
-    <div id="setup-modal" class="full-screen">
-        <div id="setup-panel" class="modal-panel">
-            <h2>Configura Tavolo</h2>
-            <div class="setup-section">
-                <label>Giocatori (5 posti max)</label>
-                <div id="seat-config"></div>
-            </div>
-            <div style="display: flex; align-items: center; gap: 15px;">
-                <label>Ante Base: <input type="number" id="ante-input" value="10" min="1" max="1000"></label>
-                <label style="font-size: 0.7rem; color: rgba(255,255,255,0.6);">Blind = Ante</label>
-            </div>
-            <button class="start-btn" onclick="startGame()">INIZIA GIOCO</button>
-        </div>
-    </div>
+<h1>Ultimate Texas Hold'em (Simplified)</h1>
 
-    <div id="result-overlay" class="full-screen">
-        <div id="result-panel" class="modal-panel">
-            <h2>Risultati Mano</h2>
-            <div id="result-rows"></div>
-            <button class="start-btn" onclick="closeResult()">NUOVA MANO</button>
-        </div>
-    </div>
+<div id="table">
 
-    <div id="table-area">
-        <div id="dealer-area">
-            <div class="label">BANCO</div>
-            <div id="dealer-cards" class="cards"></div>
-            <div id="dealer-hand" class="seat-hand"></div>
-        </div>
+<h3>Dealer</h3>
+<div id="dealer" class="cards"></div>
+<div id="dealerHand"></div>
 
-        <div id="community-area">
-            <div class="label">COMMUNITY CARDS</div>
-            <div id="community-cards" class="cards"></div>
-        </div>
+<h3>Board</h3>
+<div id="board" class="cards"></div>
 
-        <div id="seats-area"></div>
-    </div>
+<h3>Player</h3>
+<div id="player" class="cards"></div>
+<div id="playerHand"></div>
 
-    <div id="controls-area">
-        <div id="phase-label">CONFIGURA PER INIZIARE</div>
-        <div id="bet-sizing">
-            <label>Fiches:</label>
-            <button class="chip-btn" data-val="5" onclick="addToBet(5)">5</button>
-            <button class="chip-btn" data-val="10" onclick="addToBet(10)">10</button>
-            <button class="chip-btn" data-val="25" onclick="addToBet(25)">25</button>
-            <button class="chip-btn" data-val="50" onclick="addToBet(50)">50</button>
-            <button class="chip-btn" data-val="100" onclick="addToBet(100)">100</button>
-            <button class="chip-btn" data-val="500" onclick="addToBet(500)">500</button>
-            <div id="current-bet">0</div>
-            <button id="clear-bet" onclick="clearBet()">Reset</button>
-        </div>
-        <div id="action-btns"></div>
-    </div>
+</div>
 
-    <div id="training-box">
-        <div id="training-text">Benvenuto nel simulatore UTH. Configura i giocatori (umano/AI/vuoto) e premi INIZIA.[file:1]</div>
-    </div>
+<div>
+<button onclick="startHand()">DEAL</button>
+<button onclick="nextPhase()">NEXT</button>
+</div>
 
-    <div id="log-area"></div>
+<h2 id="result"></h2>
 
-    <script>
-        // Deck e utils
-        const RANKS = ['2','3','4','5','6','7','8','9','T','J','Q','K','A'];
-        const SUITS = ['♠','♣','♥','♦'];
-        const SUIT_COLOR = ['black','black','red','red'];
-        const RANK_VAL = { '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, 'T':10, 'J':11, 'Q':12, 'K':13, 'A':14 };
+<script>
 
-        function buildDeck() {
-            let deck = [];
-            for (let s of SUITS) for (let r of RANKS) deck.push({r, s});
-            return deck;
+// ===== DECK =====
+const suits = ["♠","♣","♥","♦"];
+const ranks = ["2","3","4","5","6","7","8","9","T","J","Q","K","A"];
+const values = Object.fromEntries(ranks.map((r,i)=>[r,i+2]));
+
+let deck, player, dealer, board, phase;
+
+// ===== INIT =====
+function newDeck(){
+    let d=[];
+    for(let s of suits){
+        for(let r of ranks){
+            d.push({r,s});
         }
+    }
+    return shuffle(d);
+}
 
-        function shuffle(deck) {
-            for (let i = deck.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [deck[i], deck[j]] = [deck[j], deck[i]];
-            }
-            return deck;
+function shuffle(d){
+    for(let i=d.length-1;i>0;i--){
+        let j=Math.floor(Math.random()* (i+1));
+        [d[i],d[j]]=[d[j],d[i]];
+    }
+    return d;
+}
+
+// ===== GAME FLOW =====
+function startHand(){
+    deck = newDeck();
+    player = [deck.pop(), deck.pop()];
+    dealer = [deck.pop(), deck.pop()];
+    board = [];
+    phase = "preflop";
+
+    render();
+    document.getElementById("result").innerText="";
+}
+
+function nextPhase(){
+
+    if(phase==="preflop"){
+        board.push(deck.pop(), deck.pop(), deck.pop());
+        phase="flop";
+    }
+    else if(phase==="flop"){
+        board.push(deck.pop());
+        phase="turn";
+    }
+    else if(phase==="turn"){
+        board.push(deck.pop());
+        phase="river";
+    }
+    else if(phase==="river"){
+        showdown();
+        phase="done";
+    }
+
+    render();
+}
+
+// ===== RENDER =====
+function drawCard(c, hidden=false){
+    if(hidden) return `<div class="card">🂠</div>`;
+    let color = (c.s==="♥"||c.s==="♦") ? "red":"";
+    return `<div class="card ${color}">${c.r}<br>${c.s}</div>`;
+}
+
+function render(){
+
+    document.getElementById("player").innerHTML =
+        player.map(c=>drawCard(c)).join("");
+
+    document.getElementById("dealer").innerHTML =
+        dealer.map((c,i)=>drawCard(c, phase!=="done" && i===1)).join("");
+
+    document.getElementById("board").innerHTML =
+        board.map(c=>drawCard(c)).join("");
+}
+
+// ===== HAND EVALUATION =====
+function evaluate(cards){
+
+    let vals = cards.map(c=>values[c.r]).sort((a,b)=>b-a);
+
+    let counts = {};
+    vals.forEach(v=>counts[v]=(counts[v]||0)+1);
+
+    let pairs = Object.values(counts).filter(v=>v===2).length;
+    let trips = Object.values(counts).includes(3);
+    let quads = Object.values(counts).includes(4);
+
+    let isFlush = cards.map(c=>c.s)
+        .some(s => cards.filter(c=>c.s===s).length>=5);
+
+    let unique = [...new Set(vals)];
+    let isStraight = false;
+
+    for(let i=0;i<unique.length-4;i++){
+        if(unique[i]-unique[i+4]===4){
+            isStraight=true;
         }
+    }
 
-        function cardHTML(card, big = false, faceDown = false) {
-            if (faceDown) return '<div class="card face-down"></div>';
-            if (!card) return '<div class="card"></div>';
-            const cls = SUIT_COLOR[SUITS.indexOf(card.s)];
-            return `<div class="card ${cls}">${big ? '' : '<div class="card-rank">'}${card.r}</div><div class="card-suit">${card.s}</div>`;
-        }
+    if(isFlush && isStraight) return {rank:8,name:"Straight Flush"};
+    if(quads) return {rank:7,name:"Four of a Kind"};
+    if(trips && pairs) return {rank:6,name:"Full House"};
+    if(isFlush) return {rank:5,name:"Flush"};
+    if(isStraight) return {rank:4,name:"Straight"};
+    if(trips) return {rank:3,name:"Three of a Kind"};
+    if(pairs>=2) return {rank:2,name:"Two Pair"};
+    if(pairs===1) return {rank:1,name:"Pair"};
 
-        // Game state
-        let game = {
-            seats: [], // [{name, type:'human'|'ai'|'empty', chips:1000, ante:0, blind:0, play:0, trips:0, folded:false, cards:[], handResult:null}]
-            dealerCards: [],
-            community: [],
-            deck: [],
-            anteBase: 10,
-            phase: 'setup',
-            currentSeat: -1,
-            pendingBet: 0,
-            pendingType: '' // 'trips'
-        };
+    return {rank:0,name:"High Card"};
+}
 
-        // Eval hand (semplificata per 5-7 cards)
-        function evaluate(cards) {
-            if (cards.length < 5) return {rank: 0, name: 'High Card'};
-            // Logica semplificata per brevità - espandi con full evaluator dal file originale[file:1]
-            const vals = cards.map(c => RANK_VAL[c.r]).sort((a,b) => b-a);
-            const suits = cards.map(c => c.s);
-            const flush = new Set(suits).size === 1;
-            const straight = checkStraight(vals);
-            if (flush && straight) return {rank: 8, name: 'Straight Flush'};
-            // ... (implementa full logic come nel file uth.html)
-            return {rank: 0, name: 'High Card'};
-        }
+// ===== SHOWDOWN =====
+function showdown(){
 
-        function checkStraight(vals) {
-            const unique = [...new Set(vals)].sort((a,b)=>b-a);
-            if (unique.length >= 5) {
-                for (let i = 0; i <= unique.length - 5; i++) {
-                    if (unique[i] - unique[i+4] === 4) return unique[i];
-                }
-            }
-            return false;
-        }
+    let pEval = evaluate(player.concat(board));
+    let dEval = evaluate(dealer.concat(board));
 
-        // UI build
-        function buildSetupUI() {
-            const cfg = document.getElementById('seat-config');
-            cfg.innerHTML = '';
-            for (let i = 0; i < 5; i++) {
-                cfg.innerHTML += `
-                    <div class="seat-row">
-                        <span>Posto ${i+1}</span>
-                        <input type="text" id="pname${i}" value="${i===0 ? 'Tu' : `Giocatore ${i+1}`}" placeholder="Nome">
-                        <select id="ptype${i}">
-                            <option value="human" ${i===0 ? 'selected' : ''}>Umano</option>
-                            <option value="ai">AI</option>
-                            <option value="empty">Vuoto</option>
-                        </select>
-                    </div>
-                `;
-            }
-        }
-        buildSetupUI();
+    document.getElementById("playerHand").innerText = pEval.name;
+    document.getElementById("dealerHand").innerText = dEval.name;
 
-        function startGame() {
-            game.anteBase = parseInt(document.getElementById('ante-input').value) || 10;
-            game.seats = [];
-            for (let i = 0; i < 5; i++) {
-                const type = document.getElementById(`ptype${i}`).value;
-                const name = document.getElementById(`pname${i}`).value || `P${i+1}`;
-                if (type === 'empty') continue;
-                game.seats.push({name, type, chips: 1000, ante:0, blind:0, play:0, trips:0, folded:false, cards:[], handResult:null, acted:false});
-            }
-            document.getElementById('setup-modal').style.display = 'none';
-            game.phase = 'idle';
-            render();
-            setPhaseLabel('Premi PIAZZA ANTE & DEAL');
-            setTraining('Piazza Ante e Blind. Trips opzionale per bonus. Impara con training.[file:1]');
-            addLog('Tavolo pronto. Ante: ' + game.anteBase, 'log-info');
-        }
+    let result;
 
-        function render() {
-            // Dealer
-            const dc = document.getElementById('dealer-cards');
-            dc.innerHTML = game.dealerCards.map(c => cardHTML(c, true)).join('') || cardHTML(null,true,true) + cardHTML(null,true,true);
+    if(pEval.rank > dEval.rank){
+        result = "YOU WIN";
+    }
+    else if(pEval.rank < dEval.rank){
+        result = "DEALER WINS";
+    }
+    else{
+        result = "PUSH";
+    }
 
-            // Community
-            const cc = document.getElementById('community-cards');
-            cc.innerHTML = '';
-            for (let i = 0; i < 5; i++) {
-                cc.innerHTML += game.community[i] ? cardHTML(game.community[i], true) : cardHTML(null, true, true);
-            }
+    document.getElementById("result").innerText = result;
 
-            // Seats
-            const sa = document.getElementById('seats-area');
-            sa.innerHTML = '';
-            game.seats.forEach((s, idx) => {
-                if (!s) {
-                    sa.innerHTML += '<div class="seat" style="opacity:0.3"><div class="seat-name">VUOTO</div></div>';
-                    return;
-                }
-                const isActive = game.currentSeat === idx && game.phase !== 'idle' && !s.folded;
-                let cls = 'seat' + (isActive ? ' active' : '');
-                let cardsHTML = s.cards.map(c => cardHTML(c)).join('') || cardHTML(null) + cardHTML(null);
-                let betsHTML = '';
-                if (s.ante) betsHTML += `<div class="bet-chip ante">A${s.ante}</div>`;
-                if (s.blind) betsHTML += `<div class="bet-chip blind">B${s.blind}</div>`;
-                if (s.play) betsHTML += `<div class="bet-chip play">P${s.play}</div>`;
-                if (s.trips) betsHTML += `<div class="bet-chip trips">T${s.trips}</div>`;
-                const status = s.folded ? 'FOLD' : s.handResult || '';
-                sa.innerHTML += `
-                    <div class="${cls}">
-                        <div class="seat-name">${s.name} (${s.type})</div>
-                        <div class="seat-chips">${s.chips}</div>
-                        <div class="cards">${cardsHTML}</div>
-                        <div class="seat-hand" id="hand${idx}">${status}</div>
-                        <div class="bets">${betsHTML}</div>
-                        <div class="seat-status" id="status${idx}"></div>
-                    </div>
-                `;
-            });
-        }
+    render();
+}
 
-        // Bet UI (pre-deal trips)
-        function addToBet(val) {
-            game.pendingBet += val;
-            document.getElementById('current-bet').textContent = game.pendingBet;
-        }
-        function clearBet() {
-            game.pendingBet = 0;
-            document.getElementById('current-bet').textContent = 0;
-        }
+</script>
 
-        // Game flow semplificato
-        async function placeBetsAndDeal() {
-            // Collect bets
-            game.seats.forEach(s => {
-                if (!s || s.folded) return;
-                s.ante = game.anteBase;
-                s.blind = game.anteBase;
-                if (s.type === 'human') s.trips = game.pendingBet;
-                else s.trips = Math.random() > 0.5 ? game.anteBase : 0;
-                s.chips -= s.ante + s.blind + s.trips;
-                s.folded = false;
-                s.cards = [];
-                s.acted = false;
-            });
-            clearBet();
-
-            // Deck
-            game.deck = shuffle(buildDeck());
-            game.dealerCards = [game.deck.pop(), game.deck.pop()];
-            game.community = [];
-            game.seats.forEach(s => {
-                if (!s || s.folded) return;
-                s.cards = [game.deck.pop(), game.deck.pop()];
-            });
-
-            game.phase = 'preflop';
-            game.currentSeat = 0; // Simplified
-            render();
-            setPhaseLabel('PREFLOP - Bet 3x/4x o Check');
-            setActionBtns('preflop');
-            setTraining('Mani premium (AA,KK): bet 4x. Buone (coppia, AK suited): 3x. Altrimenti check.[file:1]');
-            // AI actions simplified
-            await dealNextPhase();
-        }
-
-        function setPhaseLabel(text) {
-            document.getElementById('phase-label').textContent = text;
-        }
-
-        function setActionBtns(phase) {
-            const btns = document.getElementById('action-btns');
-            if (phase === 'idle') {
-                btns.innerHTML = '<button class="action-btn btn-deal" onclick="placeBetsAndDeal()">PIAZZA ANTE & DEAL</button>';
-            } else if (phase === 'preflop') {
-                btns.innerHTML = `
-                    <button class="action-btn btn-bet4" onclick="playerAction(4)">BET 4x</button>
-                    <button class="action-btn btn-bet3" onclick="playerAction(3)">BET 3x</button>
-                    <button class="action-btn btn-check" onclick="playerAction(\'check\')">CHECK</button>
-                `;
-            } // Add flop, river...
-        }
-
-        async function playerAction(action) {
-            const s = game.seats[game.currentSeat];
-            if (!s) return;
-            if (action === 'check') {
-                addLog(`${s.name} CHECK`);
-            } else {
-                const amt = game.anteBase * action;
-                s.play = amt;
-                s.chips -= amt;
-                addLog(`${s.name} BET ${action}x (${amt})`);
-            }
-            s.acted = true;
-            await dealNextPhase();
-            render();
-        }
-
-        async function dealNextPhase() {
-            // Simplified progression: preflop -> flop -> river -> showdown
-            // Implement full logic based on file[file:1]
-            setTimeout(() => showdown(), 1000);
-        }
-
-        async function showdown() {
-            game.phase = 'showdown';
-            // Eval all
-            const dealerHand = game.dealerCards.concat(game.community);
-            const dealerEval = evaluate(dealerHand);
-            document.getElementById('dealer-hand').textContent = dealerEval.name;
-
-            game.seats.forEach(s => {
-                if (!s || s.folded) {
-                    s.handResult = 'FOLD';
-                    return;
-                }
-                const playerHand = s.cards.concat(game.community);
-                s.handResult = evaluate(playerHand).name;
-                document.getElementById(`hand${game.seats.indexOf(s)}`).textContent = s.handResult;
-            });
-
-            render();
-            showResult();
-        }
-
-        function showResult() {
-            // Simplified result
-            document.getElementById('result-rows').innerHTML = '<div>Banco qualificato. Confronta mani.</div><div>Vinci con coppia o meglio vs banco.</div>';
-            document.getElementById('result-overlay').style.display = 'flex';
-        }
-
-        function closeResult() {
-            document.getElementById('result-overlay').style.display = 'none';
-            game.phase = 'idle';
-            setActionBtns('idle');
-            setPhaseLabel('NUOVA MANO - Piazza Ante');
-        }
-
-        function setTraining(html) {
-            document.getElementById('training-text').innerHTML = html;
-        }
-
-        function addLog(msg, cls = '') {
-            const log = document.getElementById('log-area');
-            const p = document.createElement('div');
-            p.className = cls;
-            p.textContent = msg;
-            log.insertBefore(p, log.firstChild);
-            while (log.children.length > 15) log.removeChild(log.lastChild);
-        }
-
-        // Full screen
-        document.addEventListener('dblclick', () => {
-            if (!document.fullscreenElement) document.documentElement.requestFullscreen();
-            else document.exitFullscreen();
-        });
-
-        // Init
-        render();
-    </script>
 </body>
 </html>
