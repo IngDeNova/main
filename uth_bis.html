@@ -1,0 +1,40 @@
+function showdown(){
+  phase="showdown";
+
+  let playerScore = evaluate(player.concat(community));
+  let dealerScore = evaluate(dealer.concat(community));
+
+  let dealerQualifies = dealerScore >= 1;
+
+  let win = 0;
+
+  if(playerScore > dealerScore){
+
+    // ANTE
+    if(dealerQualifies){
+      win += ante*2;
+    } else {
+      win += ante;
+    }
+
+    // PLAY
+    win += play*2;
+
+    // BLIND
+    if(dealerQualifies){
+      let payout = getBlindPayout(playerScore);
+      if(payout > 0){
+        win += blind + (blind * payout);
+      } else {
+        win += blind; // push
+      }
+    }
+
+  } else if(playerScore === dealerScore){
+    win += ante + play + blind;
+  }
+
+  balance += win;
+
+  render();
+}
