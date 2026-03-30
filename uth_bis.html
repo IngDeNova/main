@@ -1,3 +1,261 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Ultimate Texas Hold'em</title>
+
+<style>
+body {
+  font-family: Arial;
+  background:#0b5d3b;
+  color:white;
+  text-align:center;
+}
+
+.cards {
+  display:flex;
+  justify-content:center;
+  gap:6px;
+  margin:6px;
+}
+
+.card {
+  background:white;
+  color:black;
+  padding:8px;
+  border-radius:6px;
+  width:40px;
+  font-weight:bold;
+}
+
+.back {
+  background:black;
+  color:black;
+}
+
+button {
+  margin:5px;
+  padding:10px 15px;
+  font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Ultimate Texas Hold'em</h1>
+
+<button onclick="startGame()">Nuova Mano</button>
+
+<h3>Saldo: <span id="balance">1000</span></h3>
+<h3>Ante: <span id="ante">10</span> | Blind: <span id="blind">10</span> | Play: <span id="play">0</span></h3>
+
+<div id="player"></div>
+<div id="dealer"></div>
+<div id="community"></div>
+
+<div id="actions"></div>
+
+<script>
+const suits = ['♠','♥','♦','♣'];
+const ranks = ['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
+
+let deck, player, dealer, community;
+let balance = 1000;
+let ante = 10;
+let blind = 10;
+let play = 0;
+let phase;
+
+// ===== DECK =====
+function createDeck(){
+  deck=[];
+  for(let s of suits){
+    for(let r of ranks){
+      deck.push(r+s);
+    }
+  }
+}
+
+function shuffle(){
+  for(let i=deck.length-1;i>0;i--){
+    let j=Math.floor(Math.random()*(i+1));
+    [deck[i],deck[j]]=[deck[j],deck[i]];
+  }
+}
+
+function deal(){
+  return deck.shift();
+}
+
+// ===== GAME FLOW =====
+function startGame(){
+  if(balance < 20){
+    alert("Saldo finito");
+    return;
+  }
+
+  createDeck();
+  shuffle();
+
+  player=[];
+  dealer=[];
+  community=[];
+  play=0;
+
+  balance -= 20;
+
+  for(let r=0;r<2;r++){
+    player.push(deal());
+    dealer.push(deal());
+  }
+
+  phase="preflop";
+  render();
+}
+
+function action(type){
+
+  if(type==="check"){
+    if(phase==="preflop") nextFlop();
+    else if(phase==="flop") nextRiver();
+  }
+
+  if(type==="bet4"){
+    play = ante*4;
+    balance -= play;
+    nextFlop();
+  }
+
+  if(type==="bet2"){
+    play = ante*2;
+    balance -= play;
+    nextRiver();
+  }
+
+  if(type==="bet1"){
+    play = ante;
+    balance -= play;
+    showdown();
+  }
+}
+
+function nextFlop(){
+  deal(); // burn
+  community.push(deal(),deal(),deal());
+  phase="flop";
+  render();
+}
+
+function nextRiver(){
+  deal(); // burn
+  community.push(deal(),deal());
+  phase="river";
+  render();
+}
+
+// ===== HAND EVALUATION =====
+function evaluate(hand){
+
+  let values = hand.map(c=>{
+    let r=c.slice(0,-1);
+    if(r==="A") return 14;
+    if(r==="K") return 13;
+    if(r==="Q") return 12;
+    if(r==="J") return 11;
+    return parseInt(r);
+  });
+
+  let suitsArr = hand.map(c=>c.slice(-1));
+
+  values.sort((a,b)=>b-a);
+
+  let counts={};
+  values.forEach(v=>counts[v]=(counts[v]||0)+1);
+
+  let pairs = Object.values(counts).filter(v=>v===2).length;
+  let three = Object.values(counts).includes(3);
+  let four = Object.values(counts).includes(4);
+
+  // FLUSH
+  let suitCount={};
+  suitsArr.forEach(s=>suitCount[s]=(suitCount[s]||0)+1);
+  let flushSuit = Object.keys(suitCount).find(s=>suitCount[s]>=5);
+  let isFlush = !!flushSuit;
+
+  // STRAIGHT
+  let unique = [...new Set(values)].sort((a,b)=>b-a);
+  let isStraight=false;
+
+  for(let i=0;i<unique.length-4;i++){
+    if(unique[i]-1===unique[i+1] &&
+       unique[i+1]-1===unique[i+2] &&
+       unique[i+2]-1===unique[i+3] &&
+       unique[i+3]-1===unique[i+4]){
+      isStraight=true;
+    }
+  }
+
+  // wheel
+  if(unique.includes(14) &&
+     unique.includes(2) &&
+     unique.includes(3) &&
+     unique.includes(4) &&
+     unique.includes(5)){
+    isStraight=true;
+  }
+
+  // STRAIGHT FLUSH
+  let isStraightFlush=false;
+
+  if(isFlush){
+    let flushCards = hand.filter(c=>c.slice(-1)===flushSuit);
+    let vals = flushCards.map(c=>{
+      let r=c.slice(0,-1);
+      if(r==="A") return 14;
+      if(r==="K") return 13;
+      if(r==="Q") return 12;
+      if(r==="J") return 11;
+      return parseInt(r);
+    });
+
+    vals=[...new Set(vals)].sort((a,b)=>b-a);
+
+    for(let i=0;i<vals.length-4;i++){
+      if(vals[i]-1===vals[i+1] &&
+         vals[i+1]-1===vals[i+2] &&
+         vals[i+2]-1===vals[i+3] &&
+         vals[i+3]-1===vals[i+4]){
+        isStraightFlush=true;
+      }
+    }
+  }
+
+  if(isStraightFlush) return 8;
+  if(four) return 7;
+  if(three && pairs) return 6;
+  if(isFlush) return 5;
+  if(isStraight) return 4;
+  if(three) return 3;
+  if(pairs===2) return 2;
+  if(pairs===1) return 1;
+
+  return 0;
+}
+
+// ===== BLIND PAYOUT =====
+function getBlindPayout(score){
+  switch(score){
+    case 8: return 50;
+    case 7: return 10;
+    case 6: return 3;
+    case 5: return 1.5;
+    case 4: return 1;
+    default: return 0;
+  }
+}
+
+// ===== SHOWDOWN =====
 function showdown(){
   phase="showdown";
 
@@ -11,11 +269,8 @@ function showdown(){
   if(playerScore > dealerScore){
 
     // ANTE
-    if(dealerQualifies){
-      win += ante*2;
-    } else {
-      win += ante;
-    }
+    if(dealerQualifies) win += ante*2;
+    else win += ante;
 
     // PLAY
     win += play*2;
@@ -26,7 +281,7 @@ function showdown(){
       if(payout > 0){
         win += blind + (blind * payout);
       } else {
-        win += blind; // push
+        win += blind;
       }
     }
 
@@ -35,6 +290,60 @@ function showdown(){
   }
 
   balance += win;
-
   render();
 }
+
+// ===== RENDER =====
+function render(){
+
+  document.getElementById("balance").innerText = balance;
+  document.getElementById("play").innerText = play;
+
+  document.getElementById("player").innerHTML =
+    "<h3>Giocatore</h3>" + renderCards(player);
+
+  let dealerCards =
+    phase==="showdown"
+    ? renderCards(dealer)
+    : `<div class="cards">
+        <div class="card back">XX</div>
+        <div class="card back">XX</div>
+      </div>`;
+
+  document.getElementById("dealer").innerHTML =
+    "<h3>Banco</h3>" + dealerCards;
+
+  document.getElementById("community").innerHTML =
+    "<h3>Board</h3>" + renderCards(community);
+
+  renderActions();
+}
+
+function renderActions(){
+  let div=document.getElementById("actions");
+  div.innerHTML="";
+
+  if(phase==="preflop"){
+    div.innerHTML += `<button onclick="action('bet4')">BET x4</button>`;
+    div.innerHTML += `<button onclick="action('check')">CHECK</button>`;
+  }
+
+  if(phase==="flop"){
+    div.innerHTML += `<button onclick="action('bet2')">BET x2</button>`;
+    div.innerHTML += `<button onclick="action('check')">CHECK</button>`;
+  }
+
+  if(phase==="river"){
+    div.innerHTML += `<button onclick="action('bet1')">BET x1</button>`;
+  }
+}
+
+function renderCards(cards){
+  return `<div class="cards">` +
+    cards.map(c=>`<div class="card">${c}</div>`).join('') +
+    `</div>`;
+}
+</script>
+
+</body>
+</html>
