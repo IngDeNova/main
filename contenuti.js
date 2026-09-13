@@ -42,7 +42,7 @@ const SITO = {
       it: "Studio Tecnico Terranova\nVia Alcide De Gasperi, 8\n95047 Paternò (CT), Italia",
       en: "Studio Tecnico Terranova\nVia Alcide De Gasperi, 8\n95047 Paternò (CT), Italy"
     },
-    linkedin: "https://www.linkedin.com/in/giovanniterranova",
+    linkedin: "https://www.linkedin.com/in/giovanni-terranova",
     // Se vuoi pubblicare un CV in PDF, caricalo nella cartella "nuovo/" e scrivi qui il nome del file.
     cvPdf: ""
   }
