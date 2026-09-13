@@ -189,6 +189,34 @@ main { min-height: 60vh; }
   .foto.singola img { height: auto; object-fit: contain; }
 }
 
+/* ---------- Percorso ---------- */
+.fascia {
+  font-size: 26px; padding: 14px var(--gutter) 12px;
+  border-bottom: 2px solid var(--grafite);
+  background: var(--carta-2);
+}
+.percorso { border-bottom: var(--linea) solid var(--grafite); }
+.tappa { padding: 16px var(--gutter) 20px; border-bottom: var(--linea) solid var(--grafite); }
+.tappa:last-child { border-bottom: 0; }
+.tappa .quando {
+  font-family: var(--titoli); font-weight: 600; font-size: 18px;
+  color: var(--piombo); margin-bottom: 4px;
+}
+.tappa h3 { font-size: 26px; }
+.tappa .dove { color: var(--piombo); font-size: 15.5px; margin-top: 3px; }
+.tappa ul { margin: 10px 0 0; padding: 0; list-style: none; max-width: 68ch; }
+.tappa li { position: relative; padding-left: 18px; margin-top: 6px; font-size: 16px; }
+.tappa li::before { content: ""; position: absolute; left: 0; top: 10px; width: 8px; height: 2px; background: var(--grafite); }
+.tappa .nota { margin-top: 10px; font-size: 16px; max-width: 68ch; }
+.tappa .vedi { margin-top: 12px; font-weight: 500; font-size: 15.5px; }
+.tappa .vedi a { box-shadow: inset 0 -8px 0 var(--giallo); padding: 0 2px; }
+.tappa .vedi a:hover { text-decoration: none; box-shadow: inset 0 -22px 0 var(--giallo); }
+@media (min-width: 720px) {
+  .fascia { font-size: 30px; }
+  .tappa { display: grid; grid-template-columns: 190px 1fr; gap: 0 24px; padding: 20px var(--gutter) 24px; }
+  .tappa .quando { margin-bottom: 0; padding-top: 5px; }
+}
+
 /* ---------- Referenze ---------- */
 .referenze { display: grid; grid-template-columns: 1fr; gap: var(--linea); background: var(--grafite); border-bottom: var(--linea) solid var(--grafite); }
 .referenza { background: var(--carta); padding: 16px var(--gutter) 18px; }

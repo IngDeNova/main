@@ -76,6 +76,36 @@ Se dopo il salvataggio il sito appare vuoto, c'è quasi sicuramente una virgola 
 
 ---
 
+## La pagina "Percorso"
+
+Sono tre elenchi in fondo a `contenuti.js`:
+
+- `ESPERIENZE` — i lavori, dal più recente al più vecchio (l'ordine nel file è l'ordine in pagina);
+- `FORMAZIONE` — titoli di studio e abilitazioni;
+- `LINGUE`.
+
+Per aggiungere un lavoro, copia un blocco dentro `ESPERIENZE` e compila:
+
+```js
+  {
+    periodo: { it: "gen 2027 – oggi", en: "Jan 2027 – present" },
+    ruolo: { it: "Direttore dei lavori", en: "Works supervisor" },
+    ente: "Nome dell'azienda",
+    luogo: { it: "Città (PR)", en: "City, Italy" },
+    attivita: {
+      it: ["Prima cosa fatta", "Seconda cosa fatta"],
+      en: ["First activity", "Second activity"]
+    },
+    vedi: "tttred"     // facoltativo: aggiunge "Vedi le foto" verso quel progetto
+  },
+```
+
+`vedi` va usato solo se esiste un progetto con quel codice e con delle foto; altrimenti togli la riga.
+
+Lo stage a Riga non è pubblicato: in fondo all'elenco c'è il blocco già pronto, dentro un commento `/* ... */`. Se un giorno vorrai pubblicarlo, togli le due righe del commento: resta nella forma generica (senza nome dell'azienda e senza mesi).
+
+---
+
 ## Cambiare i testi
 
 - **Presentazione, qualifica, sede**: in cima a `contenuti.js`, dentro `SITO`.

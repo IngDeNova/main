@@ -361,6 +361,302 @@ const PROGETTI = [
   }
 ];
 
+
+/* ---------------------------------------------------------------------
+   PERCORSO — esperienze di lavoro, dalla più recente alla più vecchia.
+   L'ordine qui è l'ordine in pagina.
+     periodo   → testo libero
+     ruolo, ente, luogo, attivita → it / en
+     vedi      → (facoltativo) codice di un progetto: aggiunge "Vedi le foto"
+   --------------------------------------------------------------------- */
+const ESPERIENZE = [
+  {
+    periodo: { it: "nov 2025 – oggi", en: "Nov 2025 – present" },
+    ruolo: { it: "Titolare", en: "Owner" },
+    ente: "Studio Tecnico Geom. Terranova",
+    luogo: { it: "Paternò (CT)", en: "Paternò, Sicily" },
+    attivita: {
+      it: [
+        "Pratiche edilizie (CILA, SCIA e affini) e rapporti diretti con gli enti competenti",
+        "Atti catastali tramite DOCFA, incluse pratiche di introduzione in mappa",
+        "Rilievi topografici per committenza privata",
+        "Consulenza tecnica su degradi edilizi e tecniche di risanamento",
+        "Progettazione architettonica ed esecutiva, redazione elaborati grafici",
+        "Computi metrici estimativi, contabilità lavori, assistenza tecnica in cantiere"
+      ],
+      en: [
+        "Building permits (CILA, SCIA and similar) and direct dealings with local authorities",
+        "Cadastral filings through DOCFA, including new-building map entries",
+        "Land surveys for private clients",
+        "Technical advice on building decay and remediation techniques",
+        "Architectural and construction design, drawing production",
+        "Bills of quantities, works accounting, on-site technical assistance"
+      ]
+    }
+  },
+  {
+    periodo: { it: "apr 2024 – ott 2025", en: "Apr 2024 – Oct 2025" },
+    ruolo: { it: "Program & Operation Manager", en: "Program & Operation Manager" },
+    ente: "Archimede Srl",
+    luogo: { it: "Siracusa", en: "Syracuse, Sicily" },
+    attivita: {
+      it: [
+        "Pianificazione operativa e coordinamento del progetto, dalla definizione dei requisiti alla verifica dell'esecuzione",
+        "Progettazione e modellazione 3D dei telai strutturali del veicolo solare",
+        "Calcoli preliminari e dimensionamento di elementi in acciaio e materiali compositi",
+        "Realizzazione diretta del telaio in alluminio tramite saldatura TIG",
+        "Gestione forniture, rapporti con fornitori e coordinamento del team tecnico"
+      ],
+      en: [
+        "Operational planning and project coordination, from requirements to execution checks",
+        "3D design and modelling of the solar car's structural chassis",
+        "Preliminary calculations and sizing of steel and composite elements",
+        "Hands-on construction of the aluminium chassis by TIG welding",
+        "Procurement, supplier relations and technical team coordination"
+      ]
+    },
+    vedi: "solar"
+  },
+  {
+    periodo: { it: "ago – set 2025", en: "Aug – Sep 2025" },
+    ruolo: { it: "Collaboratore tecnico esterno", en: "External technical collaborator" },
+    ente: { it: "PeRCeiVe Lab — Università degli Studi di Catania", en: "PeRCeiVe Lab — University of Catania" },
+    luogo: { it: "Catania · progetto PNRR FAIR, Spoke 10", en: "Catania · PNRR FAIR project, Spoke 10" },
+    attivita: {
+      it: [
+        "Supporto al deploy e all'integrazione dei modelli AI nei sistemi di monitoraggio e controllo del veicolo solare",
+        "Validazione fisico-ingegneristica delle previsioni AI tramite bilanci energetici",
+        "Progettazione CAD delle interfacce fisiche di sensori e attuatori",
+        "Attività conclusa nei tempi previsti, con relazione tecnica validata dal responsabile scientifico"
+      ],
+      en: [
+        "Support for deploying and integrating AI models into the solar car's monitoring and control systems",
+        "Physics-based validation of AI predictions against conventional energy balances",
+        "CAD design of the physical interfaces for sensors and actuators",
+        "Completed on schedule, with a technical report approved by the scientific lead"
+      ]
+    },
+    vedi: "perceive"
+  },
+  {
+    periodo: { it: "ott – dic 2024", en: "Oct – Dec 2024" },
+    ruolo: { it: "Disegnatore BIM", en: "BIM draftsman" },
+    ente: "GLE Ingegneria Srl",
+    luogo: { it: "Catania · cantiere Silicon Carbide Campus STMicroelectronics", en: "Catania · Silicon Carbide Campus, STMicroelectronics site" },
+    attivita: {
+      it: [
+        "Disegno tecnico BIM (Autodesk Revit) a supporto della progettazione e dell'esecuzione",
+        "Impianto per la produzione di semiconduttori al carburo di silicio, nell'ambito dell'EU Chips Act"
+      ],
+      en: [
+        "BIM technical drawing (Autodesk Revit) supporting design and construction",
+        "Silicon carbide semiconductor plant, part of the EU Chips Act"
+      ]
+    }
+  },
+  {
+    periodo: { it: "ago – nov 2024", en: "Aug – Nov 2024" },
+    ruolo: { it: "Responsabile sviluppo qualità", en: "Quality development manager" },
+    ente: "Designare Srl",
+    luogo: { it: "Catania", en: "Catania" },
+    attivita: {
+      it: [
+        "Studi di fattibilità, analisi finanziarie e costi-benefici, valutazioni preliminari",
+        "Elaborati tecnici dettagliati e specifiche progettuali",
+        "Coordinamento degli stakeholder e raccolta dei feedback per l'allineamento degli obiettivi",
+        "Supervisione dell'implementazione e conformità ai piani; interfaccia con fornitori e appaltatori",
+        "Attività di audit interno e gestione di controversie e contestazioni sui lavori"
+      ],
+      en: [
+        "Feasibility studies, financial and cost-benefit analyses, preliminary assessments",
+        "Detailed technical documents and design specifications",
+        "Stakeholder coordination and feedback gathering to align objectives",
+        "Oversight of implementation and plan compliance; interface with suppliers and contractors",
+        "Internal audits and handling of disputes and claims over the works"
+      ]
+    }
+  },
+  {
+    periodo: { it: "giu – lug 2024", en: "Jun – Jul 2024" },
+    ruolo: { it: "Addetto al Servizio di Prevenzione e Protezione (ASPP)", en: "Health and safety officer (ASPP)" },
+    ente: "GDS Ingegneria",
+    luogo: { it: "Catania · cantiere Silicon Carbide Campus STMicroelectronics", en: "Catania · Silicon Carbide Campus, STMicroelectronics site" },
+    attivita: {
+      it: [
+        "Supervisione e verifica in campo dell'applicazione delle prescrizioni di sicurezza (D.Lgs. 81/2008)",
+        "Controllo del rispetto di procedure e misure di prevenzione da parte delle imprese esecutrici",
+        "Segnalazione delle non conformità e verifica delle azioni correttive",
+        "Cantiere industriale di grande scala"
+      ],
+      en: [
+        "On-site supervision and verification of safety requirements (Italian Legislative Decree 81/2008)",
+        "Checks on contractors' compliance with procedures and preventive measures",
+        "Reporting of non-conformities and follow-up on corrective actions",
+        "Large-scale industrial construction site"
+      ]
+    }
+  },
+  {
+    periodo: { it: "apr 2023 – mag 2024", en: "Apr 2023 – May 2024" },
+    ruolo: { it: "Specialista sul campo", en: "Field specialist" },
+    ente: "Vulpes Impianti Srl",
+    luogo: { it: "Trieste", en: "Trieste" },
+    attivita: {
+      it: [
+        "Tecnico di cantiere su commesse fotovoltaiche: avanzamento lavori e supervisione delle squadre",
+        "Coordinamento di approvvigionamento e installazione su una decina di impianti residenziali-condominiali in parallelo, da oltre 6 kWp ciascuno",
+        "Gestione e contabilità di magazzino",
+        "Rilievi in campo e redazione di elaborati grafici"
+      ],
+      en: [
+        "Site engineer on photovoltaic contracts: progress monitoring and crew supervision",
+        "Procurement and installation coordination across about ten residential and multi-family systems in parallel, each above 6 kWp",
+        "Warehouse management and stock accounting",
+        "Field surveys and drawing production"
+      ]
+    },
+    vedi: "tttlog"
+  },
+  {
+    periodo: { it: "gen 2022 – mag 2024", en: "Jan 2022 – May 2024" },
+    ruolo: { it: "Consulente tecnico", en: "Technical consultant" },
+    ente: "Tecnovalore Srl",
+    luogo: { it: "Trieste · general contractor Superbonus 110%", en: "Trieste · Superbonus 110% general contractor" },
+    attivita: {
+      it: [
+        "Project management: coordinamento del cantiere, controllo dei requisiti e revisione dei progetti architettonici",
+        "Riqualificazione energetica di oltre 30 edifici condominiali con cappotto termico",
+        "Direzione lavori per impianti fotovoltaici condominiali fino a 20 kWp",
+        "Assistenza al rilievo e alla manutenzione di centrali termiche, impianti elettrici e idraulici",
+        "Computi metrici estimativi e SAL; controllo qualità degli approvvigionamenti",
+        "Verifica delle prescrizioni di sicurezza e del rispetto dei cronoprogrammi"
+      ],
+      en: [
+        "Project management: site coordination, requirement checks and architectural design review",
+        "Energy retrofit of over 30 apartment buildings with external thermal insulation",
+        "Works supervision for shared photovoltaic systems up to 20 kWp",
+        "Survey and maintenance support for heating plants, electrical and plumbing systems",
+        "Bills of quantities and progress statements; procurement quality control",
+        "Safety and schedule compliance checks"
+      ]
+    },
+    vedi: "tttred"
+  },
+  {
+    periodo: "2021",
+    ruolo: { it: "Direttore di cantiere", en: "Site manager" },
+    ente: "G2D Sas di Pollero Davide & C.",
+    luogo: { it: "Albenga (SV)", en: "Albenga, Liguria" },
+    attivita: {
+      it: [
+        "Progettazione e supervisione di opere di efficientamento energetico e ristrutturazione su villette uni/bifamiliari",
+        "Coordinamento delle imprese esecutrici e controllo dell'avanzamento rispetto al cronoprogramma",
+        "Computi metrici estimativi e SAL",
+        "Gestione forniture e conferimenti in discarica",
+        "Controllo delle prescrizioni di sicurezza in cantiere",
+        "Rilievi, restituzione grafica e relazioni tecniche"
+      ],
+      en: [
+        "Design and construction supervision of energy-efficiency and renovation works on single and two-family houses",
+        "Coordination of contractors and progress monitoring against the schedule",
+        "Bills of quantities and progress statements",
+        "Supply management and waste disposal",
+        "Site safety compliance checks",
+        "Surveys, drawings and technical reports"
+      ]
+    }
+  },
+  {
+    periodo: "2021",
+    ruolo: { it: "Geometra", en: "Surveyor (Geometra)" },
+    ente: "Studio Tecnico Geom. Gualdi",
+    luogo: { it: "Imperia", en: "Imperia, Liguria" },
+    attivita: {
+      it: [
+        "Redazione e revisione di progetti architettonici ed esecutivi per interventi di ristrutturazione edilizia",
+        "Incarico parallelo a quello in G2D Sas, in stretta collaborazione sullo stesso territorio"
+      ],
+      en: [
+        "Preparation and review of architectural and construction designs for renovation works",
+        "Held alongside the G2D Sas role, working closely on the same territory"
+      ]
+    }
+  },
+  {
+    periodo: { it: "2012 – 2015 · 2016 – 2018", en: "2012 – 2015 · 2016 – 2018" },
+    ruolo: { it: "Praticante e poi collaboratore geometra", en: "Trainee, then collaborating surveyor" },
+    ente: "Studio Tecnico Geom. Terranova",
+    luogo: { it: "Paternò (CT) · studio di famiglia", en: "Paternò, Sicily · family practice" },
+    attivita: {
+      it: [
+        "Circa cinque anni di formazione sul campo: praticantato propedeutico all'Esame di Stato (2015) e successiva collaborazione con responsabilità crescenti",
+        "Rilievi topografici e architettonici sul campo",
+        "Restituzione grafica dei rilievi su CAD",
+        "Redazione di elaborati progettuali",
+        "Predisposizione di pratiche edilizie e catastali"
+      ],
+      en: [
+        "About five years of hands-on training: traineeship leading to the 2015 state examination, then a collaboration with growing responsibility",
+        "Land and building surveys in the field",
+        "CAD drawing of survey data",
+        "Preparation of design documents",
+        "Preparation of building and cadastral filings"
+      ]
+    }
+  }
+
+  /* Stage in agenzia immobiliare a Riga (2026): per ora non pubblicato.
+     Se vuoi aggiungerlo, usa sempre la forma generica, senza nome dell'azienda e senza mesi:
+  ,{
+    periodo: "2026",
+    ruolo: { it: "Stage", en: "Internship" },
+    ente: { it: "Agenzia immobiliare", en: "Real estate agency" },
+    luogo: { it: "Riga (Lettonia)", en: "Riga, Latvia" },
+    attivita: {
+      it: ["Follow-up di interventi di manutenzione su immobili in vendita, in un contesto di lavoro internazionale"],
+      en: ["Follow-up of maintenance works on properties for sale, in an international working environment"]
+    }
+  }
+  */
+];
+
+/* ---------------------------------------------------------------------
+   FORMAZIONE, ABILITAZIONI E LINGUE — mostrate in fondo alla pagina Percorso.
+   --------------------------------------------------------------------- */
+const FORMAZIONE = [
+  {
+    periodo: { it: "2012 – 2024", en: "2012 – 2024" },
+    titolo: { it: "Laurea magistrale a ciclo unico in Ingegneria Edile-Architettura (LM-4)", en: "MSc in Building Engineering and Architecture (LM-4, single-cycle)" },
+    ente: { it: "Università degli Studi di Catania", en: "University of Catania" },
+    nota: {
+      it: "Tesi: «Progettazione di un bivacco» — rifugio d'alta quota sull'Etna ottenuto dal riuso di un container marittimo, con approccio di economia circolare, studio dei vincoli paesaggistici, computo metrico e pianificazione del cantiere. Percorso condotto in parallelo ad attività lavorative continue.",
+      en: "Thesis: “Design of a mountain bivouac” — a high-altitude shelter on Mount Etna built by reusing a shipping container, with a circular-economy approach, landscape-constraint analysis, bill of quantities and construction planning. Studied alongside continuous professional work."
+    }
+  },
+  {
+    periodo: "2015",
+    titolo: { it: "Abilitazione all'esercizio della libera professione di Geometra", en: "Professional licence as Geometra (surveyor)" },
+    ente: { it: "Esame di Stato · iscrizione all'Albo dei Geometri", en: "State examination · registered with the professional board" }
+  },
+  {
+    periodo: "2024",
+    titolo: { it: "Formazione in Sicurezza dei Cantieri — Allegato XIV D.Lgs. 81/2008", en: "Construction site safety training — Annex XIV, Legislative Decree 81/2008" },
+    ente: { it: "Università degli Studi di Catania, certificazione di Ateneo", en: "University of Catania, official certificate" }
+  },
+  {
+    periodo: "2012",
+    titolo: { it: "Diploma di Istituto Tecnico per Geometri", en: "Technical diploma in surveying" },
+    ente: { it: "I.I.S.S. «Giovanni Falcone»", en: "I.I.S.S. “Giovanni Falcone”" }
+  }
+];
+
+const LINGUE = [
+  { lingua: { it: "Italiano", en: "Italian" }, livello: { it: "madrelingua", en: "native" } },
+  { lingua: { it: "Inglese", en: "English" }, livello: { it: "B2", en: "B2" } },
+  { lingua: { it: "Tedesco", en: "German" }, livello: { it: "base (A2)", en: "basic (A2)" } },
+  { lingua: { it: "Russo", en: "Russian" }, livello: { it: "base (A1)", en: "basic (A1)" } }
+];
+
 /* ---------------------------------------------------------------------
    REFERENZE — aziende con cui ho collaborato, con contatto LinkedIn del responsabile.
    --------------------------------------------------------------------- */

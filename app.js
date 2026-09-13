@@ -6,6 +6,8 @@
   const UI = {
     it: {
       home: "Home", referenze: "Referenze", contatti: "Contatti", chiSono: "Chi sono",
+      percorso: "Percorso", esperienza: "Esperienza", formazione: "Formazione e abilitazioni",
+      lingue: "Lingue", vediFoto: "Vedi le foto", sottoPercorso: "Dodici anni tra studio tecnico, cantiere e ricerca.",
       indietro: "Indietro", tutteLeSezioni: "Tutte le sezioni",
       foto: "foto", unaFoto: "foto", raccolte: "raccolte", unaRaccolta: "raccolta",
       tocca: "Tocca una foto per ingrandirla", fotoInArrivo: "Fotografie in arrivo.",
@@ -19,6 +21,8 @@
     },
     en: {
       home: "Home", referenze: "References", contatti: "Contact", chiSono: "About me",
+      percorso: "Career", esperienza: "Experience", formazione: "Education and credentials",
+      lingue: "Languages", vediFoto: "See the photos", sottoPercorso: "Twelve years across technical practice, construction sites and research.",
       indietro: "Back", tutteLeSezioni: "All sections",
       foto: "photos", unaFoto: "photo", raccolte: "collections", unaRaccolta: "collection",
       tocca: "Tap a photo to enlarge it", fotoInArrivo: "Photos coming soon.",
@@ -64,6 +68,7 @@
     const nav = [
       { href: "#/", testo: t("home"), attiva: rotta.tipo === "home" },
       ...SEZIONI.map((s) => ({ href: "#/s/" + s.id, testo: tx(s.titoloBreve || s.titolo), attiva: rotta.sezione === s.id })),
+      { href: "#/percorso", testo: t("percorso"), attiva: rotta.tipo === "percorso" },
       { href: "#/referenze", testo: t("referenze"), attiva: rotta.tipo === "referenze" },
       { href: "#/contatti", testo: t("contatti"), attiva: rotta.tipo === "contatti" }
     ];
@@ -179,6 +184,49 @@
       ${foto}`;
   }
 
+  function paginaPercorso() {
+    const tappe = ESPERIENZE.map((e) => {
+      const atti = (tx(e.attivita) || []).map((a) => `<li>${esc(a)}</li>`).join("");
+      const p = progettoDi(e.vedi);
+      return `
+        <article class="tappa">
+          <p class="quando">${esc(tx(e.periodo))}</p>
+          <div class="cosa">
+            <h3>${esc(tx(e.ruolo))}</h3>
+            <p class="dove">${esc(tx(e.ente))}${e.luogo ? " · " + esc(tx(e.luogo)) : ""}</p>
+            <ul>${atti}</ul>
+            ${p && p.foto ? `<p class="vedi"><a href="#/p/${esc(p.cartella)}">${esc(t("vediFoto"))}</a></p>` : ""}
+          </div>
+        </article>`;
+    }).join("");
+    const titoli = FORMAZIONE.map((f) => `
+      <article class="tappa">
+        <p class="quando">${esc(tx(f.periodo))}</p>
+        <div class="cosa">
+          <h3>${esc(tx(f.titolo))}</h3>
+          <p class="dove">${esc(tx(f.ente))}</p>
+          ${f.nota ? `<p class="nota">${esc(tx(f.nota))}</p>` : ""}
+        </div>
+      </article>`).join("");
+    const lingue = LINGUE.map((l) => `
+      <article class="tappa">
+        <p class="quando">${esc(tx(l.lingua))}</p>
+        <div class="cosa"><p class="dove">${esc(tx(l.livello))}</p></div>
+      </article>`).join("");
+    return `
+      <a class="torna" href="#/">← ${esc(t("home"))}</a>
+      <div class="testata">
+        <h1>${esc(t("percorso"))}</h1>
+        <p class="sotto">${esc(t("sottoPercorso"))}</p>
+      </div>
+      <h2 class="fascia">${esc(t("esperienza"))}</h2>
+      <div class="percorso">${tappe}</div>
+      <h2 class="fascia">${esc(t("formazione"))}</h2>
+      <div class="percorso">${titoli}</div>
+      <h2 class="fascia">${esc(t("lingue"))}</h2>
+      <div class="percorso">${lingue}</div>`;
+  }
+
   function paginaReferenze() {
     const voci = REFERENZE.map((r) => `
       <div class="referenza">
@@ -216,6 +264,7 @@
   function renderPie() {
     const anno = new Date().getFullYear();
     return `
+      <a href="#/percorso">${esc(t("percorso"))}</a>
       <a href="#/referenze">${esc(t("referenze"))}</a>
       <a href="#/contatti">${esc(t("contatti"))}</a>
       <a href="${esc(SITO.contatti.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>
@@ -232,6 +281,7 @@
       const p = progettoDi(decodeURIComponent(parti[1]));
       return { tipo: "progetto", cartella: decodeURIComponent(parti[1]), sezione: p ? p.sezione : "" };
     }
+    if (parti[0] === "percorso") return { tipo: "percorso" };
     if (parti[0] === "referenze") return { tipo: "referenze" };
     if (parti[0] === "contatti") return { tipo: "contatti" };
     return { tipo: "home" };
@@ -246,6 +296,7 @@
     switch (r.tipo) {
       case "sezione": { const s = sezioneDi(r.sezione); html = paginaSezione(r.sezione); if (s) titolo = tx(s.titolo) + " — " + SITO.nome; break; }
       case "progetto": { const p = progettoDi(r.cartella); html = paginaProgetto(r.cartella); if (p) { titolo = tx(p.titolo) + " — " + SITO.nome; progettoAperto = p; } break; }
+      case "percorso": html = paginaPercorso(); titolo = t("percorso") + " — " + SITO.nome; break;
       case "referenze": html = paginaReferenze(); titolo = t("referenze") + " — " + SITO.nome; break;
       case "contatti": html = paginaContatti(); titolo = t("contatti") + " — " + SITO.nome; break;
       default: html = paginaHome(); titolo = SITO.nome + " — " + t("titoloHome");
