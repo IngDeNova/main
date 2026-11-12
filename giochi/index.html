@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cyberwar 100</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: menu a sinistra con ricerca e filtri, gioco a destra; su telefono il menu è a tutta pagina e il gioco si apre a schermo pieno. */
+:root{--bg:#030806;--panel:#07130d;--line:#155c32;--g:#39ff7a;--gd:#1f9d4c;--dim:#6a9a7c;--a:#ffc233;--txt:#c4f7d4;
+  --mono:"DejaVu Sans Mono","Liberation Mono",Menlo,Consolas,"Courier New",monospace;color-scheme:dark}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--txt);font-family:var(--mono)}
+.app{display:grid;grid-template-columns:320px minmax(0,1fr);gap:16px;height:100%;box-sizing:border-box;padding-block:12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.side{display:flex;flex-direction:column;gap:10px;min-width:0;min-height:0}
+.eyebrow{font-size:11px;letter-spacing:2px;color:var(--dim)}
+h1{margin:0;font-weight:normal;font-size:26px;letter-spacing:4px;color:var(--g);text-shadow:0 0 8px rgba(57,255,122,.6)}
+.prog{font-size:12px;color:var(--a);letter-spacing:1px}
+.bar{height:4px;background:#0b2215}.bar i{display:block;height:100%;background:var(--a);width:0}
+#q{font-family:inherit;background:#000;color:var(--g);border:1px solid var(--gd);padding:9px 10px;font-size:14px;outline:none;width:100%;box-sizing:border-box}
+#q:focus{border-color:var(--g)}
+.cats{display:flex;flex-wrap:wrap;gap:6px}
+.cats button{font-family:inherit;background:transparent;color:var(--dim);border:1px solid var(--line);padding:5px 8px;font-size:11px;letter-spacing:1px;cursor:pointer}
+.cats button[aria-pressed="true"]{color:#000;background:var(--g);border-color:var(--g)}
+.list{flex:1;overflow:auto;display:flex;flex-direction:column;gap:4px;min-height:0;padding-right:4px}
+.it{all:unset;cursor:pointer;display:grid;grid-template-columns:38px 1fr auto;align-items:center;gap:6px;padding:7px 8px;border:1px solid var(--line);background:var(--panel);font-size:13px}
+.it:hover{border-color:var(--gd)}
+.it:focus-visible{outline:2px solid var(--a);outline-offset:1px}
+.it[aria-current="true"]{border-color:var(--g);box-shadow:inset 3px 0 0 var(--g)}
+.it .n{color:var(--dim);font-variant-numeric:tabular-nums}
+.it .t{color:var(--g);letter-spacing:1px;min-width:0}
+.it .t small{display:block;color:var(--dim);letter-spacing:1px;font-size:10px}
+.it .ok{color:var(--a);font-size:14px}
+.stage{min-width:0;min-height:0;border:1px solid var(--line);background:#000;display:flex}
+.stage iframe{border:0;width:100%;height:100%;background:var(--bg)}
+.reset{font-family:inherit;background:transparent;color:var(--dim);border:none;font-size:11px;cursor:pointer;text-decoration:underline;align-self:flex-start;padding:0}
+@media (max-width:800px){
+  .app{grid-template-columns:1fr;height:auto;min-height:100%}
+  .stage{display:none}
+  .list{overflow:visible}
+}
+</style></head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="eyebrow">CENTRO ADDESTRAMENTO GUERRA CIBERNETICA</div>
+    <h1>CYBERWAR 100</h1>
+    <div class="prog" id="prog"></div><div class="bar"><i id="pbar"></i></div>
+    <input id="q" type="search" placeholder="Cerca per nome o numero" autocomplete="off">
+    <div class="cats" id="cats"></div>
+    <div class="list" id="list"></div>
+    <button class="reset" id="reset" type="button">Azzera i giochi completati</button>
+  </aside>
+  <section class="stage" id="stage"><iframe id="fr" title="Gioco"></iframe></section>
+</div>
+<script src="comune.js"></script>
+<script src="catalogo.js"></script>
+<script>
+const CATS = ["Tutti"].concat([...new Set(GIOCHI.map(g => g.cat))]);
+let cat = "Tutti", cur = 1, confirmReset = false;
+const fr = document.getElementById("fr"), wide = () => matchMedia("(min-width:801px)").matches;
+document.getElementById("cats").innerHTML = CATS.map(c => `<button type="button" data-c="${c}" aria-pressed="${c === cat}">${c.toUpperCase()}</button>`).join("");
+function draw() {
+  const q = document.getElementById("q").value.trim().toLowerCase(), done = getDone();
+  document.getElementById("list").innerHTML = GIOCHI.filter(g => (cat === "Tutti" || g.cat === cat) && (!q || g.nome.toLowerCase().includes(q) || String(g.id) === q))
+    .map(g => `<button class="it" type="button" data-id="${g.id}" aria-current="${g.id === cur}"><span class="n">#${String(g.id).padStart(3, "0")}</span><span class="t">${esc(g.nome)}<small>${g.cat.toUpperCase()}</small></span><span class="ok">${done.includes(g.id) ? "✔" : ""}</span></button>`).join("");
+  document.getElementById("prog").textContent = `COMPLETATI ${done.length} / ${GIOCHI.length}`;
+  document.getElementById("pbar").style.width = (done.length / GIOCHI.length * 100) + "%";
+}
+function apri(id) {
+  cur = id;
+  if (!wide()) { location.href = "gioco.html?id=" + id; return; }
+  fr.src = "gioco.html?id=" + id + "&emb=1"; draw();
+  const el = document.querySelector(`.it[data-id="${id}"]`); if (el) el.scrollIntoView({ block: "nearest" });
+}
+document.getElementById("list").onclick = e => { const b = e.target.closest(".it"); if (b) apri(+b.dataset.id); };
+document.getElementById("cats").onclick = e => { const b = e.target.closest("button"); if (!b) return; cat = b.dataset.c; document.querySelectorAll("#cats button").forEach(x => x.setAttribute("aria-pressed", x.dataset.c === cat)); draw(); };
+document.getElementById("q").oninput = draw;
+document.getElementById("reset").onclick = e => {
+  if (!confirmReset) { confirmReset = true; e.target.textContent = "Sicuro? Tocca di nuovo per azzerare"; setTimeout(() => { confirmReset = false; e.target.textContent = "Azzera i giochi completati"; }, 3000); return; }
+  try { localStorage.removeItem(DONE_KEY); } catch (x) { } confirmReset = false; e.target.textContent = "Azzera i giochi completati"; draw();
+};
+addEventListener("message", e => { const d = e.data || {}; if (d.apri) apri(d.apri); if (d.corrente) { cur = d.corrente; draw(); } if (d.fatto) draw(); });
+draw();
+if (wide()) apri(1);
+</script>
+</body></html>

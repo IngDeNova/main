@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gioco - Cyberwar 100</title><link rel="stylesheet" href="stile.css"></head>
+<body>
+<div class="wrap">
+  <div class="gbar"><a id="menu" href="index.html" target="_top">◄ MENU</a><span class="gid" id="gid"></span><span class="sp"></span>
+    <button class="warn" id="hint" type="button">SUGGERIMENTO</button><button id="restart" type="button" title="Ricomincia">↻ RICOMINCIA</button></div>
+  <div class="kind" id="kind"></div><h1 id="title"></h1><div class="brief" id="brief"></div>
+  <div id="game"></div>
+  <div class="nav"><a id="prev">◄ PRECEDENTE</a><a id="next">SUCCESSIVO ►</a></div>
+</div>
+<div id="win"><div class="in"></div></div>
+<div id="hintbox"><div class="in"><div class="lbl" style="color:var(--a)">SUGGERIMENTO</div><div id="hinttext"></div><div style="text-align:right;margin-top:14px"><button class="pri" id="hclose" type="button">CHIUDI</button></div></div></div>
+<script src="comune.js"></script>
+<script src="catalogo.js"></script>
+<script src="motori.js"></script>
+<script>
+const qs = new URLSearchParams(location.search);
+const EMB = qs.get("emb") === "1";
+let id = Math.min(GIOCHI.length, Math.max(1, parseInt(qs.get("id") || location.hash.slice(1), 10) || 1));
+const G = GIOCHI[id - 1], M = E[G.tipo];
+const link = n => `gioco.html?id=${n}${EMB ? "&emb=1" : ""}`;
+document.title = `#${id} ${G.nome} - Cyberwar 100`;
+if (EMB) $("#menu").style.display = "none";
+$("#gid").textContent = `GIOCO ${id}/${GIOCHI.length}`;
+$("#kind").textContent = G.cat.toUpperCase();
+$("#title").textContent = G.nome;
+$("#brief").innerHTML = M.brief(G.p);
+if (id > 1) $("#prev").href = link(id - 1); else $("#prev").style.visibility = "hidden";
+if (id < GIOCHI.length) $("#next").href = link(id + 1); else $("#next").style.visibility = "hidden";
+if (EMB) { $("#prev").onclick = $("#next").onclick = e => { e.preventDefault(); parent.postMessage({ apri: id + (e.currentTarget.id === "next" ? 1 : -1) }, "*"); }; }
+
+const info = M.info && M.info(G.p);
+if (!info) $("#hint").style.display = "none";
+$("#hint").onclick = () => { $("#hinttext").innerHTML = info; $("#hintbox").classList.add("on"); };
+$("#hclose").onclick = () => $("#hintbox").classList.remove("on");
+$("#hintbox").onclick = e => { if (e.target.id === "hintbox") $("#hintbox").classList.remove("on"); };
+
+WIN = () => {
+  clearTimers(); setDone(id); sfx.win();
+  if (EMB) parent.postMessage({ fatto: id }, "*");
+  $("#win .in").innerHTML = `<div class="lbl">ACCESSO OTTENUTO</div><h2>MISSIONE COMPIUTA</h2><div class="brief">Codice di conferma:</div><div class="code">${codiceDi(id)}</div>
+    <div class="row" style="justify-content:center">${id < GIOCHI.length ? '<button class="pri" id="wnext" type="button">GIOCO SUCCESSIVO ►</button>' : ""}<button id="wagain" type="button">↻ RIGIOCA</button></div>`;
+  $("#win").classList.add("on");
+  const wn = $("#wnext"); if (wn) wn.onclick = () => EMB ? parent.postMessage({ apri: id + 1 }, "*") : location.href = link(id + 1);
+  $("#wagain").onclick = avvia;
+};
+function avvia() {
+  clearTimers(); document.onkeydown = null; $("#win").classList.remove("on");
+  M.render($("#game"), G.p);
+}
+$("#restart").onclick = avvia;
+if (EMB) parent.postMessage({ corrente: id }, "*");
+avvia();
+</script>
+</body></html>
